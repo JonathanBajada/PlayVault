@@ -1,5 +1,9 @@
 import express, { Request, Response } from 'express';
+import 'dotenv/config';
+console.log(process.env.POKEMON_TCG_API_KEY);
+
 import usersRouter from './routes/users';
+import cardsRouter from './routes/cards';
 
 const app = express();
 
@@ -10,7 +14,7 @@ app.get('/health', (req: Request, res: Response) => {
 });
 
 app.use('/users', usersRouter);
-
+app.use('/cards', cardsRouter);
 const PORT = 3000;
 app.listen(PORT, () => {
 	console.log(`Server listening on port ${PORT}`);
