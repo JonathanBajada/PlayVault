@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { fetchCards, Card as CardType } from '@/lib/api/cards';
+import { fetchCards, fetchSets, Card as CardType } from '@/lib/api/cards';
 import Card from '@/components/Card';
 import CardModal from '@/components/CardModal';
 
@@ -10,6 +10,7 @@ export default function CardsPage() {
 	const [page, setPage] = useState(1);
 	const [search, setSearch] = useState('');
 	const [debouncedSearch, setDebouncedSearch] = useState('');
+	const [selectedSet, setSelectedSet] = useState<string>('');
 	const [selectedCard, setSelectedCard] = useState<CardType | null>(null);
 	const limit = 20;
 
@@ -23,15 +24,30 @@ export default function CardsPage() {
 		return () => clearTimeout(timer);
 	}, [search]);
 
+	// Reset page when set filter changes
+	const handleSetChange = (set: string) => {
+		setSelectedSet(set);
+		setPage(1);
+	};
+
 	const { data, isLoading, error } = useQuery({
-		queryKey: ['cards', page, limit, debouncedSearch],
+		queryKey: ['cards', page, limit, debouncedSearch, selectedSet],
 		queryFn: () =>
 			fetchCards({
 				page,
 				limit,
 				search: debouncedSearch || undefined,
+				set: selectedSet || undefined,
 			}),
 	});
+
+	// Fetch all unique sets
+	const { data: setsData } = useQuery({
+		queryKey: ['sets'],
+		queryFn: fetchSets,
+	});
+
+	const uniqueSets = setsData || [];
 
 	const totalPages = data ? Math.ceil(data.total / limit) : 0;
 
@@ -68,31 +84,78 @@ export default function CardsPage() {
 					</p>
 				</div>
 
-				{/* Search Bar */}
+				{/* Search and Filter Bar */}
 				<div className='mb-8'>
-					<div className='relative max-w-md'>
-						<input
-							type='text'
-							placeholder='Search cards by name...'
-							value={search}
-							onChange={(e) => setSearch(e.target.value)}
-							className='w-full px-4 py-3 pl-10 pr-4 text-gray-900 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all'
-						/>
-						<div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
-							<svg
-								className='h-5 w-5 text-gray-400'
-								fill='none'
-								stroke='currentColor'
-								viewBox='0 0 24 24'
-							>
-								<path
-									strokeLinecap='round'
-									strokeLinejoin='round'
-									strokeWidth={2}
-									d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
-								/>
-							</svg>
+					<div className='flex flex-col sm:flex-row gap-4 max-w-2xl'>
+						{/* Search Input */}
+						<div className='relative flex-1'>
+							<input
+								type='text'
+								placeholder='Search cards by name...'
+								value={search}
+								onChange={(e) => setSearch(e.target.value)}
+								className='w-full px-4 py-3 pl-10 pr-4 text-gray-900 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all'
+							/>
+							<div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+								<svg
+									className='h-5 w-5 text-gray-400'
+									fill='none'
+									stroke='currentColor'
+									viewBox='0 0 24 24'
+								>
+									<path
+										strokeLinecap='round'
+										strokeLinejoin='round'
+										strokeWidth={2}
+										d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
+									/>
+								</svg>
+							</div>
 						</div>
+
+						{/* Set Filter */}
+						<div className='relative sm:w-64'>
+							<select
+								value={selectedSet}
+								onChange={(e) => handleSetChange(e.target.value)}
+								className='w-full px-4 py-3 pr-10 text-gray-900 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all appearance-none cursor-pointer'
+							>
+								<option value=''>All Sets</option>
+								{uniqueSets.map((set) => (
+									<option key={set} value={set}>
+										{set}
+									</option>
+								))}
+							</select>
+							<div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
+								<svg
+									className='h-5 w-5 text-gray-400'
+									fill='none'
+									stroke='currentColor'
+									viewBox='0 0 24 24'
+								>
+									<path
+										strokeLinecap='round'
+										strokeLinejoin='round'
+										strokeWidth={2}
+										d='M19 9l-7 7-7-7'
+									/>
+								</svg>
+							</div>
+						</div>
+
+						{/* Clear Filters Button */}
+						{(selectedSet || search) && (
+							<button
+								onClick={() => {
+									setSelectedSet('');
+									setSearch('');
+								}}
+								className='px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors whitespace-nowrap'
+							>
+								Clear Filters
+							</button>
+						)}
 					</div>
 				</div>
 

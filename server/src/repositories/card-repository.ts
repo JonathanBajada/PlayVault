@@ -68,3 +68,14 @@ export async function getCards(
 		total: Number(countResult.rows[0].count),
 	};
 }
+
+export async function getUniqueSets() {
+	const result = await pool.query(
+		`SELECT DISTINCT set_name 
+		FROM cards 
+		WHERE set_name IS NOT NULL 
+		ORDER BY set_name`,
+	);
+
+	return result.rows.map((row) => row.set_name);
+}

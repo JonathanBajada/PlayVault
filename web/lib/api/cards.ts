@@ -43,3 +43,14 @@ export async function fetchCards({
 
 	return res.json();
 }
+
+export async function fetchSets(): Promise<string[]> {
+	const res = await fetch('http://localhost:4000/cards/sets');
+
+	if (!res.ok) {
+		throw new Error('Failed to fetch sets');
+	}
+
+	const data = await res.json();
+	return data.sets;
+}
