@@ -7,15 +7,18 @@
 		"dev": "ts-node-dev --respawn --transpile-only src/server.ts",
 		"typecheck": "tsc --noEmit",
 		"fetch-cards": "ts-node scripts/fetch-all-cards.ts",
-		"populate-cards-index": "ts-node scripts/populate-cards-index.ts"
+		"populate-cards-index": "ts-node scripts/populate-cards-index.ts",
+		"seed-cards": "ts-node scripts/seed-cards.ts"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"@types/pg": "^8.16.0",
 		"axios": "^1.13.2",
 		"dotenv": "^17.2.3",
 		"express": "^5.2.1",
+		"pg": "^8.16.3",
 		"zod": "^4.2.1"
 	},
 	"devDependencies": {
