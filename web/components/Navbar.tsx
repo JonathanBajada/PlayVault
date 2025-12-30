@@ -30,7 +30,14 @@ export default function Navbar() {
 								xmlns='http://www.w3.org/2000/svg'
 								className='w-6 h-6 md:w-7 md:h-7'
 							>
-								<circle cx='12' cy='12' r='10' stroke='#1F2937' strokeWidth='2' fill='white' />
+								<circle
+									cx='12'
+									cy='12'
+									r='10'
+									stroke='#1F2937'
+									strokeWidth='2'
+									fill='white'
+								/>
 								<path
 									d='M2 12C2 6.48 6.48 2 12 2C17.52 2 22 6.48 22 12H2Z'
 									fill='#EF4444'
