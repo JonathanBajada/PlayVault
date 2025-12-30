@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { pool } from '../db';
 
-async function seedCards() {
+export async function seedCards() {
 	const filePath = path.join(__dirname, '../../data/cards.json');
 	const raw = fs.readFileSync(filePath, 'utf-8');
 	const cards = JSON.parse(raw);
@@ -15,7 +15,7 @@ async function seedCards() {
 		for (const card of cards) {
 			await client.query(
 				`
-        INSERT INTO cards (id, name, set_name, rarity, image_small)
+        INSERT INTO cards (id, name, set_name, rarity, image_small_url)
         VALUES ($1, $2, $3, $4, $5)
         ON CONFLICT (id) DO NOTHING
         `,
@@ -33,5 +33,3 @@ async function seedCards() {
 		process.exit(0);
 	}
 }
-
-seedCards();
