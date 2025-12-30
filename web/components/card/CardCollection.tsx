@@ -140,9 +140,9 @@ export default function CardCollection({
 
 				{/* Search and Filter Bar */}
 				<div className='mb-8'>
-					<div className='flex flex-col sm:flex-row gap-4 max-w-3xl'>
+					<div className='flex flex-col sm:flex-row gap-4'>
 						{/* Search Input */}
-						<div className='relative flex-1'>
+						<div className='relative sm:w-64 flex-shrink-0'>
 							<input
 								type='text'
 								placeholder='Search cards by name...'
@@ -168,7 +168,7 @@ export default function CardCollection({
 						</div>
 
 						{/* Set Filter */}
-						<div className='relative sm:w-64'>
+						<div className='relative sm:w-56 flex-shrink-0'>
 							<select
 								value={selectedSet}
 								onChange={(e) => handleSetChange(e.target.value)}
@@ -199,7 +199,7 @@ export default function CardCollection({
 						</div>
 
 						{/* Rarity Filter */}
-						<div className='relative sm:w-64'>
+						<div className='relative sm:w-56 flex-shrink-0'>
 							<select
 								value={selectedRarity}
 								onChange={(e) => handleRarityChange(e.target.value)}
