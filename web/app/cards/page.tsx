@@ -14,7 +14,10 @@ export default function CardsPage() {
 	});
 
 	if (isLoading) return <p>Loading...</p>;
-	if (error) return <p>Error loading cards</p>;
+	if (error) {
+		console.error(error);
+		return <p>Error loading cards</p>;
+	}
 
 	return (
 		<div>
