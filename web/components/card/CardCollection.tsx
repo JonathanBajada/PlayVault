@@ -2,7 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { fetchCards, fetchSets, Card as CardType } from '@/lib/api/cards';
+import {
+	fetchCards,
+	fetchSets,
+	fetchRarities,
+	Card as CardType,
+} from '@/lib/api/cards';
 import Card from '@/components/card/Card';
 import CardModal from '@/components/card/CardModal';
 
@@ -28,6 +33,7 @@ export default function CardCollection({
 	const [search, setSearch] = useState(initialSearch);
 	const [debouncedSearch, setDebouncedSearch] = useState(initialSearch);
 	const [selectedSet, setSelectedSet] = useState<string>(initialSet);
+	const [selectedRarity, setSelectedRarity] = useState<string>('');
 	const [selectedCard, setSelectedCard] = useState<CardType | null>(null);
 
 	// Debounce search input
@@ -46,14 +52,28 @@ export default function CardCollection({
 		setPage(1);
 	};
 
+	// Reset page when rarity filter changes
+	const handleRarityChange = (rarity: string) => {
+		setSelectedRarity(rarity);
+		setPage(1);
+	};
+
 	const { data, isLoading, error } = useQuery({
-		queryKey: ['cards', page, limit, debouncedSearch, selectedSet],
+		queryKey: [
+			'cards',
+			page,
+			limit,
+			debouncedSearch,
+			selectedSet,
+			selectedRarity,
+		],
 		queryFn: () =>
 			fetchCards({
 				page,
 				limit,
 				search: debouncedSearch || undefined,
 				set: selectedSet || undefined,
+				rarity: selectedRarity || undefined,
 			}),
 	});
 
@@ -63,7 +83,14 @@ export default function CardCollection({
 		queryFn: fetchSets,
 	});
 
+	// Fetch all unique rarities
+	const { data: raritiesData } = useQuery({
+		queryKey: ['rarities'],
+		queryFn: fetchRarities,
+	});
+
 	const uniqueSets = setsData || [];
+	const uniqueRarities = raritiesData || [];
 
 	const totalPages = data ? Math.ceil(data.total / limit) : 0;
 
@@ -88,15 +115,24 @@ export default function CardCollection({
 	}
 
 	return (
-		<div className='min-h-screen bg-gray-50 dark:bg-gray-900 py-8'>
-			<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+		<div className='min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-gray-950 dark:via-indigo-950/20 dark:to-purple-950/20 py-8 relative'>
+			{/* Animated background elements */}
+			<div className='absolute inset-0 overflow-hidden pointer-events-none'>
+				<div className='absolute top-0 left-1/4 w-96 h-96 bg-purple-300/20 rounded-full blur-3xl animate-pulse'></div>
+				<div
+					className='absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-300/20 rounded-full blur-3xl animate-pulse'
+					style={{ animationDelay: '1s' }}
+				></div>
+			</div>
+
+			<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10'>
 				{/* Header */}
 				{showHeader && (
 					<div className='mb-8'>
-						<h1 className='text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2'>
+						<h1 className='text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-3 drop-shadow-sm'>
 							{headerTitle}
 						</h1>
-						<p className='text-gray-600 dark:text-gray-400'>
+						<p className='text-gray-600 dark:text-gray-300 text-lg'>
 							{headerDescription}
 						</p>
 					</div>
@@ -104,7 +140,7 @@ export default function CardCollection({
 
 				{/* Search and Filter Bar */}
 				<div className='mb-8'>
-					<div className='flex flex-col sm:flex-row gap-4 max-w-2xl'>
+					<div className='flex flex-col sm:flex-row gap-4 max-w-3xl'>
 						{/* Search Input */}
 						<div className='relative flex-1'>
 							<input
@@ -112,7 +148,7 @@ export default function CardCollection({
 								placeholder='Search cards by name...'
 								value={search}
 								onChange={(e) => setSearch(e.target.value)}
-								className='w-full px-4 py-3 pl-10 pr-4 text-gray-900 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all'
+								className='w-full px-4 py-3 pl-10 pr-4 text-gray-900 dark:text-white bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border border-white/20 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-400/50 outline-none transition-all shadow-lg hover:shadow-xl'
 							/>
 							<div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
 								<svg
@@ -136,7 +172,7 @@ export default function CardCollection({
 							<select
 								value={selectedSet}
 								onChange={(e) => handleSetChange(e.target.value)}
-								className='w-full px-4 py-3 pr-10 text-gray-900 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all appearance-none cursor-pointer'
+								className='w-full px-4 py-3 pr-10 text-gray-900 dark:text-white bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border border-white/20 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-400/50 outline-none transition-all appearance-none cursor-pointer shadow-lg hover:shadow-xl'
 							>
 								<option value=''>All Sets</option>
 								{uniqueSets.map((set) => (
@@ -162,14 +198,46 @@ export default function CardCollection({
 							</div>
 						</div>
 
+						{/* Rarity Filter */}
+						<div className='relative sm:w-64'>
+							<select
+								value={selectedRarity}
+								onChange={(e) => handleRarityChange(e.target.value)}
+								className='w-full px-4 py-3 pr-10 text-gray-900 dark:text-white bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border border-white/20 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-400/50 outline-none transition-all appearance-none cursor-pointer shadow-lg hover:shadow-xl'
+							>
+								<option value=''>All Rarities</option>
+								{uniqueRarities.map((rarity) => (
+									<option key={rarity} value={rarity}>
+										{rarity}
+									</option>
+								))}
+							</select>
+							<div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
+								<svg
+									className='h-5 w-5 text-gray-400'
+									fill='none'
+									stroke='currentColor'
+									viewBox='0 0 24 24'
+								>
+									<path
+										strokeLinecap='round'
+										strokeLinejoin='round'
+										strokeWidth={2}
+										d='M19 9l-7 7-7-7'
+									/>
+								</svg>
+							</div>
+						</div>
+
 						{/* Clear Filters Button */}
-						{(selectedSet || search) && (
+						{(selectedSet || selectedRarity || search) && (
 							<button
 								onClick={() => {
 									setSelectedSet('');
+									setSelectedRarity('');
 									setSearch('');
 								}}
-								className='px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors whitespace-nowrap'
+								className='px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-200 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border border-white/20 dark:border-white/10 rounded-xl hover:bg-white/90 dark:hover:bg-gray-700/90 transition-all whitespace-nowrap shadow-lg hover:shadow-xl hover:scale-105'
 							>
 								Clear Filters
 							</button>
@@ -180,7 +248,10 @@ export default function CardCollection({
 				{/* Loading State */}
 				{isLoading && (
 					<div className='flex justify-center items-center py-20'>
-						<div className='animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600'></div>
+						<div className='relative'>
+							<div className='animate-spin rounded-full h-16 w-16 border-4 border-indigo-200 dark:border-indigo-900'></div>
+							<div className='animate-spin rounded-full h-16 w-16 border-t-4 border-indigo-600 dark:border-indigo-400 absolute top-0 left-0'></div>
+						</div>
 					</div>
 				)}
 

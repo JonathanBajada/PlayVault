@@ -54,3 +54,14 @@ export async function fetchSets(): Promise<string[]> {
 	const data = await res.json();
 	return data.sets;
 }
+
+export async function fetchRarities(): Promise<string[]> {
+	const res = await fetch('http://localhost:4000/cards/rarities');
+
+	if (!res.ok) {
+		throw new Error('Failed to fetch rarities');
+	}
+
+	const data = await res.json();
+	return data.rarities;
+}

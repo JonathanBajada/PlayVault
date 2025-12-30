@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getCards, getUniqueSets } from '../repositories/card-repository';
+import { getCards, getUniqueSets, getUniqueRarities } from '../repositories/card-repository';
 
 console.log('cards router file loaded');
 
@@ -34,6 +34,16 @@ router.get('/sets', async (req, res) => {
 	} catch (error) {
 		console.error('Error fetching sets:', error);
 		res.status(500).json({ error: 'Failed to fetch sets' });
+	}
+});
+
+router.get('/rarities', async (req, res) => {
+	try {
+		const rarities = await getUniqueRarities();
+		res.json({ rarities });
+	} catch (error) {
+		console.error('Error fetching rarities:', error);
+		res.status(500).json({ error: 'Failed to fetch rarities' });
 	}
 });
 

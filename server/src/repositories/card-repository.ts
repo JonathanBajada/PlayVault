@@ -79,3 +79,14 @@ export async function getUniqueSets() {
 
 	return result.rows.map((row) => row.set_name);
 }
+
+export async function getUniqueRarities() {
+	const result = await pool.query(
+		`SELECT DISTINCT rarity 
+		FROM cards 
+		WHERE rarity IS NOT NULL 
+		ORDER BY rarity`,
+	);
+
+	return result.rows.map((row) => row.rarity);
+}
