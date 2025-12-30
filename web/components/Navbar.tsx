@@ -103,13 +103,10 @@ export default function Navbar() {
 							</svg>
 							Pokedex
 						</Link>
-						<Link
-							href='/marketplace'
-							className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm md:text-base font-medium transition-all duration-300 ${
-								isActive('/marketplace')
-									? 'text-white bg-white/20 hover:bg-white/30 backdrop-blur-sm shadow-lg'
-									: 'text-white/90 hover:text-white hover:bg-white/10'
-							}`}
+						<button
+							onClick={() => alert('Coming Soon!')}
+							title='Coming Soon'
+							className='flex items-center gap-2 px-4 py-2 rounded-xl text-sm md:text-base font-medium transition-all duration-300 text-white/90 hover:text-white hover:bg-white/10 cursor-pointer opacity-75 hover:opacity-100'
 						>
 							<svg
 								width='20'
@@ -143,7 +140,8 @@ export default function Navbar() {
 								/>
 							</svg>
 							Marketplace
-						</Link>
+							<span className='text-xs opacity-75'>Soon</span>
+						</button>
 						<Link
 							href='/binder'
 							className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm md:text-base font-medium transition-all duration-300 ${
