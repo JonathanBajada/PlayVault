@@ -219,9 +219,52 @@ export default function Navbar() {
 						</Link>
 						<Link
 							href='/login'
-							className='nav-login flex items-center gap-2 px-4 py-2 rounded-xl text-sm lg:text-base font-medium transition-colors duration-300'
+							className='nav-login-premium flex items-center gap-1.5'
+							style={{
+								background: 'rgba(255, 255, 255, 0.06)',
+								border: '1px solid rgba(255, 255, 255, 0.12)',
+								borderRadius: '999px',
+								padding: '8px 14px',
+								color: '#f8fafc',
+								fontWeight: 500,
+								fontSize: '0.875rem',
+								transition: 'all 150ms ease',
+							}}
+							onMouseEnter={(e) => {
+								e.currentTarget.style.background =
+									'rgba(255, 255, 255, 0.12)';
+								e.currentTarget.style.borderColor =
+									'rgba(255, 255, 255, 0.2)';
+								const arrow =
+									e.currentTarget.querySelector('.login-arrow');
+								if (arrow) {
+									(arrow as HTMLElement).style.transform =
+										'translateX(2px)';
+								}
+							}}
+							onMouseLeave={(e) => {
+								e.currentTarget.style.background =
+									'rgba(255, 255, 255, 0.06)';
+								e.currentTarget.style.borderColor =
+									'rgba(255, 255, 255, 0.12)';
+								const arrow =
+									e.currentTarget.querySelector('.login-arrow');
+								if (arrow) {
+									(arrow as HTMLElement).style.transform =
+										'translateX(0)';
+								}
+							}}
 						>
-							Login
+							<span>Login</span>
+							<span
+								className='login-arrow'
+								style={{
+									transition: 'transform 150ms ease',
+									display: 'inline-block',
+								}}
+							>
+								→
+							</span>
 						</Link>
 					</div>
 
@@ -229,9 +272,52 @@ export default function Navbar() {
 					<div className='md:hidden flex items-center gap-3'>
 						<Link
 							href='/login'
-							className='nav-login px-3 py-1.5 rounded-lg text-xs font-medium transition-colors duration-300'
+							className='nav-login-premium flex items-center gap-1.5'
+							style={{
+								background: 'rgba(255, 255, 255, 0.06)',
+								border: '1px solid rgba(255, 255, 255, 0.12)',
+								borderRadius: '999px',
+								padding: '8px 14px',
+								color: '#f8fafc',
+								fontWeight: 500,
+								fontSize: '0.75rem',
+								transition: 'all 150ms ease',
+							}}
+							onMouseEnter={(e) => {
+								e.currentTarget.style.background =
+									'rgba(255, 255, 255, 0.12)';
+								e.currentTarget.style.borderColor =
+									'rgba(255, 255, 255, 0.2)';
+								const arrow =
+									e.currentTarget.querySelector('.login-arrow');
+								if (arrow) {
+									(arrow as HTMLElement).style.transform =
+										'translateX(2px)';
+								}
+							}}
+							onMouseLeave={(e) => {
+								e.currentTarget.style.background =
+									'rgba(255, 255, 255, 0.06)';
+								e.currentTarget.style.borderColor =
+									'rgba(255, 255, 255, 0.12)';
+								const arrow =
+									e.currentTarget.querySelector('.login-arrow');
+								if (arrow) {
+									(arrow as HTMLElement).style.transform =
+										'translateX(0)';
+								}
+							}}
 						>
-							Login
+							<span>Login</span>
+							<span
+								className='login-arrow'
+								style={{
+									transition: 'transform 150ms ease',
+									display: 'inline-block',
+								}}
+							>
+								→
+							</span>
 						</Link>
 						<button
 							onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
