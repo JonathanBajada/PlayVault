@@ -19,12 +19,18 @@ export async function fetchCards({
 	search,
 	rarity,
 	set,
+	cardType,
+	minPrice,
+	maxPrice,
 }: {
 	page: number;
 	limit: number;
 	search?: string;
 	rarity?: string;
 	set?: string;
+	cardType?: string;
+	minPrice?: string;
+	maxPrice?: string;
 }): Promise<CardsResponse> {
 	const params = new URLSearchParams({
 		page: String(page),
@@ -34,6 +40,9 @@ export async function fetchCards({
 	if (search) params.set('search', search);
 	if (rarity) params.set('rarity', rarity);
 	if (set) params.set('set', set);
+	if (cardType) params.set('cardType', cardType);
+	if (minPrice) params.set('minPrice', minPrice);
+	if (maxPrice) params.set('maxPrice', maxPrice);
 
 	const res = await fetch(`http://localhost:4000/cards?${params.toString()}`);
 

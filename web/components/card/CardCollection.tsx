@@ -34,6 +34,8 @@ export default function CardCollection({
 	const [debouncedSearch, setDebouncedSearch] = useState(initialSearch);
 	const [selectedSet, setSelectedSet] = useState<string>(initialSet);
 	const [selectedRarity, setSelectedRarity] = useState<string>('');
+	const [selectedCardType, setSelectedCardType] = useState<string>('');
+	const [priceRange, setPriceRange] = useState<[number, number]>([0, 500]);
 	const [selectedCard, setSelectedCard] = useState<CardType | null>(null);
 
 	// Debounce search input
@@ -58,6 +60,18 @@ export default function CardCollection({
 		setPage(1);
 	};
 
+	// Reset page when card type filter changes
+	const handleCardTypeChange = (cardType: string) => {
+		setSelectedCardType(cardType);
+		setPage(1);
+	};
+
+	// Reset page when price filter changes
+	const handlePriceRangeChange = (newRange: [number, number]) => {
+		setPriceRange(newRange);
+		setPage(1);
+	};
+
 	const { data, isLoading, error } = useQuery({
 		queryKey: [
 			'cards',
@@ -66,6 +80,8 @@ export default function CardCollection({
 			debouncedSearch,
 			selectedSet,
 			selectedRarity,
+			selectedCardType,
+			priceRange,
 		],
 		queryFn: () =>
 			fetchCards({
@@ -74,6 +90,9 @@ export default function CardCollection({
 				search: debouncedSearch || undefined,
 				set: selectedSet || undefined,
 				rarity: selectedRarity || undefined,
+				cardType: selectedCardType || undefined,
+				minPrice: priceRange[0] > 0 ? String(priceRange[0]) : undefined,
+				maxPrice: priceRange[1] < 500 ? String(priceRange[1]) : undefined,
 			}),
 	});
 
@@ -148,7 +167,7 @@ export default function CardCollection({
 			<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10'>
 				{/* Header */}
 				{showHeader && (
-					<div className='mb-12'>
+					<div className='mb-16'>
 						<h1
 							className='font-brand text-4xl md:text-5xl mb-3 drop-shadow-sm'
 							style={{
@@ -176,161 +195,295 @@ export default function CardCollection({
 				)}
 
 				{/* Search and Filter Bar */}
-				<div className='mb-14'>
-					<div className='filter-container flex flex-col sm:flex-row gap-3 p-4'>
-						{/* Search Input */}
-						<div className='relative sm:w-64 flex-shrink-0'>
-							<input
-								type='text'
-								placeholder='Search cards by name...'
-								value={search}
-								onChange={(e) => setSearch(e.target.value)}
-								className='filter-search-input w-full px-4 py-3 pl-10 pr-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-white/10 transition-all'
-								style={{
-									color: 'var(--text-primary)',
-									background: 'rgba(255, 255, 255, 0.08)',
-									border: '1px solid rgba(255, 255, 255, 0.08)',
-								}}
-							/>
-							<div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
-								<svg
-									className='h-5 w-5 text-gray-400'
-									fill='none'
-									stroke='currentColor'
-									viewBox='0 0 24 24'
+				<div className='mb-12'>
+					<div className='filter-container flex flex-col gap-3 p-4'>
+						{/* Row 1: Primary Filters - Always on one line */}
+						<div className='flex flex-nowrap gap-3 overflow-x-auto'>
+							{/* Search Input */}
+							<div className='relative w-56 shrink-0'>
+								<input
+									type='text'
+									placeholder='Search cards by name...'
+									value={search}
+									onChange={(e) => setSearch(e.target.value)}
+									className='filter-search-input w-full px-4 py-3 pl-10 pr-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-white/10 transition-all'
+									style={{
+										color: 'var(--text-primary)',
+										background: 'rgba(255, 255, 255, 0.08)',
+										border: '1px solid rgba(255, 255, 255, 0.08)',
+									}}
+								/>
+								<div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+									<svg
+										className='h-5 w-5 text-gray-400'
+										fill='none'
+										stroke='currentColor'
+										viewBox='0 0 24 24'
+									>
+										<path
+											strokeLinecap='round'
+											strokeLinejoin='round'
+											strokeWidth={2}
+											d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
+										/>
+									</svg>
+								</div>
+							</div>
+
+							{/* Set Filter */}
+							<div className='relative w-48 shrink-0'>
+								<select
+									value={selectedSet}
+									onChange={(e) => handleSetChange(e.target.value)}
+									className='filter-dropdown w-full px-4 py-3 pl-10 pr-10 rounded-xl focus:outline-none focus:ring-2 focus:ring-white/10 transition-all appearance-none cursor-pointer'
+									style={{
+										color: 'var(--text-primary)',
+										background: 'rgba(255, 255, 255, 0.04)',
+										border: '1px solid rgba(255, 255, 255, 0.08)',
+									}}
 								>
-									<path
-										strokeLinecap='round'
-										strokeLinejoin='round'
-										strokeWidth={2}
-										d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
-									/>
-								</svg>
+									<option value=''>All Sets</option>
+									{uniqueSets.map((set) => (
+										<option key={set} value={set}>
+											{set}
+										</option>
+									))}
+								</select>
+								<div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+									<svg
+										className='h-5 w-5'
+										style={{ color: 'var(--text-muted)' }}
+										fill='none'
+										stroke='currentColor'
+										viewBox='0 0 24 24'
+									>
+										<path
+											strokeLinecap='round'
+											strokeLinejoin='round'
+											strokeWidth={2}
+											d='M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10'
+										/>
+									</svg>
+								</div>
+								<div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
+									<svg
+										className='h-5 w-5 text-gray-400'
+										fill='none'
+										stroke='currentColor'
+										viewBox='0 0 24 24'
+									>
+										<path
+											strokeLinecap='round'
+											strokeLinejoin='round'
+											strokeWidth={2}
+											d='M19 9l-7 7-7-7'
+										/>
+									</svg>
+								</div>
+							</div>
+
+							{/* Rarity Filter */}
+							<div className='relative w-48 shrink-0'>
+								<select
+									value={selectedRarity}
+									onChange={(e) => handleRarityChange(e.target.value)}
+									className='filter-dropdown w-full px-4 py-3 pl-10 pr-10 rounded-xl focus:outline-none focus:ring-2 focus:ring-white/10 transition-all appearance-none cursor-pointer'
+									style={{
+										color: 'var(--text-primary)',
+										background: 'rgba(255, 255, 255, 0.04)',
+										border: '1px solid rgba(255, 255, 255, 0.08)',
+									}}
+								>
+									<option value=''>All Rarities</option>
+									{uniqueRarities.map((rarity) => (
+										<option key={rarity} value={rarity}>
+											{rarity}
+										</option>
+									))}
+								</select>
+								<div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+									<svg
+										className='h-5 w-5'
+										style={{ color: 'var(--text-muted)' }}
+										fill='none'
+										stroke='currentColor'
+										viewBox='0 0 24 24'
+									>
+										<path
+											strokeLinecap='round'
+											strokeLinejoin='round'
+											strokeWidth={2}
+											d='M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z'
+										/>
+									</svg>
+								</div>
+								<div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
+									<svg
+										className='h-5 w-5 text-gray-400'
+										fill='none'
+										stroke='currentColor'
+										viewBox='0 0 24 24'
+									>
+										<path
+											strokeLinecap='round'
+											strokeLinejoin='round'
+											strokeWidth={2}
+											d='M19 9l-7 7-7-7'
+										/>
+									</svg>
+								</div>
+							</div>
+
+							{/* Card Type Filter */}
+							<div className='relative w-44 shrink-0'>
+								<select
+									value={selectedCardType}
+									onChange={(e) =>
+										handleCardTypeChange(e.target.value)
+									}
+									className='filter-dropdown w-full px-4 py-3 pl-10 pr-10 rounded-xl focus:outline-none focus:ring-2 focus:ring-white/10 transition-all appearance-none cursor-pointer'
+									style={{
+										color: 'var(--text-primary)',
+										background: 'rgba(255, 255, 255, 0.04)',
+										border: '1px solid rgba(255, 255, 255, 0.08)',
+									}}
+								>
+									<option value=''>All Types</option>
+									<option value='Pokemon'>Pokemon</option>
+									<option value='Trainer'>Trainer</option>
+									<option value='Energy'>Energy</option>
+								</select>
+								<div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+									<svg
+										className='h-5 w-5'
+										style={{ color: 'var(--text-muted)' }}
+										fill='none'
+										stroke='currentColor'
+										viewBox='0 0 24 24'
+									>
+										<path
+											strokeLinecap='round'
+											strokeLinejoin='round'
+											strokeWidth={2}
+											d='M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z'
+										/>
+									</svg>
+								</div>
+								<div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
+									<svg
+										className='h-5 w-5 text-gray-400'
+										fill='none'
+										stroke='currentColor'
+										viewBox='0 0 24 24'
+									>
+										<path
+											strokeLinecap='round'
+											strokeLinejoin='round'
+											strokeWidth={2}
+											d='M19 9l-7 7-7-7'
+										/>
+									</svg>
+								</div>
 							</div>
 						</div>
 
-						{/* Set Filter */}
-						<div className='relative sm:w-56 flex-shrink-0'>
-							<select
-								value={selectedSet}
-								onChange={(e) => handleSetChange(e.target.value)}
-								className='filter-dropdown w-full px-4 py-3 pl-10 pr-10 rounded-xl focus:outline-none focus:ring-2 focus:ring-white/10 transition-all appearance-none cursor-pointer'
-								style={{
-									color: 'var(--text-primary)',
-									background: 'rgba(255, 255, 255, 0.04)',
-									border: '1px solid rgba(255, 255, 255, 0.08)',
-								}}
-							>
-								<option value=''>All Sets</option>
-								{uniqueSets.map((set) => (
-									<option key={set} value={set}>
-										{set}
-									</option>
-								))}
-							</select>
-							<div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
-								<svg
-									className='h-5 w-5'
-									style={{ color: 'var(--text-muted)' }}
-									fill='none'
-									stroke='currentColor'
-									viewBox='0 0 24 24'
-								>
-									<path
-										strokeLinecap='round'
-										strokeLinejoin='round'
-										strokeWidth={2}
-										d='M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10'
+						{/* Row 2: Secondary Filters - Price Range Slider */}
+						<div className='flex items-end gap-4 flex-wrap'>
+							{/* Price Range Slider */}
+							<div className='w-[65%]'>
+								<div className='mb-1.5'>
+									<span
+										className='text-xs font-medium'
+										style={{ color: 'var(--text-secondary)' }}
+									>
+										Price {priceRange[0]} — {priceRange[1]}
+									</span>
+								</div>
+								<div className='relative h-4'>
+									<div className='price-slider-track' />
+									<div
+										className='price-slider-active-range'
+										style={{
+											left: `${(priceRange[0] / 500) * 100}%`,
+											width: `${
+												((priceRange[1] - priceRange[0]) / 500) *
+												100
+											}%`,
+										}}
 									/>
-								</svg>
-							</div>
-							<div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
-								<svg
-									className='h-5 w-5 text-gray-400'
-									fill='none'
-									stroke='currentColor'
-									viewBox='0 0 24 24'
-								>
-									<path
-										strokeLinecap='round'
-										strokeLinejoin='round'
-										strokeWidth={2}
-										d='M19 9l-7 7-7-7'
+									<input
+										type='range'
+										min='0'
+										max='500'
+										value={priceRange[0]}
+										onChange={(e) =>
+											handlePriceRangeChange([
+												Math.min(
+													Number(e.target.value),
+													priceRange[1] - 1,
+												),
+												priceRange[1],
+											])
+										}
+										className='price-slider-thumb price-slider-thumb-left'
+										style={{
+											position: 'absolute',
+											width: '100%',
+											zIndex:
+												priceRange[0] > priceRange[1] - 10 ? 2 : 1,
+										}}
 									/>
-								</svg>
+									<input
+										type='range'
+										min='0'
+										max='500'
+										value={priceRange[1]}
+										onChange={(e) =>
+											handlePriceRangeChange([
+												priceRange[0],
+												Math.max(
+													Number(e.target.value),
+													priceRange[0] + 1,
+												),
+											])
+										}
+										className='price-slider-thumb price-slider-thumb-right'
+										style={{
+											position: 'absolute',
+											width: '100%',
+											zIndex:
+												priceRange[1] < priceRange[0] + 10 ? 2 : 1,
+										}}
+									/>
+								</div>
 							</div>
-						</div>
 
-						{/* Rarity Filter */}
-						<div className='relative sm:w-56 flex-shrink-0'>
-							<select
-								value={selectedRarity}
-								onChange={(e) => handleRarityChange(e.target.value)}
-								className='filter-dropdown w-full px-4 py-3 pl-10 pr-10 rounded-xl focus:outline-none focus:ring-2 focus:ring-white/10 transition-all appearance-none cursor-pointer'
-								style={{
-									color: 'var(--text-primary)',
-									background: 'rgba(255, 255, 255, 0.04)',
-									border: '1px solid rgba(255, 255, 255, 0.08)',
-								}}
-							>
-								<option value=''>All Rarities</option>
-								{uniqueRarities.map((rarity) => (
-									<option key={rarity} value={rarity}>
-										{rarity}
-									</option>
-								))}
-							</select>
-							<div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
-								<svg
-									className='h-5 w-5'
-									style={{ color: 'var(--text-muted)' }}
-									fill='none'
-									stroke='currentColor'
-									viewBox='0 0 24 24'
+							{/* Clear Filters Button */}
+							{(selectedSet ||
+								selectedRarity ||
+								search ||
+								selectedCardType ||
+								priceRange[0] > 0 ||
+								priceRange[1] < 500) && (
+								<button
+									onClick={() => {
+										setSelectedSet('');
+										setSelectedRarity('');
+										setSearch('');
+										setSelectedCardType('');
+										setPriceRange([0, 500]);
+									}}
+									className='filter-clear-btn px-4 py-3 text-sm font-medium rounded-xl transition-all whitespace-nowrap'
+									style={{
+										color: 'var(--text-secondary)',
+										background: 'rgba(255, 255, 255, 0.04)',
+										border: '1px solid rgba(255, 255, 255, 0.08)',
+									}}
 								>
-									<path
-										strokeLinecap='round'
-										strokeLinejoin='round'
-										strokeWidth={2}
-										d='M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z'
-									/>
-								</svg>
-							</div>
-							<div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
-								<svg
-									className='h-5 w-5 text-gray-400'
-									fill='none'
-									stroke='currentColor'
-									viewBox='0 0 24 24'
-								>
-									<path
-										strokeLinecap='round'
-										strokeLinejoin='round'
-										strokeWidth={2}
-										d='M19 9l-7 7-7-7'
-									/>
-								</svg>
-							</div>
+									Clear Filters
+								</button>
+							)}
 						</div>
-
-						{/* Clear Filters Button */}
-						{(selectedSet || selectedRarity || search) && (
-							<button
-								onClick={() => {
-									setSelectedSet('');
-									setSelectedRarity('');
-									setSearch('');
-								}}
-								className='filter-clear-btn px-4 py-3 text-sm font-medium rounded-xl transition-all whitespace-nowrap'
-								style={{
-									color: 'var(--text-secondary)',
-									background: 'rgba(255, 255, 255, 0.04)',
-									border: '1px solid rgba(255, 255, 255, 0.08)',
-								}}
-							>
-								Clear Filters
-							</button>
-						)}
 					</div>
 				</div>
 
