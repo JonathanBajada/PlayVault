@@ -141,24 +141,26 @@ export default function CardCollection({
 	}
 
 	return (
-		<div className='min-h-screen bg-gradient-to-br from-blue-100 via-purple-100 to-blue-200 py-8 relative'>
-			{/* Animated background elements */}
-			<div className='absolute inset-0 overflow-hidden pointer-events-none'>
-				<div className='absolute top-0 left-1/4 w-96 h-96 bg-purple-300/20 rounded-full blur-3xl animate-pulse'></div>
-				<div
-					className='absolute bottom-0 right-1/4 w-96 h-96 bg-blue-300/20 rounded-full blur-3xl animate-pulse'
-					style={{ animationDelay: '1s' }}
-				></div>
-			</div>
-
+		<div
+			className='min-h-screen py-8 relative'
+			style={{ paddingTop: '6rem' }}
+		>
 			<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10'>
 				{/* Header */}
 				{showHeader && (
 					<div className='mb-8'>
-						<h1 className='text-4xl md:text-5xl font-extrabold text-purple-700 mb-3 drop-shadow-sm'>
+						<h1
+							className='text-4xl md:text-5xl font-extrabold mb-3 drop-shadow-sm'
+							style={{ color: 'var(--text-primary)' }}
+						>
 							{headerTitle}
 						</h1>
-						<p className='text-gray-600 text-lg'>{headerDescription}</p>
+						<p
+							className='text-lg'
+							style={{ color: 'var(--text-secondary)' }}
+						>
+							{headerDescription}
+						</p>
 					</div>
 				)}
 
@@ -172,7 +174,11 @@ export default function CardCollection({
 								placeholder='Search cards by name...'
 								value={search}
 								onChange={(e) => setSearch(e.target.value)}
-								className='w-full px-4 py-3 pl-10 pr-4 text-gray-900 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500/50 focus:border-purple-400 outline-none transition-all shadow-md hover:shadow-lg'
+								className='filter-bar w-full px-4 py-3 pl-10 pr-4 rounded-lg focus:ring-2 focus:ring-purple-500/50 outline-none transition-all'
+								style={{
+									color: 'var(--text-primary)',
+									borderColor: 'var(--border-default)',
+								}}
 							/>
 							<div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
 								<svg
@@ -196,7 +202,11 @@ export default function CardCollection({
 							<select
 								value={selectedSet}
 								onChange={(e) => handleSetChange(e.target.value)}
-								className='w-full px-4 py-3 pl-10 pr-10 text-gray-900 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500/50 focus:border-purple-400 outline-none transition-all appearance-none cursor-pointer shadow-md hover:shadow-lg'
+								className='filter-bar w-full px-4 py-3 pl-10 pr-10 rounded-lg focus:ring-2 focus:ring-purple-500/50 outline-none transition-all appearance-none cursor-pointer'
+								style={{
+									color: 'var(--text-primary)',
+									borderColor: 'var(--border-default)',
+								}}
 							>
 								<option value=''>All Sets</option>
 								{uniqueSets.map((set) => (
@@ -242,7 +252,11 @@ export default function CardCollection({
 							<select
 								value={selectedRarity}
 								onChange={(e) => handleRarityChange(e.target.value)}
-								className='w-full px-4 py-3 pl-10 pr-10 text-gray-900 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500/50 focus:border-purple-400 outline-none transition-all appearance-none cursor-pointer shadow-md hover:shadow-lg'
+								className='filter-bar w-full px-4 py-3 pl-10 pr-10 rounded-lg focus:ring-2 focus:ring-purple-500/50 outline-none transition-all appearance-none cursor-pointer'
+								style={{
+									color: 'var(--text-primary)',
+									borderColor: 'var(--border-default)',
+								}}
 							>
 								<option value=''>All Rarities</option>
 								{uniqueRarities.map((rarity) => (
@@ -291,7 +305,11 @@ export default function CardCollection({
 									setSelectedRarity('');
 									setSearch('');
 								}}
-								className='px-4 py-3 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all whitespace-nowrap shadow-md hover:shadow-lg'
+								className='filter-bar px-4 py-3 text-sm font-medium rounded-lg transition-all whitespace-nowrap'
+								style={{
+									color: 'var(--text-secondary)',
+									borderColor: 'var(--border-default)',
+								}}
 							>
 								Clear Filters
 							</button>
@@ -331,7 +349,11 @@ export default function CardCollection({
 								<button
 									onClick={() => handlePageChange(page - 1)}
 									disabled={page === 1}
-									className='px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors'
+									className='filter-bar px-4 py-2 text-sm font-medium rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors'
+									style={{
+										color: 'var(--text-secondary)',
+										borderColor: 'var(--border-default)',
+									}}
 								>
 									Previous
 								</button>
@@ -358,7 +380,7 @@ export default function CardCollection({
 													className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
 														page === pageNum
 															? 'bg-purple-600 text-white'
-															: 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
+															: 'filter-bar'
 													}`}
 												>
 													{pageNum}
@@ -371,7 +393,11 @@ export default function CardCollection({
 								<button
 									onClick={() => handlePageChange(page + 1)}
 									disabled={page === totalPages}
-									className='px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors'
+									className='filter-bar px-4 py-2 text-sm font-medium rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors'
+									style={{
+										color: 'var(--text-secondary)',
+										borderColor: 'var(--border-default)',
+									}}
 								>
 									Next
 								</button>

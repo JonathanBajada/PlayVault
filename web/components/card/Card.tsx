@@ -9,111 +9,6 @@ interface CardProps {
 	isInBinder?: boolean;
 }
 
-function getRarityColors(rarity: string | null | undefined) {
-	if (!rarity) {
-		return {
-			bg: 'bg-slate-500/15',
-			text: 'text-slate-700',
-			border: 'border-slate-300/50',
-			banner: 'bg-slate-600/80',
-			shadow: 'shadow-[0_8px_30px_rgba(100,116,139,0.25)]',
-		};
-	}
-
-	const rarityLower = rarity.toLowerCase();
-
-	// Rare Holo variants (all share purple)
-	if (rarityLower.includes('rare holo') || rarityLower === 'rare ultra') {
-		return {
-			bg: 'bg-purple-500/20',
-			text: 'text-purple-700',
-			border: 'border-purple-300/50',
-			banner: 'bg-purple-600/80',
-			shadow: 'shadow-[0_8px_30px_rgba(168,85,247,0.25)]',
-		};
-	}
-
-	// Specific rarity mappings
-	if (rarityLower === 'common') {
-		return {
-			bg: 'bg-slate-500/15',
-			text: 'text-slate-700',
-			border: 'border-slate-300/50',
-			banner: 'bg-slate-600/80',
-			shadow: 'shadow-[0_8px_30px_rgba(100,116,139,0.25)]',
-		};
-	}
-
-	if (rarityLower === 'uncommon') {
-		return {
-			bg: 'bg-emerald-500/15',
-			text: 'text-emerald-700',
-			border: 'border-emerald-300/50',
-			banner: 'bg-emerald-600/80',
-			shadow: 'shadow-[0_8px_30px_rgba(16,185,129,0.25)]',
-		};
-	}
-
-	if (rarityLower === 'promo') {
-		return {
-			bg: 'bg-orange-500/15',
-			text: 'text-orange-700',
-			border: 'border-orange-300/50',
-			banner: 'bg-orange-600/80',
-			shadow: 'shadow-[0_8px_30px_rgba(251,146,60,0.25)]',
-		};
-	}
-
-	if (rarityLower === 'rare') {
-		return {
-			bg: 'bg-blue-500/15',
-			text: 'text-blue-700',
-			border: 'border-blue-300/50',
-			banner: 'bg-blue-600/80',
-			shadow: 'shadow-[0_8px_30px_rgba(37,99,235,0.25)]',
-		};
-	}
-
-	if (rarityLower === 'rare break') {
-		return {
-			bg: 'bg-amber-500/20',
-			text: 'text-amber-800',
-			border: 'border-amber-300/60',
-			banner: 'bg-amber-600/80',
-			shadow: 'shadow-[0_8px_30px_rgba(245,158,11,0.25)]',
-		};
-	}
-
-	if (rarityLower === 'rare prism star') {
-		return {
-			bg: 'bg-cyan-500/15',
-			text: 'text-cyan-700',
-			border: 'border-cyan-300/50',
-			banner: 'bg-cyan-600/80',
-			shadow: 'shadow-[0_8px_30px_rgba(6,182,212,0.25)]',
-		};
-	}
-
-	if (rarityLower === 'rare shiny') {
-		return {
-			bg: 'bg-teal-500/15',
-			text: 'text-teal-700',
-			border: 'border-teal-300/50',
-			banner: 'bg-teal-600/80',
-			shadow: 'shadow-[0_8px_30px_rgba(20,184,166,0.25)]',
-		};
-	}
-
-	// Default fallback
-	return {
-		bg: 'bg-slate-500/15',
-		text: 'text-slate-700',
-		border: 'border-slate-300/50',
-		banner: 'bg-slate-600/80',
-		shadow: 'shadow-[0_8px_30px_rgba(100,116,139,0.25)]',
-	};
-}
-
 export default function Card({ card, onClick, isInBinder = false }: CardProps) {
 	const [added, setAdded] = useState(isInBinder);
 
@@ -134,74 +29,96 @@ export default function Card({ card, onClick, isInBinder = false }: CardProps) {
 		setAdded(!added);
 	};
 
-	const rarityColors = getRarityColors(card.rarity);
-	const borderStyle = `border ${rarityColors.border} ${rarityColors.shadow}`;
-	const rarityBannerColor = rarityColors.banner;
+	const rarityLower = card.rarity?.toLowerCase() || '';
+	const isHolo =
+		rarityLower.includes('rare holo') || rarityLower.includes('holo');
 
 	return (
 		<div
-			className={`relative rounded-2xl overflow-hidden ${borderStyle}
-				group cursor-pointer transition-all duration-200 ease-out
-				group-hover:-translate-y-1
-				group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)]`}
+			className={`card ${isHolo ? 'holo' : ''} cursor-pointer`}
 			onClick={onClick}
 		>
 			{/* ================= FULL WIDTH IMAGE ================= */}
-			<div className='w-full aspect-[5/7] bg-gradient-to-b from-gray-50 to-gray-100 relative overflow-hidden'>
+			<div className='card-image-wrapper'>
 				{/* ================= TOP LEFT RARITY LABEL ================= */}
-				<div className='absolute top-2 left-2 z-20'>
-					<div
-						className={`${rarityBannerColor}
-							text-white text-[10px] font-bold tracking-wide
-							px-2.5 py-1 rounded-md
-							shadow-lg backdrop-blur-sm`}
-					>
-						{card.rarity || 'Unknown'}
-					</div>
+				<div
+					className='rarity-badge'
+					style={{
+						background: rarityLower.includes('holo')
+							? 'var(--rarity-holo)'
+							: rarityLower === 'common'
+							? 'var(--rarity-common)'
+							: rarityLower === 'uncommon'
+							? 'var(--rarity-uncommon)'
+							: rarityLower === 'rare'
+							? 'var(--rarity-rare)'
+							: 'var(--rarity-common)',
+					}}
+				>
+					{card.rarity || 'Unknown'}
 				</div>
 
 				{card.image_small_url ? (
-					<img
-						src={card.image_small_url}
-						alt={card.name}
-						className='w-full h-full object-cover'
-						loading='lazy'
-					/>
+					<img src={card.image_small_url} alt={card.name} loading='lazy' />
 				) : (
-					<div className='w-full h-full flex items-center justify-center bg-gray-200'>
-						<div className='text-gray-400 text-sm'>No Image</div>
+					<div
+						className='w-full h-full flex items-center justify-center'
+						style={{ backgroundColor: 'var(--bg-elevated)' }}
+					>
+						<div
+							style={{ color: 'var(--text-muted)' }}
+							className='text-sm'
+						>
+							No Image
+						</div>
 					</div>
 				)}
-
-				{/* Hover shimmer effect */}
-				<div
-					className='absolute inset-0
-						bg-gradient-to-r from-transparent via-white/30 to-transparent
-						-translate-x-full group-hover:translate-x-full
-						transition-transform duration-1000 pointer-events-none'
-				/>
 			</div>
 
 			{/* ================= CONTENT PANEL ================= */}
-			<div className='bg-white/95 backdrop-blur-sm flex flex-col'>
+			<div
+				className='flex flex-col'
+				style={{
+					background: 'var(--bg-surface-soft)',
+					backdropFilter: 'blur(12px)',
+				}}
+			>
 				<div className='px-4 pt-4 pb-4 flex-grow'>
 					{/* Name and Set Info */}
 					<div className='space-y-1'>
-						<h3 className='font-bold text-gray-900 text-base leading-tight line-clamp-2 min-h-[2.5rem]'>
+						<h3
+							className='card-title line-clamp-2 min-h-[2.5rem]'
+							style={{ color: 'var(--text-primary)' }}
+						>
 							{card.name}
 						</h3>
 
 						{/* Set Info - directly under name */}
 						{card.set_name && (
 							<div className='space-y-0.5 -mt-0.5'>
-								<p className='text-[10px] text-gray-500 font-semibold uppercase tracking-wider'>
-									SET
-								</p>
-								<p className='text-xs text-gray-700 font-medium line-clamp-1'>
+								<p className='card-meta-label'>SET</p>
+								<p
+									className='card-meta-value line-clamp-1'
+									style={{ color: 'var(--text-secondary)' }}
+								>
 									{card.set_name}
 								</p>
 							</div>
 						)}
+					</div>
+
+					{/* Price */}
+					<div
+						className='mt-3 pt-3'
+						style={{ borderTop: '1px solid var(--border-default)' }}
+					>
+						<p className='card-meta-label mb-1'>PRICE</p>
+						<p
+							className='text-lg font-bold'
+							style={{ color: 'var(--text-primary)' }}
+						>
+							$24.99
+						</p>
 					</div>
 				</div>
 
@@ -213,7 +130,7 @@ export default function Card({ card, onClick, isInBinder = false }: CardProps) {
 							e.stopPropagation();
 							// TODO: Implement favorite functionality
 						}}
-						className='p-2.5 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors duration-200 flex items-center justify-center'
+						className='btn-secondary p-2.5 flex items-center justify-center'
 						aria-label='Favorite card'
 					>
 						<svg
@@ -236,14 +153,8 @@ export default function Card({ card, onClick, isInBinder = false }: CardProps) {
 					<button
 						onClick={handleAddToBinder}
 						aria-pressed={added}
-						className={`flex-1 flex items-center justify-center gap-1.5
-							px-3 py-2.5 text-sm font-semibold rounded-lg
-							transition-colors duration-200
-							${
-								added
-									? 'bg-green-500/90 text-white hover:bg-green-600'
-									: 'bg-purple-600/80 text-white hover:bg-purple-700'
-							}`}
+						className={`btn-primary flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 text-sm
+							${added ? 'opacity-90' : ''}`}
 					>
 						{added ? (
 							<>
