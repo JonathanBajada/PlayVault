@@ -22,7 +22,12 @@ export default function Navbar() {
 					<div className='flex items-center'>
 						<Link
 							href='/'
-							className='flex items-center gap-2 text-white text-xl md:text-2xl font-bold hover:text-gray-200 transition-colors'
+							className='flex items-center gap-2 text-xl md:text-2xl font-brand hover:opacity-80 transition-opacity'
+							style={{
+								color: '#E6EAF2',
+								fontWeight: 600,
+								letterSpacing: '0.5px',
+							}}
 						>
 							<svg
 								width='24'
@@ -55,7 +60,7 @@ export default function Navbar() {
 								<circle cx='12' cy='12' r='3' fill='#1F2937' />
 								<circle cx='12' cy='12' r='1.5' fill='white' />
 							</svg>
-							PokeVault
+							Poke Vault
 						</Link>
 					</div>
 					{/* Desktop Navigation */}

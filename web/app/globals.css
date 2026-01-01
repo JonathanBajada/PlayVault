@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 @import 'tailwindcss';
 
 /* =========================================================
@@ -60,8 +62,17 @@ body {
 		),
 		var(--bg-page);
 	color: var(--text-primary);
-	font-family: system-ui, -apple-system, sans-serif;
+	font-family: 'Inter', system-ui, -apple-system, sans-serif;
 	min-height: 100vh;
+}
+
+/* ---------- Typography ---------- */
+.font-brand {
+	font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+}
+
+.font-body {
+	font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 /* ---------- Navbar ---------- */

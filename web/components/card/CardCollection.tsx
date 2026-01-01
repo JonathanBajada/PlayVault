@@ -150,24 +150,27 @@ export default function CardCollection({
 				{showHeader && (
 					<div className='mb-12'>
 						<h1
-							className='text-4xl md:text-5xl font-extrabold mb-3 drop-shadow-sm'
+							className='font-brand text-4xl md:text-5xl mb-3 drop-shadow-sm'
 							style={{
 								color: 'var(--text-primary)',
-								letterSpacing: '-0.02em',
-								fontWeight: 800,
+								letterSpacing: '0.3px',
+								fontWeight: 600,
+								lineHeight: 1.2,
 							}}
 						>
 							{headerTitle}
 						</h1>
 						<p
-							className='text-base'
+							className='font-body text-sm md:text-base'
 							style={{
 								color: 'var(--text-muted)',
-								opacity: 0.7,
+								opacity: 0.65,
 								fontWeight: 400,
+								lineHeight: 1.5,
 							}}
 						>
-							{headerDescription}
+							Explore card sets, build your binder, and connect with
+							collectors to trade and sell.
 						</p>
 					</div>
 				)}
