@@ -196,26 +196,26 @@ export default function CardCollection({
 
 				{/* Search and Filter Bar */}
 				<div className='mb-9'>
-					<div className='filter-container flex flex-col gap-3 p-4'>
+					<div className='filter-container flex flex-col gap-3 p-3 sm:p-4'>
 						{/* Row 1: Primary Filters - Always on one line */}
-						<div className='flex flex-nowrap gap-3 overflow-x-auto'>
+						<div className='flex flex-nowrap gap-2 sm:gap-3 overflow-x-auto pb-1'>
 							{/* Search Input */}
-							<div className='relative w-64 shrink-0'>
+							<div className='relative w-56 sm:w-64 shrink-0'>
 								<input
 									type='text'
 									placeholder='Search cards by name...'
 									value={search}
 									onChange={(e) => setSearch(e.target.value)}
-									className='filter-search-input w-full px-4 py-3 pl-10 pr-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-white/10 transition-all'
+									className='filter-search-input w-full px-3 sm:px-4 py-2.5 sm:py-3 pl-9 sm:pl-10 pr-3 sm:pr-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-white/10 transition-all text-sm sm:text-base'
 									style={{
 										color: 'var(--text-primary)',
 										background: 'rgba(255, 255, 255, 0.08)',
 										border: '1px solid rgba(255, 255, 255, 0.08)',
 									}}
 								/>
-								<div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+								<div className='absolute inset-y-0 left-0 pl-2.5 sm:pl-3 flex items-center pointer-events-none'>
 									<svg
-										className='h-5 w-5 text-gray-400'
+										className='h-4 w-4 sm:h-5 sm:w-5 text-gray-400'
 										fill='none'
 										stroke='currentColor'
 										viewBox='0 0 24 24'
@@ -231,11 +231,11 @@ export default function CardCollection({
 							</div>
 
 							{/* Set Filter */}
-							<div className='relative w-48 shrink-0'>
+							<div className='relative w-40 sm:w-48 shrink-0'>
 								<select
 									value={selectedSet}
 									onChange={(e) => handleSetChange(e.target.value)}
-									className='filter-dropdown w-full px-4 py-3 pl-10 pr-10 rounded-xl focus:outline-none focus:ring-2 focus:ring-white/10 transition-all appearance-none cursor-pointer'
+									className='filter-dropdown w-full px-3 sm:px-4 py-2.5 sm:py-3 pl-9 sm:pl-10 pr-9 sm:pr-10 rounded-xl focus:outline-none focus:ring-2 focus:ring-white/10 transition-all appearance-none cursor-pointer text-sm sm:text-base'
 									style={{
 										color: 'var(--text-primary)',
 										background: 'rgba(255, 255, 255, 0.04)',
@@ -249,9 +249,9 @@ export default function CardCollection({
 										</option>
 									))}
 								</select>
-								<div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+								<div className='absolute inset-y-0 left-0 pl-2.5 sm:pl-3 flex items-center pointer-events-none'>
 									<svg
-										className='h-5 w-5'
+										className='h-4 w-4 sm:h-5 sm:w-5'
 										style={{ color: 'var(--text-muted)' }}
 										fill='none'
 										stroke='currentColor'
@@ -265,9 +265,9 @@ export default function CardCollection({
 										/>
 									</svg>
 								</div>
-								<div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
+								<div className='absolute inset-y-0 right-0 pr-2.5 sm:pr-3 flex items-center pointer-events-none'>
 									<svg
-										className='h-5 w-5 text-gray-400'
+										className='h-4 w-4 sm:h-5 sm:w-5 text-gray-400'
 										fill='none'
 										stroke='currentColor'
 										viewBox='0 0 24 24'
@@ -283,11 +283,11 @@ export default function CardCollection({
 							</div>
 
 							{/* Rarity Filter */}
-							<div className='relative w-48 shrink-0'>
+							<div className='relative w-40 sm:w-48 shrink-0'>
 								<select
 									value={selectedRarity}
 									onChange={(e) => handleRarityChange(e.target.value)}
-									className='filter-dropdown w-full px-4 py-3 pl-10 pr-10 rounded-xl focus:outline-none focus:ring-2 focus:ring-white/10 transition-all appearance-none cursor-pointer'
+									className='filter-dropdown w-full px-3 sm:px-4 py-2.5 sm:py-3 pl-9 sm:pl-10 pr-9 sm:pr-10 rounded-xl focus:outline-none focus:ring-2 focus:ring-white/10 transition-all appearance-none cursor-pointer text-sm sm:text-base'
 									style={{
 										color: 'var(--text-primary)',
 										background: 'rgba(255, 255, 255, 0.04)',
@@ -301,9 +301,9 @@ export default function CardCollection({
 										</option>
 									))}
 								</select>
-								<div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+								<div className='absolute inset-y-0 left-0 pl-2.5 sm:pl-3 flex items-center pointer-events-none'>
 									<svg
-										className='h-5 w-5'
+										className='h-4 w-4 sm:h-5 sm:w-5'
 										style={{ color: 'var(--text-muted)' }}
 										fill='none'
 										stroke='currentColor'
@@ -317,9 +317,9 @@ export default function CardCollection({
 										/>
 									</svg>
 								</div>
-								<div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
+								<div className='absolute inset-y-0 right-0 pr-2.5 sm:pr-3 flex items-center pointer-events-none'>
 									<svg
-										className='h-5 w-5 text-gray-400'
+										className='h-4 w-4 sm:h-5 sm:w-5 text-gray-400'
 										fill='none'
 										stroke='currentColor'
 										viewBox='0 0 24 24'
@@ -335,13 +335,13 @@ export default function CardCollection({
 							</div>
 
 							{/* Card Type Filter */}
-							<div className='relative w-44 shrink-0'>
+							<div className='relative w-36 sm:w-44 shrink-0'>
 								<select
 									value={selectedCardType}
 									onChange={(e) =>
 										handleCardTypeChange(e.target.value)
 									}
-									className='filter-dropdown w-full px-4 py-3 pl-10 pr-10 rounded-xl focus:outline-none focus:ring-2 focus:ring-white/10 transition-all appearance-none cursor-pointer'
+									className='filter-dropdown w-full px-3 sm:px-4 py-2.5 sm:py-3 pl-9 sm:pl-10 pr-9 sm:pr-10 rounded-xl focus:outline-none focus:ring-2 focus:ring-white/10 transition-all appearance-none cursor-pointer text-sm sm:text-base'
 									style={{
 										color: 'var(--text-primary)',
 										background: 'rgba(255, 255, 255, 0.04)',
@@ -353,9 +353,9 @@ export default function CardCollection({
 									<option value='Trainer'>Trainer</option>
 									<option value='Energy'>Energy</option>
 								</select>
-								<div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+								<div className='absolute inset-y-0 left-0 pl-2.5 sm:pl-3 flex items-center pointer-events-none'>
 									<svg
-										className='h-5 w-5'
+										className='h-4 w-4 sm:h-5 sm:w-5'
 										style={{ color: 'var(--text-muted)' }}
 										fill='none'
 										stroke='currentColor'
@@ -369,9 +369,9 @@ export default function CardCollection({
 										/>
 									</svg>
 								</div>
-								<div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
+								<div className='absolute inset-y-0 right-0 pr-2.5 sm:pr-3 flex items-center pointer-events-none'>
 									<svg
-										className='h-5 w-5 text-gray-400'
+										className='h-4 w-4 sm:h-5 sm:w-5 text-gray-400'
 										fill='none'
 										stroke='currentColor'
 										viewBox='0 0 24 24'
@@ -388,9 +388,9 @@ export default function CardCollection({
 						</div>
 
 						{/* Row 2: Secondary Filters - Price Range Slider */}
-						<div className='flex items-end gap-4 flex-wrap'>
+						<div className='flex flex-col sm:flex-row items-stretch sm:items-end gap-3 sm:gap-4'>
 							{/* Price Range Slider */}
-							<div className='w-[65%]'>
+							<div className='w-full sm:w-[65%]'>
 								<div className='mb-1'>
 									<span
 										className='text-[10px] font-medium tracking-wide'
@@ -467,7 +467,7 @@ export default function CardCollection({
 									setSelectedCardType('');
 									setPriceRange([0, 500]);
 								}}
-								className='filter-clear-btn px-4 py-3 text-sm font-medium rounded-xl whitespace-nowrap transition-opacity duration-200 ease-in-out'
+								className='filter-clear-btn px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-medium rounded-xl whitespace-nowrap transition-opacity duration-200 ease-in-out w-full sm:w-auto'
 								style={{
 									color: 'var(--text-secondary)',
 									background: 'rgba(255, 255, 255, 0.04)',

@@ -106,6 +106,30 @@ body {
 	min-height: fit-content;
 }
 
+/* Mobile-friendly horizontal scroll */
+.filter-container > div:first-child {
+	-webkit-overflow-scrolling: touch;
+	scrollbar-width: thin;
+}
+
+.filter-container > div:first-child::-webkit-scrollbar {
+	height: 4px;
+}
+
+.filter-container > div:first-child::-webkit-scrollbar-track {
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: 2px;
+}
+
+.filter-container > div:first-child::-webkit-scrollbar-thumb {
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 2px;
+}
+
+.filter-container > div:first-child::-webkit-scrollbar-thumb:hover {
+	background: rgba(255, 255, 255, 0.3);
+}
+
 /* ---------- Filter Search Input (Primary) ---------- */
 .filter-search-input {
 	background: rgba(255, 255, 255, 0.08) !important;
