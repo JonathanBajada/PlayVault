@@ -143,7 +143,7 @@ export default function CardCollection({
 	return (
 		<div
 			className='min-h-screen py-8 relative'
-			style={{ paddingTop: '4rem' }}
+			style={{ paddingTop: '3.5rem' }}
 		>
 			<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10'>
 				{/* Header */}
@@ -151,13 +151,21 @@ export default function CardCollection({
 					<div className='mb-8'>
 						<h1
 							className='text-4xl md:text-5xl font-extrabold mb-3 drop-shadow-sm'
-							style={{ color: 'var(--text-primary)' }}
+							style={{
+								color: 'var(--text-primary)',
+								letterSpacing: '-0.02em',
+								fontWeight: 800,
+							}}
 						>
 							{headerTitle}
 						</h1>
 						<p
-							className='text-lg'
-							style={{ color: 'var(--text-secondary)' }}
+							className='text-base'
+							style={{
+								color: 'var(--text-muted)',
+								opacity: 0.7,
+								fontWeight: 400,
+							}}
 						>
 							{headerDescription}
 						</p>
@@ -337,7 +345,7 @@ export default function CardCollection({
 
 				{/* Cards Grid */}
 				{!isLoading && data && (
-					<>
+					<div className='card-grid-zone'>
 						<div
 							className='mb-8 text-sm'
 							style={{ color: 'var(--text-muted)' }}
@@ -432,7 +440,7 @@ export default function CardCollection({
 								Page {page} of {totalPages}
 							</div>
 						)}
-					</>
+					</div>
 				)}
 
 				{/* Empty State */}

@@ -6,38 +6,49 @@
 
 /* ---------- Design Tokens ---------- */
 :root {
-	/* Backgrounds */
-	--bg-page: #0b1020;
-	--bg-surface: #0f172a;
-	--bg-surface-soft: rgba(15, 23, 42, 0.85);
-	--bg-elevated: #111827;
+	/* ===============================
+	   BACKGROUNDS — Cold Vault
+	   =============================== */
+	--bg-page: #0a0f1c; /* colder, deeper */
+	--bg-surface: #0e1626;
+	--bg-surface-soft: rgba(14, 22, 38, 0.88);
+	--bg-elevated: #121a2e;
 
-	/* Brand */
-	--brand-primary: #8b5cf6;
-	--brand-secondary: #38bdf8;
-	--brand-accent: #22d3ee;
+	/* ===============================
+	   BRAND — Single Identity
+	   =============================== */
+	--brand-primary: #7c8cff; /* cool electric indigo */
+	--brand-accent: #7c8cff; /* same as primary */
 
-	/* Text */
-	--text-primary: #e5e7eb;
-	--text-secondary: #9ca3af;
-	--text-muted: #6b7280;
-	--text-inverse: #020617;
+	/* ===============================
+	   TEXT — Calm & Editorial
+	   =============================== */
+	--text-primary: #e6eaf2;
+	--text-secondary: #a9b1c3;
+	--text-muted: #6f7a90;
+	--text-inverse: #05070f;
 
-	/* Borders */
-	--border-default: rgba(148, 163, 184, 0.15);
-	--border-strong: rgba(148, 163, 184, 0.3);
+	/* ===============================
+	   BORDERS — Structural, Not Loud
+	   =============================== */
+	--border-default: rgba(160, 174, 192, 0.14);
+	--border-strong: rgba(160, 174, 192, 0.28);
 
-	/* Shadows */
-	--shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.35);
-	--shadow-md: 0 10px 30px rgba(0, 0, 0, 0.45);
-	--shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.55);
+	/* ===============================
+	   SHADOWS — Depth, Not Drama
+	   =============================== */
+	--shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.35);
+	--shadow-md: 0 10px 26px rgba(0, 0, 0, 0.45);
+	--shadow-lg: 0 22px 55px rgba(0, 0, 0, 0.55);
 
-	/* Rarity */
-	--rarity-common: #94a3b8;
-	--rarity-uncommon: #22c55e;
-	--rarity-rare: #3b82f6;
-	--rarity-holo: #a855f7;
-	--rarity-ultra: #ec4899;
+	/* ===============================
+	   RARITY — Muted, Controlled
+	   =============================== */
+	--rarity-common: #8b95a7;
+	--rarity-uncommon: #5fb3a2;
+	--rarity-rare: #5f7cff;
+	--rarity-holo: #8b5cf6;
+	--rarity-ultra: #c084fc;
 }
 
 /* ---------- Base ---------- */
@@ -65,6 +76,17 @@ body {
 	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
+.nav-login {
+	color: var(--text-primary);
+	opacity: 0.9;
+}
+
+.nav-login:hover,
+.nav-login:focus {
+	color: var(--brand-primary);
+	opacity: 1;
+}
+
 /* ---------- Filter Bar ---------- */
 .filter-bar {
 	background: rgba(17, 24, 39, 0.85);
@@ -80,6 +102,13 @@ body {
 	row-gap: 4rem;
 }
 
+/* ---------- Card Grid Zone ---------- */
+.card-grid-zone {
+	background: #080d1a;
+	padding: 2rem 0;
+	margin-top: 1rem;
+}
+
 /* ---------- Card ---------- */
 .card {
 	position: relative;
@@ -90,14 +119,17 @@ body {
 	);
 	border-radius: 1.25rem;
 	border: 1px solid var(--border-default);
-	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3),
+		inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+		inset 0 1px 0 rgba(255, 255, 255, 0.02);
 	overflow: hidden;
-	transition: transform 0.25s ease, box-shadow 0.25s ease;
+	transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+		box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card:hover {
-	transform: translateY(-6px);
-	box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.4);
+	box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 8px 20px rgba(0, 0, 0, 0.5),
+		inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
 /* ---------- Card Image ---------- */
@@ -105,12 +137,39 @@ body {
 	position: relative;
 	aspect-ratio: 2.5 / 3.5;
 	overflow: hidden;
+	box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.15),
+		inset 0 -2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ---------- Rarity Label Bar ---------- */
+.rarity-label-bar {
+	position: absolute;
+	bottom: -1px;
+	left: 0;
+	right: 0;
+	width: 100%;
+	padding: 0.4rem 1.25rem;
+	font-size: 0.6rem;
+	font-weight: 600;
+	letter-spacing: 0.22em;
+	text-transform: uppercase;
+	border-radius: 0 0 1.25rem 1.25rem;
+	text-align: center;
+	z-index: 3;
 }
 
 .card-image-wrapper img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+	transition: filter 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+		transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	filter: brightness(0.98) contrast(0.98);
+}
+
+.card:hover .card-image-wrapper img {
+	filter: brightness(1.02) contrast(1.02);
+	transform: scale(1.01);
 }
 
 .card-image-wrapper::after {
@@ -121,8 +180,8 @@ body {
 		to bottom,
 		transparent 0%,
 		transparent 60%,
-		rgba(0, 0, 0, 0.15) 85%,
-		rgba(0, 0, 0, 0.35) 100%
+		rgba(0, 0, 0, 0.16) 85%,
+		rgba(0, 0, 0, 0.38) 100%
 	);
 	pointer-events: none;
 	z-index: 1;
@@ -133,12 +192,17 @@ body {
 	content: '';
 	position: absolute;
 	inset: -12px;
+	background: radial-gradient(circle, rgba(168, 85, 247, 0), transparent 70%);
+	z-index: -1;
+	transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card.holo:hover::before {
 	background: radial-gradient(
 		circle,
-		rgba(168, 85, 247, 0.35),
+		rgba(168, 85, 247, 0.25),
 		transparent 70%
 	);
-	z-index: -1;
 }
 
 /* ---------- Rarity Badge ---------- */
@@ -180,10 +244,11 @@ body {
 /* ---------- Typography ---------- */
 .card-title {
 	font-size: 0.95rem;
-	font-weight: 500;
-	letter-spacing: -0.01em;
+	font-weight: 600;
+	letter-spacing: -0.015em;
 	color: var(--text-primary);
-	opacity: 0.95;
+	opacity: 0.96;
+	line-height: 1.4;
 }
 
 .card-meta-label {
@@ -192,7 +257,7 @@ body {
 	text-transform: uppercase;
 	color: var(--text-muted);
 	font-weight: 400;
-	opacity: 0.8;
+	opacity: 0.65;
 }
 
 .card-meta-value {
@@ -203,11 +268,12 @@ body {
 }
 
 .card-price {
-	font-size: 1.2rem;
-	font-weight: 600;
+	font-size: 1.25rem;
+	font-weight: 700;
 	color: var(--text-primary);
-	letter-spacing: -0.02em;
+	letter-spacing: -0.025em;
 	opacity: 1;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 /* ---------- Buttons ---------- */
@@ -226,7 +292,7 @@ body {
 	background: linear-gradient(
 		135deg,
 		var(--brand-primary),
-		var(--brand-secondary)
+		var(--brand-accent)
 	);
 	color: white;
 	border-color: transparent;

@@ -219,7 +219,7 @@ export default function Navbar() {
 						</Link>
 						<Link
 							href='/login'
-							className='bg-white/95 text-indigo-600 hover:bg-white px-4 py-2 rounded-xl text-sm lg:text-base font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 backdrop-blur-sm'
+							className='nav-login flex items-center gap-2 px-4 py-2 rounded-xl text-sm lg:text-base font-medium transition-colors duration-300'
 						>
 							Login
 						</Link>
@@ -229,7 +229,7 @@ export default function Navbar() {
 					<div className='md:hidden flex items-center gap-3'>
 						<Link
 							href='/login'
-							className='bg-white/95 text-indigo-600 hover:bg-white px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-300 shadow-md'
+							className='nav-login px-3 py-1.5 rounded-lg text-xs font-medium transition-colors duration-300'
 						>
 							Login
 						</Link>

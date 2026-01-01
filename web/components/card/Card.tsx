@@ -33,6 +33,25 @@ export default function Card({ card, onClick, isInBinder = false }: CardProps) {
 	const isHolo =
 		rarityLower.includes('rare holo') || rarityLower.includes('holo');
 
+	// Get rarity label - display actual rarity value in uppercase
+	const getRarityLabel = (): string => {
+		if (!card.rarity) return 'COMMON';
+		return card.rarity.toUpperCase();
+	};
+
+	// Get rarity color category for styling
+	const getRarityColorCategory = (): 'COMMON' | 'UNCOMMON' | 'RARE' => {
+		if (!card.rarity) return 'COMMON';
+		const r = card.rarity.toLowerCase();
+		if (r === 'common') return 'COMMON';
+		if (r === 'uncommon') return 'UNCOMMON';
+		// All rare variants (rare, rare holo, ultra, promo, etc.) use RARE colors
+		return 'RARE';
+	};
+
+	const rarityLabel = getRarityLabel();
+	const rarityColorCategory = getRarityColorCategory();
+
 	return (
 		<div
 			className={`card ${isHolo ? 'holo' : ''} cursor-pointer group`}
@@ -81,14 +100,34 @@ export default function Card({ card, onClick, isInBinder = false }: CardProps) {
 						-translate-x-full group-hover:translate-x-full
 						transition-transform duration-1000 pointer-events-none z-10'
 				/>
+
+				{/* ================= RARITY LABEL BAR ================= */}
+				<div
+					className='rarity-label-bar'
+					style={{
+						background:
+							rarityColorCategory === 'COMMON'
+								? 'rgba(148, 163, 184, 0.18)'
+								: rarityColorCategory === 'UNCOMMON'
+								? 'rgba(34, 197, 94, 0.18)'
+								: 'rgba(245, 158, 11, 0.22)',
+						color:
+							rarityColorCategory === 'COMMON'
+								? '#cbd5e1'
+								: rarityColorCategory === 'UNCOMMON'
+								? '#86efac'
+								: '#fde68a',
+					}}
+				>
+					{rarityLabel}
+				</div>
 			</div>
 
 			{/* ================= CONTENT PANEL ================= */}
 			<div
 				className='flex flex-col'
 				style={{
-					background: 'rgba(15, 23, 42, 0.92)',
-					backdropFilter: 'blur(12px)',
+					background: 'rgba(22, 30, 46, 1)',
 				}}
 			>
 				<div className='px-6 pt-7 pb-5 flex-grow'>
@@ -108,63 +147,71 @@ export default function Card({ card, onClick, isInBinder = false }: CardProps) {
 							</div>
 						)}
 					</div>
+				</div>
 
+				{/* Price Zone */}
+				<div
+					className='price-zone'
+					style={{
+						background:
+							'linear-gradient(to bottom, rgba(18, 26, 38, 0.4), rgba(15, 22, 35, 0.6))',
+					}}
+				>
 					{/* Price */}
 					<div
-						className='mt-6 pt-6'
+						className='px-6 pt-6'
 						style={{ borderTop: '1px solid var(--border-default)' }}
 					>
 						<p className='card-meta-label mb-2'>PRICE</p>
 						<p className='card-price'>$24.99</p>
 					</div>
-				</div>
-
-				{/* Action Buttons */}
-				<div className='px-6 pt-6 pb-6 flex gap-2 shrink-0'>
-					{/* Favorite Button */}
-					<button
-						onClick={(e) => {
-							e.stopPropagation();
-							// TODO: Implement favorite functionality
-						}}
-						className='btn-secondary p-2.5 flex items-center justify-center'
-						aria-label='Favorite card'
-					>
-						<svg
-							xmlns='http://www.w3.org/2000/svg'
-							className='w-5 h-5 text-gray-600 hover:text-yellow-500 transition-colors duration-200'
-							fill='none'
-							viewBox='0 0 24 24'
-							stroke='currentColor'
-							strokeWidth={2}
+					{/* Action Buttons */}
+					<div className='px-6 pt-6 pb-6 flex gap-2 shrink-0'>
+						{/* Favorite Button */}
+						<button
+							onClick={(e) => {
+								e.stopPropagation();
+								// TODO: Implement favorite functionality
+							}}
+							className='btn-secondary p-2.5 flex items-center justify-center'
+							aria-label='Favorite card'
 						>
-							<path
-								strokeLinecap='round'
-								strokeLinejoin='round'
-								d='M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z'
-							/>
-						</svg>
-					</button>
+							<svg
+								xmlns='http://www.w3.org/2000/svg'
+								className='w-5 h-5 text-gray-600 hover:text-yellow-500 transition-colors duration-200'
+								fill='none'
+								viewBox='0 0 24 24'
+								stroke='currentColor'
+								strokeWidth={2}
+							>
+								<path
+									strokeLinecap='round'
+									strokeLinejoin='round'
+									d='M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z'
+								/>
+							</svg>
+						</button>
 
-					{/* Add to Binder */}
-					<button
-						onClick={handleAddToBinder}
-						aria-pressed={added}
-						className={`btn-primary flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 text-sm
+						{/* Add to Binder */}
+						<button
+							onClick={handleAddToBinder}
+							aria-pressed={added}
+							className={`btn-primary flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 text-sm
 							${added ? 'opacity-90' : ''}`}
-					>
-						{added ? (
-							<>
-								<span>✓</span>
-								<span>Binder</span>
-							</>
-						) : (
-							<>
-								<span>+</span>
-								<span>Binder</span>
-							</>
-						)}
-					</button>
+						>
+							{added ? (
+								<>
+									<span>✓</span>
+									<span>Binder</span>
+								</>
+							) : (
+								<>
+									<span>+</span>
+									<span>Binder</span>
+								</>
+							)}
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
