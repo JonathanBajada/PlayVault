@@ -58,7 +58,17 @@ export default function Card({ card, onClick, isInBinder = false }: CardProps) {
 			onClick={onClick}
 		>
 			{/* ================= FULL WIDTH IMAGE ================= */}
-			<div className='card-image-wrapper'>
+			<div
+				className='card-image-wrapper'
+				style={{
+					background:
+						rarityColorCategory === 'COMMON'
+							? 'rgba(148, 163, 184, 0.18)'
+							: rarityColorCategory === 'UNCOMMON'
+							? 'rgba(34, 197, 94, 0.18)'
+							: 'rgba(245, 158, 11, 0.22)',
+				}}
+			>
 				{/* ================= TOP LEFT RARITY LABEL ================= */}
 				<div
 					className='rarity-badge'
@@ -100,27 +110,27 @@ export default function Card({ card, onClick, isInBinder = false }: CardProps) {
 						-translate-x-full group-hover:translate-x-full
 						transition-transform duration-1000 pointer-events-none z-10'
 				/>
+			</div>
 
-				{/* ================= RARITY LABEL BAR ================= */}
-				<div
-					className='rarity-label-bar'
-					style={{
-						background:
-							rarityColorCategory === 'COMMON'
-								? 'rgba(148, 163, 184, 0.18)'
-								: rarityColorCategory === 'UNCOMMON'
-								? 'rgba(34, 197, 94, 0.18)'
-								: 'rgba(245, 158, 11, 0.22)',
-						color:
-							rarityColorCategory === 'COMMON'
-								? '#cbd5e1'
-								: rarityColorCategory === 'UNCOMMON'
-								? '#86efac'
-								: '#fde68a',
-					}}
-				>
-					{rarityLabel}
-				</div>
+			{/* ================= RARITY LABEL BAR ================= */}
+			<div
+				className='rarity-label-bar'
+				style={{
+					background:
+						rarityColorCategory === 'COMMON'
+							? 'rgba(148, 163, 184, 0.18)'
+							: rarityColorCategory === 'UNCOMMON'
+							? 'rgba(34, 197, 94, 0.18)'
+							: 'rgba(245, 158, 11, 0.22)',
+					color:
+						rarityColorCategory === 'COMMON'
+							? '#cbd5e1'
+							: rarityColorCategory === 'UNCOMMON'
+							? '#86efac'
+							: '#fde68a',
+				}}
+			>
+				{rarityLabel}
 			</div>
 
 			{/* ================= CONTENT PANEL ================= */}
