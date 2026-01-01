@@ -143,7 +143,7 @@ export default function CardCollection({
 	return (
 		<div
 			className='min-h-screen py-8 relative'
-			style={{ paddingTop: '6rem' }}
+			style={{ paddingTop: '4rem' }}
 		>
 			<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10'>
 				{/* Header */}
@@ -165,7 +165,7 @@ export default function CardCollection({
 				)}
 
 				{/* Search and Filter Bar */}
-				<div className='mb-8'>
+				<div className='mb-16'>
 					<div className='flex flex-col sm:flex-row gap-4'>
 						{/* Search Input */}
 						<div className='relative sm:w-64 flex-shrink-0'>
@@ -174,7 +174,7 @@ export default function CardCollection({
 								placeholder='Search cards by name...'
 								value={search}
 								onChange={(e) => setSearch(e.target.value)}
-								className='filter-bar w-full px-4 py-3 pl-10 pr-4 rounded-lg focus:ring-2 focus:ring-purple-500/50 outline-none transition-all'
+								className='filter-bar w-full px-4 py-3 pl-10 pr-4 rounded-lg focus:ring-2 focus:ring-white/20 outline-none transition-all'
 								style={{
 									color: 'var(--text-primary)',
 									borderColor: 'var(--border-default)',
@@ -202,7 +202,7 @@ export default function CardCollection({
 							<select
 								value={selectedSet}
 								onChange={(e) => handleSetChange(e.target.value)}
-								className='filter-bar w-full px-4 py-3 pl-10 pr-10 rounded-lg focus:ring-2 focus:ring-purple-500/50 outline-none transition-all appearance-none cursor-pointer'
+								className='filter-bar w-full px-4 py-3 pl-10 pr-10 rounded-lg focus:ring-2 focus:ring-white/20 outline-none transition-all appearance-none cursor-pointer'
 								style={{
 									color: 'var(--text-primary)',
 									borderColor: 'var(--border-default)',
@@ -217,7 +217,8 @@ export default function CardCollection({
 							</select>
 							<div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
 								<svg
-									className='h-5 w-5 text-purple-600'
+									className='h-5 w-5'
+									style={{ color: 'var(--text-muted)' }}
 									fill='none'
 									stroke='currentColor'
 									viewBox='0 0 24 24'
@@ -252,7 +253,7 @@ export default function CardCollection({
 							<select
 								value={selectedRarity}
 								onChange={(e) => handleRarityChange(e.target.value)}
-								className='filter-bar w-full px-4 py-3 pl-10 pr-10 rounded-lg focus:ring-2 focus:ring-purple-500/50 outline-none transition-all appearance-none cursor-pointer'
+								className='filter-bar w-full px-4 py-3 pl-10 pr-10 rounded-lg focus:ring-2 focus:ring-white/20 outline-none transition-all appearance-none cursor-pointer'
 								style={{
 									color: 'var(--text-primary)',
 									borderColor: 'var(--border-default)',
@@ -267,7 +268,8 @@ export default function CardCollection({
 							</select>
 							<div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
 								<svg
-									className='h-5 w-5 text-purple-600'
+									className='h-5 w-5'
+									style={{ color: 'var(--text-muted)' }}
 									fill='none'
 									stroke='currentColor'
 									viewBox='0 0 24 24'
@@ -321,8 +323,14 @@ export default function CardCollection({
 				{isLoading && (
 					<div className='flex justify-center items-center py-20'>
 						<div className='relative'>
-							<div className='animate-spin rounded-full h-16 w-16 border-4 border-purple-200'></div>
-							<div className='animate-spin rounded-full h-16 w-16 border-t-4 border-purple-600 absolute top-0 left-0'></div>
+							<div
+								className='animate-spin rounded-full h-16 w-16 border-4'
+								style={{ borderColor: 'var(--border-default)' }}
+							></div>
+							<div
+								className='animate-spin rounded-full h-16 w-16 border-t-4 absolute top-0 left-0'
+								style={{ borderColor: 'var(--text-secondary)' }}
+							></div>
 						</div>
 					</div>
 				)}
@@ -330,7 +338,10 @@ export default function CardCollection({
 				{/* Cards Grid */}
 				{!isLoading && data && (
 					<>
-						<div className='mb-6 text-sm text-gray-600'>
+						<div
+							className='mb-8 text-sm'
+							style={{ color: 'var(--text-muted)' }}
+						>
 							Showing {data.data.length} of {data.total} cards
 						</div>
 						<div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-8'>
@@ -379,9 +390,20 @@ export default function CardCollection({
 													onClick={() => handlePageChange(pageNum)}
 													className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
 														page === pageNum
-															? 'bg-purple-600 text-white'
+															? 'filter-bar'
 															: 'filter-bar'
 													}`}
+													style={
+														page === pageNum
+															? {
+																	backgroundColor:
+																		'rgba(255, 255, 255, 0.08)',
+																	borderColor:
+																		'var(--border-strong)',
+																	color: 'var(--text-primary)',
+															  }
+															: undefined
+													}
 												>
 													{pageNum}
 												</button>

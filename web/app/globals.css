@@ -77,7 +77,7 @@ body {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
 	gap: 2.5rem;
-	row-gap: 3rem;
+	row-gap: 4rem;
 }
 
 /* ---------- Card ---------- */
@@ -85,19 +85,19 @@ body {
 	position: relative;
 	background: linear-gradient(
 		180deg,
-		rgba(30, 41, 59, 0.95),
-		rgba(15, 23, 42, 0.95)
+		rgba(30, 41, 59, 1),
+		rgba(22, 30, 46, 1)
 	);
 	border-radius: 1.25rem;
 	border: 1px solid var(--border-default);
-	box-shadow: var(--shadow-md);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
 	overflow: hidden;
 	transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .card:hover {
 	transform: translateY(-6px);
-	box-shadow: var(--shadow-lg);
+	box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 /* ---------- Card Image ---------- */
@@ -117,8 +117,15 @@ body {
 	content: '';
 	position: absolute;
 	inset: 0;
-	box-shadow: inset 0 -20px 30px rgba(0, 0, 0, 0.35);
+	background: linear-gradient(
+		to bottom,
+		transparent 0%,
+		transparent 60%,
+		rgba(0, 0, 0, 0.15) 85%,
+		rgba(0, 0, 0, 0.35) 100%
+	);
 	pointer-events: none;
+	z-index: 1;
 }
 
 /* ---------- Holo Glow ---------- */
@@ -141,70 +148,88 @@ body {
 	left: 0.75rem;
 	padding: 0.25rem 0.6rem;
 	font-size: 0.65rem;
-	font-weight: 600;
+	font-weight: 500;
 	border-radius: 999px;
-	border: 1px solid rgba(255, 255, 255, 0.2);
+	border: 1px solid rgba(255, 255, 255, 0.12);
 	backdrop-filter: blur(8px);
 	color: white;
+	opacity: 0.75;
+	transition: opacity 0.3s ease;
+}
+
+.card:hover .rarity-badge {
+	opacity: 1;
 }
 
 .rarity-common {
-	background: rgba(148, 163, 184, 0.85);
+	background: rgba(148, 163, 184, 0.75);
 }
 .rarity-uncommon {
-	background: rgba(34, 197, 94, 0.85);
+	background: rgba(34, 197, 94, 0.75);
 }
 .rarity-rare {
-	background: rgba(59, 130, 246, 0.85);
+	background: rgba(59, 130, 246, 0.75);
 }
 .rarity-holo {
-	background: rgba(168, 85, 247, 0.85);
+	background: rgba(168, 85, 247, 0.75);
 }
 .rarity-ultra {
-	background: rgba(236, 72, 153, 0.85);
+	background: rgba(236, 72, 153, 0.75);
 }
 
 /* ---------- Typography ---------- */
 .card-title {
-	font-size: 1rem;
-	font-weight: 600;
+	font-size: 0.95rem;
+	font-weight: 500;
+	letter-spacing: -0.01em;
+	color: var(--text-primary);
+	opacity: 0.95;
 }
 
 .card-meta-label {
-	font-size: 0.65rem;
-	letter-spacing: 0.08em;
+	font-size: 0.55rem;
+	letter-spacing: 0.12em;
 	text-transform: uppercase;
 	color: var(--text-muted);
+	font-weight: 400;
+	opacity: 0.8;
 }
 
 .card-meta-value {
-	font-size: 0.8rem;
+	font-size: 0.7rem;
 	color: var(--text-secondary);
+	font-weight: 400;
+	opacity: 0.85;
 }
 
 .card-price {
-	font-size: 1.1rem;
+	font-size: 1.2rem;
 	font-weight: 600;
 	color: var(--text-primary);
+	letter-spacing: -0.02em;
+	opacity: 1;
 }
 
 /* ---------- Buttons ---------- */
 .btn-primary {
+	background: rgba(139, 92, 246, 0.15);
+	color: var(--text-secondary);
+	border: 1px solid var(--border-default);
+	border-radius: 0.75rem;
+	padding: 0.6rem 1rem;
+	font-weight: 600;
+	transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease,
+		color 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover .btn-primary {
 	background: linear-gradient(
 		135deg,
 		var(--brand-primary),
 		var(--brand-secondary)
 	);
 	color: white;
-	border-radius: 0.75rem;
-	padding: 0.6rem 1rem;
-	font-weight: 600;
-	opacity: 0.85;
-	transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-}
-
-.card:hover .btn-primary {
-	opacity: 1;
+	border-color: transparent;
 }
 
 .btn-primary:hover {
@@ -213,8 +238,16 @@ body {
 }
 
 .btn-secondary {
-	border: 1px solid var(--border-strong);
+	border: 1px solid var(--border-default);
 	background: transparent;
-	color: var(--text-secondary);
+	color: var(--text-muted);
 	border-radius: 0.75rem;
+	opacity: 0.6;
+	transition: opacity 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.card:hover .btn-secondary {
+	opacity: 1;
+	border-color: var(--border-strong);
+	color: var(--text-secondary);
 }

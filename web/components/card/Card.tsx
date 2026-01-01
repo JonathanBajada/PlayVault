@@ -87,17 +87,14 @@ export default function Card({ card, onClick, isInBinder = false }: CardProps) {
 			<div
 				className='flex flex-col'
 				style={{
-					background: 'var(--bg-surface-soft)',
+					background: 'rgba(15, 23, 42, 0.92)',
 					backdropFilter: 'blur(12px)',
 				}}
 			>
-				<div className='px-4 pt-4 pb-4 flex-grow'>
+				<div className='px-6 pt-7 pb-5 flex-grow'>
 					{/* Name and Set Info */}
-					<div className='space-y-1'>
-						<h3
-							className='card-title line-clamp-2 min-h-[2.5rem]'
-							style={{ color: 'var(--text-primary)' }}
-						>
+					<div className='space-y-1.5'>
+						<h3 className='card-title line-clamp-2 min-h-[2.5rem]'>
 							{card.name}
 						</h3>
 
@@ -105,10 +102,7 @@ export default function Card({ card, onClick, isInBinder = false }: CardProps) {
 						{card.set_name && (
 							<div className='space-y-0.5 -mt-0.5'>
 								<p className='card-meta-label'>SET</p>
-								<p
-									className='card-meta-value line-clamp-1'
-									style={{ color: 'var(--text-secondary)' }}
-								>
+								<p className='card-meta-value line-clamp-1'>
 									{card.set_name}
 								</p>
 							</div>
@@ -117,16 +111,16 @@ export default function Card({ card, onClick, isInBinder = false }: CardProps) {
 
 					{/* Price */}
 					<div
-						className='mt-3 pt-3'
+						className='mt-6 pt-6'
 						style={{ borderTop: '1px solid var(--border-default)' }}
 					>
-						<p className='card-meta-label mb-1'>PRICE</p>
+						<p className='card-meta-label mb-2'>PRICE</p>
 						<p className='card-price'>$24.99</p>
 					</div>
 				</div>
 
 				{/* Action Buttons */}
-				<div className='px-4 pt-3 pb-4 flex gap-2 shrink-0'>
+				<div className='px-6 pt-6 pb-6 flex gap-2 shrink-0'>
 					{/* Favorite Button */}
 					<button
 						onClick={(e) => {
