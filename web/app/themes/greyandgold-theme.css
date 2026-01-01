@@ -3,7 +3,7 @@
 @import 'tailwindcss';
 
 /* =========================================================
-   🔒 PokeVault – Dark Gray & Diablo II Gold (Vault Edition)
+   🔒 PokeVault – Dark Gray & Gold (Vault Edition)
    ========================================================= */
 
 /* ---------- Design Tokens ---------- */
@@ -13,11 +13,8 @@
 	--bg-surface-soft: rgba(17, 17, 20, 0.88);
 	--bg-elevated: #16161a;
 
-	/* Diablo II Unique Gold */
-	--vault-gold: #c7b377;
-	--vault-gold-dark: #b5a467;
-	--vault-gold-soft: rgba(199, 179, 119, 0.35);
-	--vault-gold-faint: rgba(199, 179, 119, 0.18);
+	--brand-primary: #d4af37;
+	--brand-accent: #b8962e;
 
 	--text-primary: #f1f1f3;
 	--text-secondary: #c7c7cc;
@@ -25,25 +22,24 @@
 	--text-inverse: #0a0a0c;
 
 	--border-default: rgba(255, 255, 255, 0.08);
-	--border-gold: rgba(199, 179, 119, 0.35);
+	--border-strong: rgba(212, 175, 55, 0.35);
 
 	--shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.45);
 	--shadow-md: 0 14px 30px rgba(0, 0, 0, 0.55);
 	--shadow-lg: 0 28px 65px rgba(0, 0, 0, 0.65);
 
-	/* Rarity Colors */
 	--rarity-common: #8e8e93;
 	--rarity-uncommon: #6aa38b;
 	--rarity-rare: #7aa2ff;
-	--rarity-holo: #c7b377;
-	--rarity-ultra: #e0d29a;
+	--rarity-holo: #d4af37;
+	--rarity-ultra: #f5d76e;
 }
 
 /* ---------- Base ---------- */
 body {
 	background: radial-gradient(
 			700px 420px at 80% 25%,
-			rgba(199, 179, 119, 0.045),
+			rgba(212, 175, 55, 0.06),
 			transparent 70%
 		),
 		var(--bg-page);
@@ -79,7 +75,7 @@ body {
 }
 
 .nav-login:hover {
-	color: var(--vault-gold);
+	color: var(--brand-primary);
 	opacity: 1;
 }
 
@@ -100,95 +96,31 @@ body {
 .filter-search-input:focus,
 .filter-dropdown:focus {
 	background: rgba(255, 255, 255, 0.08) !important;
-	border-color: var(--border-gold) !important;
-	box-shadow: 0 0 0 2px var(--vault-gold-faint);
+	border-color: var(--border-strong) !important;
+	box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.18);
 }
 
 /* ---------- Price Slider ---------- */
 .price-slider-track {
-	position: absolute;
-	width: 100%;
 	height: 3px;
 	background: rgba(255, 255, 255, 0.08);
 	border-radius: 2px;
-	top: 50%;
-	transform: translateY(-50%);
-	pointer-events: none;
 }
 
 .price-slider-active-range {
-	position: absolute;
 	height: 3px;
-	background: rgba(199, 179, 119, 0.5);
+	background: rgba(212, 175, 55, 0.6);
 	border-radius: 2px;
-	top: 50%;
-	transform: translateY(-50%);
-	pointer-events: none;
-	transition: left 0.1s ease, width 0.1s ease;
-	filter: saturate(0.7);
-}
-
-.price-slider-thumb {
-	-webkit-appearance: none;
-	appearance: none;
-	height: 3px;
-	background: transparent;
-	outline: none;
-	margin: 0;
-	padding: 0;
-	cursor: pointer;
-	top: 50%;
-	transform: translateY(-50%);
 }
 
 .price-slider-thumb::-webkit-slider-thumb {
-	-webkit-appearance: none;
-	appearance: none;
 	width: 13px;
 	height: 13px;
-	background: var(--vault-gold);
+	background: var(--brand-primary);
 	border-radius: 50%;
+	box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.35),
+		0 0 12px rgba(212, 175, 55, 0.35);
 	cursor: pointer;
-	margin-top: -5px;
-	position: relative;
-	box-shadow: 0 0 0 1px rgba(199, 179, 119, 0.2), 0 1px 4px rgba(0, 0, 0, 0.3),
-		0 0 8px rgba(199, 179, 119, 0.15);
-	transition: box-shadow 0.2s ease, transform 0.2s ease;
-}
-
-.price-slider-thumb::-webkit-slider-thumb:hover {
-	box-shadow: 0 0 0 2px rgba(199, 179, 119, 0.3), 0 2px 6px rgba(0, 0, 0, 0.4),
-		0 0 12px rgba(199, 179, 119, 0.25);
-	transform: scale(1.05);
-}
-
-.price-slider-thumb::-moz-range-thumb {
-	width: 13px;
-	height: 13px;
-	background: var(--vault-gold);
-	border-radius: 50%;
-	cursor: pointer;
-	border: none;
-	box-shadow: 0 0 0 1px rgba(199, 179, 119, 0.2), 0 1px 4px rgba(0, 0, 0, 0.3),
-		0 0 8px rgba(199, 179, 119, 0.15);
-	transition: box-shadow 0.2s ease, transform 0.2s ease;
-}
-
-.price-slider-thumb::-moz-range-thumb:hover {
-	box-shadow: 0 0 0 2px rgba(199, 179, 119, 0.3), 0 2px 6px rgba(0, 0, 0, 0.4),
-		0 0 12px rgba(199, 179, 119, 0.25);
-	transform: scale(1.05);
-}
-
-.price-slider-thumb::-webkit-slider-runnable-track {
-	height: 3px;
-	background: transparent;
-}
-
-.price-slider-thumb::-moz-range-track {
-	height: 3px;
-	background: transparent;
-	border: none;
 }
 
 /* ---------- Grid ---------- */
@@ -199,10 +131,7 @@ body {
 	row-gap: 4rem;
 }
 
-/* =========================================================
-   🔥 CARD + IMAGE SHIMMER (UNCHANGED STRUCTURE)
-   ========================================================= */
-
+/* ---------- Card ---------- */
 .card {
 	position: relative;
 	background: linear-gradient(180deg, #1a1a1e, #141418);
@@ -210,20 +139,17 @@ body {
 	border: 1px solid var(--border-default);
 	box-shadow: var(--shadow-md), inset 0 0 0 1px rgba(255, 255, 255, 0.02);
 	overflow: hidden;
-	transition: transform 0.35s ease, box-shadow 0.35s ease;
+	transition: box-shadow 0.35s ease;
 }
 
 .card:hover {
-	transform: translateY(-4px);
 	box-shadow: var(--shadow-lg);
 }
 
 /* ---------- Card Image ---------- */
 .card-image-wrapper {
-	position: relative;
 	aspect-ratio: 2.5 / 3.5;
 	padding: 0.5rem;
-	overflow: hidden;
 }
 
 .card-image-wrapper img {
@@ -231,51 +157,11 @@ body {
 	height: 100%;
 	object-fit: cover;
 	border-radius: 0.375rem;
-	transition: transform 0.35s ease;
 }
 
-.card:hover .card-image-wrapper img {
-	transform: scale(1.015);
-}
-
-/* ---------- IMAGE-ONLY FOIL SHIMMER ---------- */
-.card.holo .card-image-wrapper::after {
-	content: '';
-	position: absolute;
-	inset: -40%;
-	background: linear-gradient(
-		120deg,
-		transparent 40%,
-		rgba(199, 179, 119, 0.35),
-		transparent 60%
-	);
-	transform: translateX(-60%) rotate(6deg);
-	opacity: 0;
-	pointer-events: none;
-}
-
-.card.holo:hover .card-image-wrapper::after {
-	animation: imageFoil 1.6s ease forwards;
-}
-
-@keyframes imageFoil {
-	0% {
-		transform: translateX(-60%) rotate(6deg);
-		opacity: 0;
-	}
-	20% {
-		opacity: 1;
-	}
-	80% {
-		opacity: 1;
-	}
-	100% {
-		transform: translateX(60%) rotate(6deg);
-		opacity: 0;
-	}
-}
-
-/* ---------- Rarity Label Bar ---------- */
+/* =========================================================
+   ✅ RARITY LABEL BAR — ORIGINAL FLAT STYLE (ADDED BACK)
+   ========================================================= */
 .rarity-label-bar {
 	width: 100%;
 	padding: 0.3rem 1.25rem;
@@ -291,7 +177,7 @@ body {
 	border-top: 1px solid var(--border-default);
 }
 
-/* ---------- Rarity Badge ---------- */
+/* ---------- Rarity Badge (unchanged) ---------- */
 .rarity-badge {
 	position: absolute;
 	top: 0.75rem;
@@ -315,10 +201,29 @@ body {
 	background: rgba(122, 162, 255, 0.7);
 }
 .rarity-holo {
-	background: rgba(199, 179, 119, 0.75);
+	background: rgba(212, 175, 55, 0.75);
 }
 .rarity-ultra {
-	background: rgba(224, 210, 154, 0.85);
+	background: rgba(245, 215, 110, 0.85);
+}
+
+/* ---------- Gold Holo Glow ---------- */
+.card.holo::before {
+	content: '';
+	position: absolute;
+	inset: -14px;
+	background: radial-gradient(
+		circle,
+		rgba(212, 175, 55, 0.18),
+		transparent 70%
+	);
+	z-index: -1;
+	opacity: 0;
+	transition: opacity 0.35s ease;
+}
+
+.card.holo:hover::before {
+	opacity: 1;
 }
 
 /* ---------- Text ---------- */
@@ -338,13 +243,13 @@ body {
 .card-price {
 	font-size: 1.25rem;
 	font-weight: 700;
-	color: var(--vault-gold);
-	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+	color: var(--brand-primary);
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 /* ---------- Buttons ---------- */
 .btn-primary {
-	background: rgba(199, 179, 119, 0.1);
+	background: rgba(212, 175, 55, 0.12);
 	color: var(--text-secondary);
 	border: 1px solid var(--border-default);
 	border-radius: 0.75rem;
@@ -354,14 +259,10 @@ body {
 }
 
 .card:hover .btn-primary {
-	background: linear-gradient(
-		135deg,
-		var(--vault-gold),
-		var(--vault-gold-dark)
-	);
+	background: linear-gradient(135deg, #d4af37, #b8962e);
 	color: #0b0b0d;
 	border-color: transparent;
-	box-shadow: 0 10px 22px rgba(199, 179, 119, 0.35);
+	box-shadow: 0 10px 25px rgba(212, 175, 55, 0.35);
 }
 
 .btn-secondary {

@@ -1,0 +1,503 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import 'tailwindcss';
+
+/* =========================================================
+   🌌 PokeVault – Dark Cosmic Theme (Production Ready)
+   ========================================================= */
+
+/* ---------- Design Tokens ---------- */
+:root {
+	/* ===============================
+	   BACKGROUNDS — Cold Vault
+	   =============================== */
+	--bg-page: #0b0f1d; /* colder, deeper */
+	--bg-surface: #0e1626;
+	--bg-surface-soft: rgba(14, 22, 38, 0.88);
+	--bg-elevated: #121a2e;
+
+	/* ===============================
+	   BRAND — Single Identity
+	   =============================== */
+	--brand-primary: #7c8cff; /* cool electric indigo */
+	--brand-accent: #7c8cff; /* same as primary */
+
+	/* ===============================
+	   TEXT — Calm & Editorial
+	   =============================== */
+	--text-primary: #e6eaf2;
+	--text-secondary: #a9b1c3;
+	--text-muted: #6f7a90;
+	--text-inverse: #05070f;
+
+	/* ===============================
+	   BORDERS — Structural, Not Loud
+	   =============================== */
+	--border-default: rgba(160, 174, 192, 0.14);
+	--border-strong: rgba(160, 174, 192, 0.28);
+
+	/* ===============================
+	   SHADOWS — Depth, Not Drama
+	   =============================== */
+	--shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.35);
+	--shadow-md: 0 10px 26px rgba(0, 0, 0, 0.45);
+	--shadow-lg: 0 22px 55px rgba(0, 0, 0, 0.55);
+
+	/* ===============================
+	   RARITY — Muted, Controlled
+	   =============================== */
+	--rarity-common: #8b95a7;
+	--rarity-uncommon: #5fb3a2;
+	--rarity-rare: #5f7cff;
+	--rarity-holo: #8b5cf6;
+	--rarity-ultra: #c084fc;
+}
+
+/* ---------- Base ---------- */
+body {
+	background: radial-gradient(
+			900px 500px at 85% 30%,
+			rgba(168, 85, 247, 0.08),
+			transparent 65%
+		),
+		var(--bg-page);
+	color: var(--text-primary);
+	font-family: 'Inter', system-ui, -apple-system, sans-serif;
+	min-height: 100vh;
+}
+
+/* ---------- Typography ---------- */
+.font-brand {
+	font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+}
+
+.font-body {
+	font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+	background: linear-gradient(
+		90deg,
+		rgba(15, 23, 42, 0.85),
+		rgba(17, 24, 39, 0.95)
+	);
+	backdrop-filter: blur(14px);
+	border-bottom: 1px solid var(--border-default);
+	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.nav-login {
+	color: var(--text-primary);
+	opacity: 0.9;
+}
+
+.nav-login:hover,
+.nav-login:focus {
+	color: var(--brand-primary);
+	opacity: 1;
+}
+
+/* ---------- Marketplace Tooltip ---------- */
+.marketplace-tooltip {
+	background: rgba(22, 30, 46, 0.95);
+	color: #e6eaf2;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(8px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.marketplace-tooltip-arrow {
+	width: 0;
+	height: 0;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-bottom: 6px solid rgba(22, 30, 46, 0.95);
+}
+
+/* ---------- Filter Container ---------- */
+.filter-container {
+	background: rgba(22, 30, 46, 0.6);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 1rem;
+	min-height: fit-content;
+}
+
+/* Mobile-friendly horizontal scroll */
+.filter-container > div:first-child {
+	-webkit-overflow-scrolling: touch;
+	scrollbar-width: thin;
+}
+
+.filter-container > div:first-child::-webkit-scrollbar {
+	height: 4px;
+}
+
+.filter-container > div:first-child::-webkit-scrollbar-track {
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: 2px;
+}
+
+.filter-container > div:first-child::-webkit-scrollbar-thumb {
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 2px;
+}
+
+.filter-container > div:first-child::-webkit-scrollbar-thumb:hover {
+	background: rgba(255, 255, 255, 0.3);
+}
+
+/* ---------- Filter Search Input (Primary) ---------- */
+.filter-search-input {
+	background: rgba(255, 255, 255, 0.08) !important;
+	border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.filter-search-input:focus {
+	background: rgba(255, 255, 255, 0.12) !important;
+	border-color: rgba(255, 255, 255, 0.15) !important;
+	box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
+}
+
+/* ---------- Filter Dropdowns ---------- */
+.filter-dropdown {
+	background: rgba(255, 255, 255, 0.04) !important;
+	border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.filter-dropdown:focus {
+	background: rgba(255, 255, 255, 0.06) !important;
+	border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* ---------- Filter Clear Button ---------- */
+.filter-clear-btn:hover {
+	background: rgba(255, 255, 255, 0.08) !important;
+	border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* ---------- Price Range Slider ---------- */
+.price-slider-track {
+	position: absolute;
+	width: 100%;
+	height: 3px;
+	background: rgba(255, 255, 255, 0.08);
+	border-radius: 2px;
+	top: 50%;
+	transform: translateY(-50%);
+	pointer-events: none;
+}
+
+.price-slider-active-range {
+	position: absolute;
+	height: 3px;
+	background: rgba(124, 140, 255, 0.5);
+	border-radius: 2px;
+	top: 50%;
+	transform: translateY(-50%);
+	pointer-events: none;
+	transition: left 0.1s ease, width 0.1s ease;
+	filter: saturate(0.7);
+}
+
+.price-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	height: 3px;
+	background: transparent;
+	outline: none;
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.price-slider-thumb::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 13px;
+	height: 13px;
+	background: var(--brand-primary);
+	border-radius: 50%;
+	cursor: pointer;
+	margin-top: -5px;
+	position: relative;
+	box-shadow: 0 0 0 1px rgba(124, 140, 255, 0.2), 0 1px 4px rgba(0, 0, 0, 0.3),
+		0 0 8px rgba(124, 140, 255, 0.15);
+	transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.price-slider-thumb::-webkit-slider-thumb:hover {
+	box-shadow: 0 0 0 2px rgba(124, 140, 255, 0.3), 0 2px 6px rgba(0, 0, 0, 0.4),
+		0 0 12px rgba(124, 140, 255, 0.25);
+	transform: scale(1.05);
+}
+
+.price-slider-thumb::-moz-range-thumb {
+	width: 13px;
+	height: 13px;
+	background: var(--brand-primary);
+	border-radius: 50%;
+	cursor: pointer;
+	border: none;
+	box-shadow: 0 0 0 1px rgba(124, 140, 255, 0.2), 0 1px 4px rgba(0, 0, 0, 0.3),
+		0 0 8px rgba(124, 140, 255, 0.15);
+	transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.price-slider-thumb::-moz-range-thumb:hover {
+	box-shadow: 0 0 0 2px rgba(124, 140, 255, 0.3), 0 2px 6px rgba(0, 0, 0, 0.4),
+		0 0 12px rgba(124, 140, 255, 0.25);
+	transform: scale(1.05);
+}
+
+.price-slider-thumb::-webkit-slider-runnable-track {
+	height: 3px;
+	background: transparent;
+}
+
+.price-slider-thumb::-moz-range-track {
+	height: 3px;
+	background: transparent;
+	border: none;
+}
+
+/* ---------- Grid ---------- */
+.card-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+	gap: 2.5rem;
+	row-gap: 4rem;
+}
+
+/* ---------- Card Grid Zone ---------- */
+.card-grid-zone {
+	background: #080d1a;
+	padding: 2rem 0;
+	margin-top: 1rem;
+}
+
+/* ---------- Card ---------- */
+.card {
+	position: relative;
+	background: linear-gradient(
+		180deg,
+		rgba(33, 44, 63, 1),
+		rgba(24, 33, 49, 1)
+	);
+	border-radius: 0.5rem;
+	border: 1px solid var(--border-default);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3),
+		inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+		inset 0 1px 0 rgba(255, 255, 255, 0.02);
+	overflow: hidden;
+	transition: box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+	box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 8px 20px rgba(0, 0, 0, 0.5),
+		inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+/* ---------- Card Image ---------- */
+.card-image-wrapper {
+	position: relative;
+	aspect-ratio: 2.5 / 3.5;
+	overflow: hidden;
+	box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.15),
+		inset 0 -2px 8px rgba(0, 0, 0, 0.2);
+	padding: 0.5rem;
+}
+
+/* ---------- Rarity Label Bar ---------- */
+.rarity-label-bar {
+	width: 100%;
+	padding: 0.3rem 1.25rem;
+	font-size: 0.6rem;
+	font-weight: 600;
+	letter-spacing: 0.22em;
+	text-transform: uppercase;
+	border-radius: 0;
+	text-align: center;
+	margin-top: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.card-image-wrapper img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: filter 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+	filter: brightness(0.98) contrast(0.98);
+	border-radius: 0.375rem;
+}
+
+.card:hover .card-image-wrapper img {
+	filter: brightness(1.02) contrast(1.02);
+	transform: scale(1.01);
+}
+
+.card-image-wrapper::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(
+		to bottom,
+		transparent 0%,
+		transparent 60%,
+		rgba(0, 0, 0, 0.16) 85%,
+		rgba(0, 0, 0, 0.38) 100%
+	);
+	pointer-events: none;
+	z-index: 1;
+}
+
+/* ---------- Holo Glow ---------- */
+.card.holo::before {
+	content: '';
+	position: absolute;
+	inset: -12px;
+	background: radial-gradient(circle, rgba(168, 85, 247, 0), transparent 70%);
+	z-index: -1;
+	transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card.holo:hover::before {
+	background: radial-gradient(
+		circle,
+		rgba(168, 85, 247, 0.25),
+		transparent 70%
+	);
+}
+
+/* ---------- Rarity Badge ---------- */
+.rarity-badge {
+	position: absolute;
+	top: 0.75rem;
+	left: 0.75rem;
+	padding: 0.25rem 0.6rem;
+	font-size: 0.65rem;
+	font-weight: 500;
+	border-radius: 999px;
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	backdrop-filter: blur(8px);
+	color: white;
+	opacity: 0.75;
+	transition: opacity 0.3s ease;
+}
+
+.card:hover .rarity-badge {
+	opacity: 1;
+}
+
+.rarity-common {
+	background: rgba(148, 163, 184, 0.75);
+}
+.rarity-uncommon {
+	background: rgba(34, 197, 94, 0.75);
+}
+.rarity-rare {
+	background: rgba(59, 130, 246, 0.75);
+}
+.rarity-holo {
+	background: rgba(168, 85, 247, 0.75);
+}
+.rarity-ultra {
+	background: rgba(236, 72, 153, 0.75);
+}
+
+/* ---------- Typography ---------- */
+.card-title {
+	font-size: 0.95rem;
+	font-weight: 700;
+	letter-spacing: -0.015em;
+	color: #e6eaf2;
+	opacity: 0.96;
+	line-height: 1.4;
+}
+
+.card-meta-label {
+	font-size: 0.55rem;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--text-muted);
+	font-weight: 400;
+	opacity: 0.65;
+}
+
+.card-meta-value {
+	font-size: 0.7rem;
+	color: var(--text-secondary);
+	font-weight: 400;
+	opacity: 0.85;
+}
+
+.card-set-name {
+	font-size: 0.7rem;
+	color: #8b93a6;
+	font-weight: 400;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+	line-height: 1.3;
+	margin-top: 1px;
+	margin-bottom: 12px;
+}
+
+.card-price {
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: var(--text-primary);
+	letter-spacing: -0.025em;
+	opacity: 1;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* ---------- Buttons ---------- */
+.btn-primary {
+	background: rgba(139, 92, 246, 0.15);
+	color: var(--text-secondary);
+	border: 1px solid var(--border-default);
+	border-radius: 0.75rem;
+	padding: 0.6rem 1rem;
+	font-weight: 600;
+	transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+		box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+		background 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+		color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+		border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover .btn-primary {
+	background: linear-gradient(
+		135deg,
+		var(--brand-primary),
+		var(--brand-accent)
+	);
+	color: white;
+	border-color: transparent;
+}
+
+.btn-primary:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 10px 25px rgba(139, 92, 246, 0.45);
+}
+
+.btn-secondary {
+	border: 1px solid var(--border-default);
+	background: transparent;
+	color: var(--text-muted);
+	border-radius: 0.75rem;
+	opacity: 0.6;
+	transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+		border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+		color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover .btn-secondary {
+	opacity: 1;
+	border-color: var(--border-strong);
+	color: var(--text-secondary);
+}
