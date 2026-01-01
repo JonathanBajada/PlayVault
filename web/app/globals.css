@@ -148,10 +148,11 @@ body {
 	padding: 0.4rem 1.25rem;
 	font-size: 0.6rem;
 	font-weight: 600;
-	letter-spacing: 0.22em;
+	letter-spacing: 0.2em;
 	text-transform: uppercase;
 	border-radius: 0;
 	text-align: center;
+	backdrop-filter: blur(3px);
 }
 
 .card-image-wrapper img {
