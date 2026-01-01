@@ -140,21 +140,18 @@ export default function Card({ card, onClick, isInBinder = false }: CardProps) {
 					background: 'rgba(22, 30, 46, 1)',
 				}}
 			>
-				<div className='px-6 pt-7 pb-5 flex-grow'>
+				<div className='px-6 pt-5 pb-3 flex-grow'>
 					{/* Name and Set Info */}
-					<div className='space-y-1.5'>
+					<div className='space-y-0.5'>
 						<h3 className='card-title line-clamp-2 min-h-[2.5rem]'>
 							{card.name}
 						</h3>
 
 						{/* Set Info - directly under name */}
 						{card.set_name && (
-							<div className='space-y-0.5 -mt-0.5'>
-								<p className='card-meta-label'>SET</p>
-								<p className='card-meta-value line-clamp-1'>
-									{card.set_name}
-								</p>
-							</div>
+							<p className='card-set-name line-clamp-1'>
+								{card.set_name}
+							</p>
 						)}
 					</div>
 				</div>
@@ -172,11 +169,10 @@ export default function Card({ card, onClick, isInBinder = false }: CardProps) {
 						className='px-6 pt-6'
 						style={{ borderTop: '1px solid var(--border-default)' }}
 					>
-						<p className='card-meta-label mb-2'>PRICE</p>
 						<p className='card-price'>$24.99</p>
 					</div>
 					{/* Action Buttons */}
-					<div className='px-6 pt-6 pb-6 flex gap-2 shrink-0 justify-end'>
+					<div className='px-6 pt-5 pb-4 flex gap-2 shrink-0 justify-end'>
 						{/* Favorite Button */}
 						<button
 							onClick={(e) => {

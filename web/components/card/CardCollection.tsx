@@ -173,7 +173,7 @@ export default function CardCollection({
 				)}
 
 				{/* Search and Filter Bar */}
-				<div className='mb-16'>
+				<div className='mb-10'>
 					<div className='flex flex-col sm:flex-row gap-4'>
 						{/* Search Input */}
 						<div className='relative sm:w-64 flex-shrink-0'>
