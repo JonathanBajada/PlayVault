@@ -69,24 +69,6 @@ export default function Card({ card, onClick, isInBinder = false }: CardProps) {
 							: 'rgba(245, 158, 11, 0.22)',
 				}}
 			>
-				{/* ================= TOP LEFT RARITY LABEL ================= */}
-				<div
-					className='rarity-badge'
-					style={{
-						background: rarityLower.includes('holo')
-							? 'var(--rarity-holo)'
-							: rarityLower === 'common'
-							? 'var(--rarity-common)'
-							: rarityLower === 'uncommon'
-							? 'var(--rarity-uncommon)'
-							: rarityLower === 'rare'
-							? 'var(--rarity-rare)'
-							: 'var(--rarity-common)',
-					}}
-				>
-					{card.rarity || 'Unknown'}
-				</div>
-
 				{card.image_small_url ? (
 					<img src={card.image_small_url} alt={card.name} loading='lazy' />
 				) : (
