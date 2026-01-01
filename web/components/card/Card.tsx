@@ -206,19 +206,62 @@ export default function Card({ card, onClick, isInBinder = false }: CardProps) {
 						<button
 							onClick={handleAddToBinder}
 							aria-pressed={added}
-							className={`btn-primary flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 text-sm
+							aria-label={added ? 'Remove from Binder' : 'Add to Binder'}
+							title={added ? 'Remove from Binder' : 'Add to Binder'}
+							className={`btn-primary p-2.5 flex items-center justify-center
 							${added ? 'opacity-90' : ''}`}
 						>
 							{added ? (
-								<>
-									<span>✓</span>
-									<span>Binder</span>
-								</>
+								<svg
+									xmlns='http://www.w3.org/2000/svg'
+									className='w-5 h-5'
+									fill='none'
+									viewBox='0 0 24 24'
+									stroke='currentColor'
+									strokeWidth={2}
+								>
+									<path
+										strokeLinecap='round'
+										strokeLinejoin='round'
+										d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
+									/>
+								</svg>
 							) : (
-								<>
-									<span>+</span>
-									<span>Binder</span>
-								</>
+								<svg
+									xmlns='http://www.w3.org/2000/svg'
+									className='w-5 h-5'
+									fill='none'
+									viewBox='0 0 24 24'
+									stroke='currentColor'
+									strokeWidth={2}
+								>
+									<path
+										strokeLinecap='round'
+										strokeLinejoin='round'
+										d='M7 3H19C20.1046 3 21 3.89543 21 5V19C21 20.1046 20.1046 21 19 21H7C5.89543 21 5 20.1046 5 19V5C5 3.89543 5.89543 3 7 3Z'
+									/>
+									<circle cx='7' cy='8' r='1.5' fill='currentColor' />
+									<circle cx='7' cy='12' r='1.5' fill='currentColor' />
+									<circle cx='7' cy='16' r='1.5' fill='currentColor' />
+									<path
+										strokeLinecap='round'
+										strokeLinejoin='round'
+										d='M10 8H18M10 12H18M10 16H18'
+									/>
+									<path
+										strokeLinecap='round'
+										strokeLinejoin='round'
+										d='M12 2V6M16 2V6'
+									/>
+									<circle cx='19' cy='5' r='3' fill='currentColor' />
+									<path
+										strokeLinecap='round'
+										strokeLinejoin='round'
+										d='M19 3V7M17 5H21'
+										stroke='white'
+										strokeWidth={1.5}
+									/>
+								</svg>
 							)}
 						</button>
 					</div>
