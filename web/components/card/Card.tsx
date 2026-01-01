@@ -118,10 +118,10 @@ export default function Card({ card, onClick, isInBinder = false }: CardProps) {
 				style={{
 					background:
 						rarityColorCategory === 'COMMON'
-							? 'rgba(148, 163, 184, 0.12)'
+							? 'rgba(148, 163, 184, 0.18)'
 							: rarityColorCategory === 'UNCOMMON'
-							? 'rgba(34, 197, 94, 0.12)'
-							: 'rgba(245, 158, 11, 0.16)',
+							? 'rgba(34, 197, 94, 0.18)'
+							: 'rgba(245, 158, 11, 0.22)',
 					color:
 						rarityColorCategory === 'COMMON'
 							? '#cbd5e1'
@@ -176,7 +176,7 @@ export default function Card({ card, onClick, isInBinder = false }: CardProps) {
 						<p className='card-price'>$24.99</p>
 					</div>
 					{/* Action Buttons */}
-					<div className='px-6 pt-6 pb-6 flex gap-2 shrink-0'>
+					<div className='px-6 pt-6 pb-6 flex gap-2 shrink-0 justify-end'>
 						{/* Favorite Button */}
 						<button
 							onClick={(e) => {
