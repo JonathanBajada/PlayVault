@@ -98,6 +98,23 @@ body {
 	opacity: 1;
 }
 
+/* ---------- Marketplace Tooltip ---------- */
+.marketplace-tooltip {
+	background: rgba(22, 30, 46, 0.95);
+	color: #e6eaf2;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(8px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.marketplace-tooltip-arrow {
+	width: 0;
+	height: 0;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-bottom: 6px solid rgba(22, 30, 46, 0.95);
+}
+
 /* ---------- Filter Container ---------- */
 .filter-container {
 	background: rgba(22, 30, 46, 0.6);
