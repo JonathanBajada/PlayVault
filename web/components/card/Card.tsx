@@ -140,9 +140,9 @@ export default function Card({ card, onClick, isInBinder = false }: CardProps) {
 					background: 'rgba(22, 30, 46, 1)',
 				}}
 			>
-				<div className='px-6 pt-5 pb-3 flex-grow'>
+				<div className='px-6 pt-4 pb-3 flex-grow'>
 					{/* Name and Set Info */}
-					<div className='space-y-0.5'>
+					<div>
 						<h3 className='card-title line-clamp-2 min-h-[2.5rem]'>
 							{card.name}
 						</h3>
@@ -166,13 +166,17 @@ export default function Card({ card, onClick, isInBinder = false }: CardProps) {
 				>
 					{/* Price */}
 					<div
-						className='px-6 pt-6'
-						style={{ borderTop: '1px solid var(--border-default)' }}
+						className='px-6'
+						style={{
+							borderTop: '1px solid var(--border-default)',
+							paddingTop: '12px',
+							paddingBottom: '8px',
+						}}
 					>
 						<p className='card-price'>$24.99</p>
 					</div>
 					{/* Action Buttons */}
-					<div className='px-6 pt-5 pb-4 flex gap-2 shrink-0 justify-end'>
+					<div className='px-6 pt-5 pb-4 flex gap-2 shrink-0 justify-start'>
 						{/* Favorite Button */}
 						<button
 							onClick={(e) => {
@@ -208,56 +212,80 @@ export default function Card({ card, onClick, isInBinder = false }: CardProps) {
 							${added ? 'opacity-90' : ''}`}
 						>
 							{added ? (
-								<svg
-									xmlns='http://www.w3.org/2000/svg'
-									className='w-5 h-5'
-									fill='none'
-									viewBox='0 0 24 24'
-									stroke='currentColor'
-									strokeWidth={2}
-								>
-									<path
-										strokeLinecap='round'
-										strokeLinejoin='round'
-										d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
-									/>
-								</svg>
+								<>
+									<svg
+										xmlns='http://www.w3.org/2000/svg'
+										className='w-5 h-5'
+										fill='none'
+										viewBox='0 0 24 24'
+										stroke='currentColor'
+										strokeWidth={2}
+									>
+										<path
+											strokeLinecap='round'
+											strokeLinejoin='round'
+											d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
+										/>
+									</svg>
+								</>
 							) : (
-								<svg
-									xmlns='http://www.w3.org/2000/svg'
-									className='w-5 h-5'
-									fill='none'
-									viewBox='0 0 24 24'
-									stroke='currentColor'
-									strokeWidth={2}
-								>
-									<path
-										strokeLinecap='round'
-										strokeLinejoin='round'
-										d='M7 3H19C20.1046 3 21 3.89543 21 5V19C21 20.1046 20.1046 21 19 21H7C5.89543 21 5 20.1046 5 19V5C5 3.89543 5.89543 3 7 3Z'
-									/>
-									<circle cx='7' cy='8' r='1.5' fill='currentColor' />
-									<circle cx='7' cy='12' r='1.5' fill='currentColor' />
-									<circle cx='7' cy='16' r='1.5' fill='currentColor' />
-									<path
-										strokeLinecap='round'
-										strokeLinejoin='round'
-										d='M10 8H18M10 12H18M10 16H18'
-									/>
-									<path
-										strokeLinecap='round'
-										strokeLinejoin='round'
-										d='M12 2V6M16 2V6'
-									/>
-									<circle cx='19' cy='5' r='3' fill='currentColor' />
-									<path
-										strokeLinecap='round'
-										strokeLinejoin='round'
-										d='M19 3V7M17 5H21'
-										stroke='white'
-										strokeWidth={1.5}
-									/>
-								</svg>
+								<>
+									<svg
+										xmlns='http://www.w3.org/2000/svg'
+										className='w-5 h-5'
+										fill='none'
+										viewBox='0 0 24 24'
+										stroke='currentColor'
+										strokeWidth={2}
+									>
+										<path
+											strokeLinecap='round'
+											strokeLinejoin='round'
+											d='M7 3H19C20.1046 3 21 3.89543 21 5V19C21 20.1046 20.1046 21 19 21H7C5.89543 21 5 20.1046 5 19V5C5 3.89543 5.89543 3 7 3Z'
+										/>
+										<circle
+											cx='7'
+											cy='8'
+											r='1.5'
+											fill='currentColor'
+										/>
+										<circle
+											cx='7'
+											cy='12'
+											r='1.5'
+											fill='currentColor'
+										/>
+										<circle
+											cx='7'
+											cy='16'
+											r='1.5'
+											fill='currentColor'
+										/>
+										<path
+											strokeLinecap='round'
+											strokeLinejoin='round'
+											d='M10 8H18M10 12H18M10 16H18'
+										/>
+										<path
+											strokeLinecap='round'
+											strokeLinejoin='round'
+											d='M12 2V6M16 2V6'
+										/>
+										<circle
+											cx='19'
+											cy='5'
+											r='3'
+											fill='currentColor'
+										/>
+										<path
+											strokeLinecap='round'
+											strokeLinejoin='round'
+											d='M19 3V7M17 5H21'
+											stroke='white'
+											strokeWidth={1.5}
+										/>
+									</svg>
+								</>
 							)}
 						</button>
 					</div>
