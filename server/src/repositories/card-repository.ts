@@ -40,7 +40,7 @@ export async function getCards(
 
 	// Data query
 	const dataQuery = `
-		SELECT id, name, set_name, rarity, image_small
+		SELECT id, name, set_name, rarity, image_small_url
 		FROM cards
 		${whereClause}
 		ORDER BY name

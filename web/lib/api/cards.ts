@@ -3,7 +3,7 @@ export type Card = {
 	name: string;
 	set_name: string;
 	rarity: string | null;
-	image_small: string;
+	image_small_url: string;
 };
 
 export type CardsResponse = {
@@ -41,7 +41,31 @@ export async function fetchCards({
 		throw new Error('Failed to fetch cards');
 	}
 
-	return res.json();
+	const data = await res.json();
+
+	// Log the cards data for debugging
+	console.log('📦 Cards API Response:', {
+		page: data.page,
+		limit: data.limit,
+		total: data.total,
+		cardsCount: data.data?.length || 0,
+	});
+
+	// Log first few cards to see structure
+	if (data.data && data.data.length > 0) {
+		console.log(
+			'🃏 Sample cards (first 3):',
+			data.data.slice(0, 3).map((card: Card) => ({
+				id: card.id,
+				name: card.name,
+				image_small_url: card.image_small_url,
+				set_name: card.set_name,
+				rarity: card.rarity,
+			})),
+		);
+	}
+
+	return data;
 }
 
 export async function fetchSets(): Promise<string[]> {
