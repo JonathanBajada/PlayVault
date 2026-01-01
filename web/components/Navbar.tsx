@@ -37,28 +37,36 @@ export default function Navbar() {
 								xmlns='http://www.w3.org/2000/svg'
 								className='w-6 h-6 md:w-7 md:h-7'
 							>
-								<circle
-									cx='12'
-									cy='12'
-									r='10'
-									stroke='#1F2937'
-									strokeWidth='2'
-									fill='white'
+								<defs>
+									<linearGradient
+										id='goldGradient'
+										x1='0'
+										y1='0'
+										x2='24'
+										y2='24'
+									>
+										<stop offset='0%' stopColor='#F5E6A8' />
+										<stop offset='50%' stopColor='#E6C86E' />
+										<stop offset='100%' stopColor='#B8943E' />
+									</linearGradient>
+								</defs>
+								<rect
+									x='2.5'
+									y='2.5'
+									width='19'
+									height='19'
+									rx='5'
+									stroke='url(#goldGradient)'
+									strokeWidth='1.5'
 								/>
 								<path
-									d='M2 12C2 6.48 6.48 2 12 2C17.52 2 22 6.48 22 12H2Z'
-									fill='#EF4444'
+									d='M8 16V8H11.5C13 8 14 9 14 10.5C14 12 13 13 11.5 13H9.5V16H8Z'
+									fill='url(#goldGradient)'
 								/>
-								<line
-									x1='2'
-									y1='12'
-									x2='22'
-									y2='12'
-									stroke='#1F2937'
-									strokeWidth='2'
+								<path
+									d='M15.5 8H17L14.5 16H13L15.5 8Z'
+									fill='url(#goldGradient)'
 								/>
-								<circle cx='12' cy='12' r='3' fill='#1F2937' />
-								<circle cx='12' cy='12' r='1.5' fill='white' />
 							</svg>
 							Poke Vault
 						</Link>
