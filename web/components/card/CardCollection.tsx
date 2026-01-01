@@ -225,7 +225,7 @@ export default function CardCollection({
 						<h1
 							className='font-brand text-4xl md:text-5xl mb-3 drop-shadow-sm'
 							style={{
-								color: 'var(--text-primary)',
+								color: 'var(--vault-gold)',
 								letterSpacing: '0.3px',
 								fontWeight: 600,
 								lineHeight: 1.2,

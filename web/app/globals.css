@@ -102,6 +102,12 @@ body {
 	background: rgba(255, 255, 255, 0.08) !important;
 	border-color: var(--border-gold) !important;
 	box-shadow: 0 0 0 2px var(--vault-gold-faint);
+	color: var(--vault-gold) !important;
+}
+
+.filter-search-input:focus ~ div svg,
+.filter-dropdown:focus ~ div svg {
+	color: var(--vault-gold) !important;
 }
 
 /* ---------- Price Slider ---------- */
