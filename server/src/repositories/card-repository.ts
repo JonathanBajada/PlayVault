@@ -58,14 +58,7 @@ export async function getCards(
 			c.number,
 			c.hp,
 			c.artist,
-			COALESCE(
-				MAX(GREATEST(
-					COALESCE(p.high, 0),
-					COALESCE(p.market, 0),
-					COALESCE(p.direct_low, 0)
-				)),
-				0
-			) AS highest_price
+			COALESCE(MAX(p.high), 0) AS highest_price
 		FROM cards c
 		INNER JOIN sets s ON c.set_id = s.id
 		LEFT JOIN prices p ON c.id = p.card_id
@@ -97,6 +90,16 @@ export async function getCards(
 		...card,
 		highest_price: card.highest_price ? Number(card.highest_price) : 0,
 	}));
+
+	// Log first card to debug price data
+	if (cards.length > 0) {
+		console.log('💰 First card price data:', {
+			id: cards[0].id,
+			name: cards[0].name,
+			highest_price: cards[0].highest_price,
+			raw_highest_price: dataResult.rows[0].highest_price,
+		});
+	}
 
 	return {
 		cards,
