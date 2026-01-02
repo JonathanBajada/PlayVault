@@ -6,9 +6,13 @@
 	"scripts": {
 		"dev": "ts-node-dev --respawn --transpile-only src/server.ts",
 		"typecheck": "tsc --noEmit",
-		"fetch-cards": "ts-node scripts/fetch-all-cards.ts",
-		"populate-cards-index": "ts-node scripts/populate-cards-index.ts",
-		"seed-cards": "ts-node scripts/seed-cards.ts"
+		"fetch-cards": "ts-node src/scripts/fetch-all-cards.ts",
+		"populate-cards-index": "ts-node src/scripts/populate-cards-index.ts",
+		"seed-cards": "ts-node src/scripts/seed-cards.ts",
+		"parse-enhanced-cards": "ts-node src/scripts/parse-enhanced-cards.ts",
+		"drop-tables": "ts-node src/scripts/drop-tables.ts",
+		"create-schema": "ts-node src/scripts/create-schema.ts",
+		"seed-new-schema": "ts-node src/scripts/seed-new-schema.ts"
 	},
 	"keywords": [],
 	"author": "",

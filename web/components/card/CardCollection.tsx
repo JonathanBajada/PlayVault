@@ -6,6 +6,7 @@ import {
 	fetchCards,
 	fetchSets,
 	fetchRarities,
+	fetchCardTypes,
 	Card as CardType,
 } from '@/lib/api/cards';
 import Card from '@/components/card/Card';
@@ -117,7 +118,13 @@ export default function CardCollection({
 		queryFn: fetchRarities,
 	});
 
+	// Fetch all unique card types
+	const { data: cardTypesData } = useQuery({
+		queryKey: ['cardTypes'],
+		queryFn: fetchCardTypes,
+	});
 	const uniqueSets = setsData || [];
+	const uniqueCardTypes = cardTypesData || [];
 	const uniqueRarities = raritiesData || [];
 
 	const totalPages = data ? Math.ceil(data.total / limit) : 0;
@@ -219,6 +226,7 @@ export default function CardCollection({
 					handlePriceSortChange={handlePriceSortChange}
 					uniqueSets={uniqueSets}
 					uniqueRarities={uniqueRarities}
+					uniqueCardTypes={uniqueCardTypes}
 				/>
 
 				{/* Loading State */}

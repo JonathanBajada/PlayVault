@@ -4,6 +4,43 @@ export type Card = {
 	set_name: string;
 	rarity: string | null;
 	image_small_url: string;
+	image_large_url?: string;
+	supertype?: string;
+	number?: string;
+	hp?: string;
+	artist?: string;
+};
+
+export type CardDetail = Card & {
+	set_series?: string;
+	set_release_date?: string;
+	types?: string[];
+	subtypes?: string[];
+	attacks?: {
+		name: string;
+		cost: string[];
+		damage?: string;
+		text?: string;
+		convertedEnergyCost?: number;
+	}[];
+	abilities?: {
+		name: string;
+		text: string;
+		type?: string;
+	}[];
+	weaknesses?: { type: string; value: string }[];
+	resistances?: { type: string; value: string }[];
+	nationalPokedexNumbers?: number[];
+	prices?: {
+		source: string;
+		variant: string;
+		low?: number;
+		mid?: number;
+		high?: number;
+		market?: number;
+		direct_low?: number;
+		updated_at?: string;
+	}[];
 };
 
 export type CardsResponse = {
@@ -100,4 +137,28 @@ export async function fetchRarities(): Promise<string[]> {
 
 	const data = await res.json();
 	return data.rarities;
+}
+
+export async function fetchCardTypes(): Promise<string[]> {
+	const res = await fetch('http://localhost:4000/cards/types');
+
+	if (!res.ok) {
+		throw new Error('Failed to fetch card types');
+	}
+
+	const data = await res.json();
+	return data.types;
+}
+
+export async function fetchCardById(id: string): Promise<CardDetail> {
+	const res = await fetch(`http://localhost:4000/cards/${id}`);
+
+	if (!res.ok) {
+		if (res.status === 404) {
+			throw new Error('Card not found');
+		}
+		throw new Error('Failed to fetch card');
+	}
+
+	return res.json();
 }

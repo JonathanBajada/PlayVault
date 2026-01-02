@@ -11,6 +11,7 @@ import {
 	HiArrowUp,
 	HiArrowDown,
 	HiArrowsUpDown,
+	HiXMark,
 } from 'react-icons/hi2';
 
 interface FilterSectionProps {
@@ -28,6 +29,7 @@ interface FilterSectionProps {
 	handlePriceSortChange: (value: string) => void;
 	uniqueSets: string[];
 	uniqueRarities: string[];
+	uniqueCardTypes: string[];
 }
 
 export default function FilterSection({
@@ -45,6 +47,7 @@ export default function FilterSection({
 	handlePriceSortChange,
 	uniqueSets,
 	uniqueRarities,
+	uniqueCardTypes,
 }: FilterSectionProps) {
 	const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 	const [tempFilters, setTempFilters] = useState({
@@ -98,6 +101,19 @@ export default function FilterSection({
 		} else {
 			handlePriceSortChange('low-to-high');
 		}
+	};
+
+	// Check if any filters are applied
+	const hasActiveFilters = () => {
+		return (
+			!!search ||
+			!!selectedSet ||
+			!!selectedRarity ||
+			!!selectedCardType ||
+			priceRange[0] > 0 ||
+			priceRange[1] < 500 ||
+			!!priceSort
+		);
 	};
 
 	// Clear filters
@@ -253,9 +269,11 @@ export default function FilterSection({
 								}}
 							>
 								<option value=''>All Types</option>
-								<option value='Pokemon'>Pokemon</option>
-								<option value='Trainer'>Trainer</option>
-								<option value='Energy'>Energy</option>
+								{uniqueCardTypes.map((type) => (
+									<option key={type} value={type}>
+										{type}
+									</option>
+								))}
 							</select>
 							<div className='absolute inset-y-0 left-0 pl-2.5 sm:pl-3 flex items-center pointer-events-none'>
 								<HiTag
@@ -305,6 +323,28 @@ export default function FilterSection({
 								)}
 							</div>
 							<span>Price</span>
+						</button>
+
+						{/* Clear Filters Button */}
+						<button
+							onClick={handleClearFilters}
+							disabled={!hasActiveFilters()}
+							className='filter-dropdown w-12 sm:w-12 shrink-0 px-3 sm:px-3 py-2.5 sm:py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-white/10 transition-all flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed'
+							style={{
+								color: hasActiveFilters()
+									? 'var(--text-primary)'
+									: 'var(--text-secondary)',
+								background: hasActiveFilters()
+									? 'rgba(255, 255, 255, 0.08)'
+									: 'rgba(255, 255, 255, 0.04)',
+								border: `1px solid ${
+									hasActiveFilters()
+										? 'rgba(255, 255, 255, 0.15)'
+										: 'rgba(255, 255, 255, 0.08)'
+								}`,
+							}}
+						>
+							<HiXMark className='h-4 w-4 sm:h-5 sm:w-5' />
 						</button>
 					</div>
 
@@ -585,9 +625,11 @@ export default function FilterSection({
 												}}
 											>
 												<option value=''>All Types</option>
-												<option value='Pokemon'>Pokemon</option>
-												<option value='Trainer'>Trainer</option>
-												<option value='Energy'>Energy</option>
+												{uniqueCardTypes.map((type) => (
+													<option key={type} value={type}>
+														{type}
+													</option>
+												))}
 											</select>
 											<div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
 												<HiTag
