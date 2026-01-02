@@ -9,6 +9,7 @@ export type Card = {
 	number?: string;
 	hp?: string;
 	artist?: string;
+	highest_price?: number;
 };
 
 export type CardDetail = Card & {

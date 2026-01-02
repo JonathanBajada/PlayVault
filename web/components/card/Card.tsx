@@ -21,6 +21,7 @@ export default function Card({ card, onClick, isInBinder = false }: CardProps) {
 			hasImage: !!card.image_small_url,
 			set_name: card.set_name,
 			rarity: card.rarity,
+			highest_price: card.highest_price,
 		});
 	}, [card]);
 
@@ -155,7 +156,11 @@ export default function Card({ card, onClick, isInBinder = false }: CardProps) {
 							paddingBottom: '8px',
 						}}
 					>
-						<p className='card-price'>$24.99</p>
+						<p className='card-price'>
+							{card.highest_price && card.highest_price > 0
+								? `$${Number(card.highest_price).toFixed(2)}`
+								: 'N/A'}
+						</p>
 					</div>
 					{/* Action Buttons */}
 					<div className='px-6 pt-5 pb-4 flex gap-2 shrink-0 justify-start'>

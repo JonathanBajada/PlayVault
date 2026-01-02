@@ -45,7 +45,7 @@ export async function getCards(
 	const whereClause =
 		conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
 
-	// Data query - JOIN with sets table to get set name
+	// Data query - JOIN with sets table to get set name and calculate highest price
 	const dataQuery = `
 		SELECT 
 			c.id,
@@ -57,10 +57,20 @@ export async function getCards(
 			c.supertype,
 			c.number,
 			c.hp,
-			c.artist
+			c.artist,
+			COALESCE(
+				MAX(GREATEST(
+					COALESCE(p.high, 0),
+					COALESCE(p.market, 0),
+					COALESCE(p.direct_low, 0)
+				)),
+				0
+			) AS highest_price
 		FROM cards c
 		INNER JOIN sets s ON c.set_id = s.id
+		LEFT JOIN prices p ON c.id = p.card_id
 		${whereClause}
+		GROUP BY c.id, c.name, s.name, c.rarity, c.image_small, c.image_large, c.supertype, c.number, c.hp, c.artist
 		ORDER BY c.name
 		LIMIT $${values.length + 1}
 		OFFSET $${values.length + 2}
@@ -82,8 +92,14 @@ export async function getCards(
 		countPromise,
 	]);
 
+	// Convert highest_price from string to number (PostgreSQL NUMERIC returns as string)
+	const cards = dataResult.rows.map((card) => ({
+		...card,
+		highest_price: card.highest_price ? Number(card.highest_price) : 0,
+	}));
+
 	return {
-		cards: dataResult.rows,
+		cards,
 		total: Number(countResult.rows[0].count),
 	};
 }

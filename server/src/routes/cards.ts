@@ -40,22 +40,7 @@ router.get('/', async (req, res) => {
 	}
 });
 
-router.get('/:id', async (req, res) => {
-	try {
-		const { id } = req.params;
-		const card = await getCardById(id);
-
-		if (!card) {
-			return res.status(404).json({ error: 'Card not found' });
-		}
-
-		res.json(card);
-	} catch (error) {
-		console.error('Error fetching card:', error);
-		res.status(500).json({ error: 'Failed to fetch card' });
-	}
-});
-
+// Specific routes must come before the parameterized route
 router.get('/sets', async (req, res) => {
 	try {
 		const sets = await getUniqueSets();
@@ -83,6 +68,22 @@ router.get('/types', async (req, res) => {
 	} catch (error) {
 		console.error('Error fetching card types:', error);
 		res.status(500).json({ error: 'Failed to fetch card types' });
+	}
+});
+
+router.get('/:id', async (req, res) => {
+	try {
+		const { id } = req.params;
+		const card = await getCardById(id);
+
+		if (!card) {
+			return res.status(404).json({ error: 'Card not found' });
+		}
+
+		res.json(card);
+	} catch (error) {
+		console.error('Error fetching card:', error);
+		res.status(500).json({ error: 'Failed to fetch card' });
 	}
 });
 
