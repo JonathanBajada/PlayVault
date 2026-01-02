@@ -111,7 +111,6 @@ export async function fetchCards({
 				image_small_url: card.image_small_url,
 				set_name: card.set_name,
 				rarity: card.rarity,
-				highest_price: card.highest_price,
 			})),
 		);
 	}

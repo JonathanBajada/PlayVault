@@ -91,16 +91,6 @@ export async function getCards(
 		highest_price: card.highest_price ? Number(card.highest_price) : 0,
 	}));
 
-	// Log first card to debug price data
-	if (cards.length > 0) {
-		console.log('💰 First card price data:', {
-			id: cards[0].id,
-			name: cards[0].name,
-			highest_price: cards[0].highest_price,
-			raw_highest_price: dataResult.rows[0].highest_price,
-		});
-	}
-
 	return {
 		cards,
 		total: Number(countResult.rows[0].count),
