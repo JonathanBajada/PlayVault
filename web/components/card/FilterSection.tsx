@@ -47,31 +47,28 @@ export default function FilterSection({
 		price: priceRange,
 	});
 
-	// Handle mobile filter sheet open/close
+	// Handle body scroll lock when mobile filter sheet opens/closes
 	useEffect(() => {
 		if (mobileFiltersOpen) {
-			// Lock body scroll when sheet is open
 			document.body.style.overflow = 'hidden';
-			// Initialize temp filters with current values
-			setTempFilters({
-				set: selectedSet,
-				rarity: selectedRarity,
-				type: selectedCardType,
-				price: priceRange,
-			});
 		} else {
 			document.body.style.overflow = '';
 		}
 		return () => {
 			document.body.style.overflow = '';
 		};
-	}, [
-		mobileFiltersOpen,
-		selectedSet,
-		selectedRarity,
-		selectedCardType,
-		priceRange,
-	]);
+	}, [mobileFiltersOpen]);
+
+	// Handle opening mobile filters - initialize temp filters with current values
+	const handleOpenMobileFilters = () => {
+		setTempFilters({
+			set: selectedSet,
+			rarity: selectedRarity,
+			type: selectedCardType,
+			price: priceRange,
+		});
+		setMobileFiltersOpen(true);
+	};
 
 	// Apply filters from bottom sheet
 	const handleApplyFilters = () => {
@@ -123,7 +120,7 @@ export default function FilterSection({
 
 				{/* Filters Button */}
 				<button
-					onClick={() => setMobileFiltersOpen(true)}
+					onClick={handleOpenMobileFilters}
 					className='flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-medium transition-all text-base'
 					style={{
 						color: 'var(--text-primary)',
