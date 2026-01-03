@@ -262,14 +262,16 @@ export default function CardCollection({
 						>
 							Showing {data.data.length} of {data.total} cards
 						</div>
-						<div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-8'>
-							{data.data.map((card) => (
-								<Card
-									key={card.id}
-									card={card}
-									onClick={() => setSelectedCard(card)}
-								/>
-							))}
+						<div className='card-grid-background'>
+							<div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-8'>
+								{data.data.map((card) => (
+									<Card
+										key={card.id}
+										card={card}
+										onClick={() => setSelectedCard(card)}
+									/>
+								))}
+							</div>
 						</div>
 
 						{/* Pagination */}

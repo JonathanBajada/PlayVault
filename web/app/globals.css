@@ -156,6 +156,16 @@ body::before {
 	will-change: auto;
 }
 
+/* ---------- Card Grid Background ---------- */
+.card-grid-background {
+	position: relative;
+	padding: 2rem;
+	border-radius: 1rem;
+	/* Semi-opaque black background - allows pixel image to show through slightly */
+	background: rgba(0, 0, 0, 0.95);
+	backdrop-filter: blur(1px);
+}
+
 /* ---------- Typography ---------- */
 .font-brand {
 	font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
