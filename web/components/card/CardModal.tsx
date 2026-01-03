@@ -248,41 +248,6 @@ export default function CardModal({ card, isOpen, onClose }: CardModalProps) {
 
 										{/* Action Buttons - Desktop */}
 										<div className='hidden md:flex gap-2 mb-5'>
-											{/* Favorite - Secondary */}
-											<button
-												onClick={handleToggleFavorite}
-												className={`btn-secondary flex items-center gap-1.5 px-3 py-2 text-sm transition-all duration-200 ${
-													isFavorite ? 'active' : ''
-												}`}
-												style={{
-													background: isFavorite
-														? 'rgba(199, 179, 119, 0.15)'
-														: 'transparent',
-													color: isFavorite
-														? 'var(--vault-gold)'
-														: 'var(--text-muted)',
-													borderColor: isFavorite
-														? 'var(--vault-gold-soft)'
-														: 'var(--border-default)',
-												}}
-											>
-												<svg
-													className='w-4 h-4'
-													fill={
-														isFavorite ? 'currentColor' : 'none'
-													}
-													stroke='currentColor'
-													viewBox='0 0 24 24'
-												>
-													<path
-														strokeLinecap='round'
-														strokeLinejoin='round'
-														strokeWidth={2}
-														d='M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z'
-													/>
-												</svg>
-											</button>
-
 											{/* Add to Binder - Primary */}
 											<button
 												onClick={handleToggleBinder}
@@ -366,6 +331,41 @@ export default function CardModal({ card, isOpen, onClose }: CardModalProps) {
 														</span>
 													</>
 												)}
+											</button>
+
+											{/* Favorite - Secondary */}
+											<button
+												onClick={handleToggleFavorite}
+												className={`btn-secondary flex items-center gap-1.5 px-3 py-2 text-sm transition-all duration-200 ${
+													isFavorite ? 'active' : ''
+												}`}
+												style={{
+													background: isFavorite
+														? 'rgba(199, 179, 119, 0.15)'
+														: 'transparent',
+													color: isFavorite
+														? 'var(--vault-gold)'
+														: 'var(--text-muted)',
+													borderColor: isFavorite
+														? 'var(--vault-gold-soft)'
+														: 'var(--border-default)',
+												}}
+											>
+												<svg
+													className='w-4 h-4'
+													fill={
+														isFavorite ? 'currentColor' : 'none'
+													}
+													stroke='currentColor'
+													viewBox='0 0 24 24'
+												>
+													<path
+														strokeLinecap='round'
+														strokeLinejoin='round'
+														strokeWidth={2}
+														d='M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z'
+													/>
+												</svg>
 											</button>
 										</div>
 									</div>
@@ -745,41 +745,6 @@ export default function CardModal({ card, isOpen, onClose }: CardModalProps) {
 				}}
 			>
 				<div className='flex gap-3 max-w-7xl mx-auto'>
-					{/* Favorite - Secondary */}
-					<button
-						onClick={handleToggleFavorite}
-						className={`flex items-center justify-center gap-2 px-4 py-3 rounded-xl transition-all duration-200 ${
-							isFavorite ? 'active' : ''
-						}`}
-						style={{
-							background: isFavorite
-								? 'rgba(199, 179, 119, 0.15)'
-								: 'transparent',
-							color: isFavorite
-								? 'var(--vault-gold)'
-								: 'var(--text-muted)',
-							border: `1px solid ${
-								isFavorite
-									? 'var(--vault-gold-soft)'
-									: 'var(--border-default)'
-							}`,
-						}}
-					>
-						<svg
-							className='w-5 h-5'
-							fill={isFavorite ? 'currentColor' : 'none'}
-							stroke='currentColor'
-							viewBox='0 0 24 24'
-						>
-							<path
-								strokeLinecap='round'
-								strokeLinejoin='round'
-								strokeWidth={2}
-								d='M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z'
-							/>
-						</svg>
-					</button>
-
 					{/* Add to Binder - Primary */}
 					<button
 						onClick={handleToggleBinder}
@@ -842,6 +807,41 @@ export default function CardModal({ card, isOpen, onClose }: CardModalProps) {
 								<span className='font-semibold'>Add to Binder</span>
 							</>
 						)}
+					</button>
+
+					{/* Favorite - Secondary */}
+					<button
+						onClick={handleToggleFavorite}
+						className={`flex items-center justify-center gap-2 px-4 py-3 rounded-xl transition-all duration-200 ${
+							isFavorite ? 'active' : ''
+						}`}
+						style={{
+							background: isFavorite
+								? 'rgba(199, 179, 119, 0.15)'
+								: 'transparent',
+							color: isFavorite
+								? 'var(--vault-gold)'
+								: 'var(--text-muted)',
+							border: `1px solid ${
+								isFavorite
+									? 'var(--vault-gold-soft)'
+									: 'var(--border-default)'
+							}`,
+						}}
+					>
+						<svg
+							className='w-5 h-5'
+							fill={isFavorite ? 'currentColor' : 'none'}
+							stroke='currentColor'
+							viewBox='0 0 24 24'
+						>
+							<path
+								strokeLinecap='round'
+								strokeLinejoin='round'
+								strokeWidth={2}
+								d='M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z'
+							/>
+						</svg>
 					</button>
 				</div>
 			</div>
