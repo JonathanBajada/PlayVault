@@ -109,7 +109,7 @@ body::before {
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	opacity: 0.25;
-	filter: blur(3px) saturate(0.7);
+	filter: blur(2px) saturate(0.7);
 	pointer-events: none;
 }
 
