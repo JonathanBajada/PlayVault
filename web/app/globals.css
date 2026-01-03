@@ -8,44 +8,78 @@
 
 /* ---------- Design Tokens ---------- */
 :root {
-	--bg-page: #0b0b0d;
-	--bg-surface: #111114;
-	--bg-surface-soft: rgba(17, 17, 20, 0.88);
-	--bg-elevated: #16161a;
+	--bg-page: #07060d;
+	--bg-surface: #0c0b16;
+	--bg-surface-soft: rgba(12, 11, 22, 0.92);
+	--bg-elevated: #15132a;
 
-	/* Diablo II Unique Gold */
-	--vault-gold: #c7b377;
-	--vault-gold-dark: #b5a467;
-	--vault-gold-soft: rgba(199, 179, 119, 0.35);
-	--vault-gold-faint: rgba(199, 179, 119, 0.18);
+	--vault-gold: #22d3ee;
+	--vault-gold-dark: #0891b2;
+	--vault-gold-soft: rgba(34, 211, 238, 0.35);
+	--vault-gold-faint: rgba(34, 211, 238, 0.18);
 
-	--text-primary: #f1f1f3;
-	--text-secondary: #c7c7cc;
-	--text-muted: #8b8b93;
-	--text-inverse: #0a0a0c;
+	--text-primary: #ecfeff;
+	--text-secondary: #bae6fd;
+	--text-muted: #67e8f9;
+	--text-inverse: #07060d;
 
 	--border-default: rgba(255, 255, 255, 0.08);
-	--border-gold: rgba(199, 179, 119, 0.35);
+	--border-gold: rgba(34, 211, 238, 0.35);
 
-	--shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.45);
-	--shadow-md: 0 14px 30px rgba(0, 0, 0, 0.55);
-	--shadow-lg: 0 28px 65px rgba(0, 0, 0, 0.65);
+	--shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.6);
+	--shadow-md: 0 26px 60px rgba(0, 0, 0, 0.8);
+	--shadow-lg: 0 48px 110px rgba(0, 0, 0, 0.9);
 
-	/* Rarity Colors */
-	--rarity-common: #8e8e93;
-	--rarity-uncommon: #6aa38b;
-	--rarity-rare: #c7b377;
-	--rarity-rare-dark: #9e8a4f;
-	--rarity-rare-soft: rgba(199, 179, 119, 0.45);
-	--rarity-holo: #c7b377;
-	--rarity-ultra: #e0d29a;
+	--rarity-common: #94a3b8;
+	--rarity-uncommon: #22d3ee;
+	--rarity-rare: #e879f9;
+	--rarity-rare-dark: #a855f7;
+	--rarity-rare-soft: rgba(232, 121, 249, 0.45);
+	--rarity-holo: #67e8f9;
+	--rarity-ultra: #f0abfc;
+
+	--rarity-common-bg: rgba(148, 163, 184, 0.14);
+	--rarity-uncommon-bg: rgba(34, 211, 238, 0.18);
+	--rarity-common-badge: rgba(148, 163, 184, 0.7);
+	--rarity-uncommon-badge: rgba(34, 211, 238, 0.8);
+	--rarity-rare-bg: rgba(232, 121, 249, 0.18);
+	--rarity-holo-badge: rgba(103, 232, 249, 0.85);
+	--rarity-ultra-badge: rgba(240, 171, 252, 0.9);
+
+	--rarity-common-text: #e5e7eb;
+	--rarity-uncommon-text: #cffafe;
+
+	--card-bg-start: #15132a;
+	--card-bg-end: #0c0b16;
+
+	--navbar-bg-start: rgba(10, 10, 26, 0.95);
+	--navbar-bg-end: rgba(14, 14, 32, 0.97);
+
+	--filter-container-bg: rgba(20, 18, 40, 0.75);
+	--slider-active-opacity: rgba(34, 211, 238, 0.6);
+
+	/* Navbar Specific */
+	--navbar-logo-text: var(--text-primary);
+	--navbar-logo-gradient-start: var(--rarity-ultra);
+	--navbar-logo-gradient-mid: var(--vault-gold);
+	--navbar-logo-gradient-end: var(--vault-gold-dark);
+	--navbar-link-text: var(--text-primary);
+	--navbar-link-text-muted: rgba(255, 255, 255, 0.9);
+	--navbar-link-bg-active: rgba(255, 255, 255, 0.2);
+	--navbar-link-bg-hover: rgba(255, 255, 255, 0.1);
+	--navbar-login-bg: rgba(255, 255, 255, 0.06);
+	--navbar-login-bg-hover: rgba(255, 255, 255, 0.12);
+	--navbar-login-border: rgba(255, 255, 255, 0.12);
+	--navbar-login-border-hover: rgba(255, 255, 255, 0.2);
+	--navbar-login-text: var(--text-primary);
+	--navbar-mobile-border: rgba(255, 255, 255, 0.1);
 }
 
 /* ---------- Base ---------- */
 body {
 	background: radial-gradient(
 			700px 420px at 80% 25%,
-			rgba(199, 179, 119, 0.045),
+			var(--vault-gold-faint),
 			transparent 70%
 		),
 		var(--bg-page);
@@ -65,14 +99,10 @@ body {
 
 /* ---------- Navbar ---------- */
 .navbar {
-	background: linear-gradient(
-		90deg,
-		rgba(15, 15, 18, 0.92),
-		rgba(18, 18, 22, 0.96)
-	);
+	background: var(--navbar-bg-gradient);
 	backdrop-filter: blur(10px);
 	border-bottom: 1px solid var(--border-default);
-	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04);
+	box-shadow: 0 1px 0 var(--white-overlay-04);
 }
 
 .nav-login {
@@ -85,9 +115,82 @@ body {
 	opacity: 1;
 }
 
+/* ---------- Navbar Logo ---------- */
+.navbar-logo {
+	color: var(--navbar-logo-text);
+	font-weight: 600;
+	letter-spacing: 0.5px;
+}
+
+.navbar-logo svg defs stop[offset='0%'] {
+	stop-color: var(--navbar-logo-gradient-start);
+}
+
+.navbar-logo svg defs stop[offset='50%'] {
+	stop-color: var(--navbar-logo-gradient-mid);
+}
+
+.navbar-logo svg defs stop[offset='100%'] {
+	stop-color: var(--navbar-logo-gradient-end);
+}
+
+/* ---------- Navbar Login Button ---------- */
+.nav-login-premium {
+	background: var(--navbar-login-bg);
+	border: 1px solid var(--navbar-login-border);
+	border-radius: 999px;
+	padding: 8px 14px;
+	color: var(--navbar-login-text);
+	font-weight: 500;
+	font-size: 0.875rem;
+	transition: all 150ms ease;
+}
+
+.nav-login-premium:hover {
+	background: var(--navbar-login-bg-hover);
+	border-color: var(--navbar-login-border-hover);
+}
+
+.nav-login-premium-mobile {
+	font-size: 0.75rem;
+}
+
+/* ---------- Navbar Links ---------- */
+.navbar-link {
+	color: var(--navbar-link-text-muted);
+	transition: all 300ms ease;
+}
+
+.navbar-link:hover {
+	color: var(--navbar-link-text);
+	background: var(--navbar-link-bg-hover);
+}
+
+.navbar-link-active {
+	color: var(--navbar-link-text);
+	background: var(--navbar-link-bg-active);
+	backdrop-filter: blur(4px);
+	box-shadow: var(--shadow-md);
+}
+
+.navbar-link-active:hover {
+	background: rgba(255, 255, 255, 0.3);
+}
+
+/* Navbar Mobile Menu */
+.navbar-mobile-menu {
+	border-top: 1px solid var(--navbar-mobile-border);
+}
+
+/* Navbar Login Arrow */
+.login-arrow {
+	transition: transform 150ms ease;
+	display: inline-block;
+}
+
 /* ---------- Filter Container ---------- */
 .filter-container {
-	background: rgba(22, 22, 26, 0.7);
+	background: var(--filter-container-bg);
 	border: 1px solid var(--border-default);
 	border-radius: 1rem;
 }
@@ -95,13 +198,13 @@ body {
 /* ---------- Inputs ---------- */
 .filter-search-input,
 .filter-dropdown {
-	background: rgba(255, 255, 255, 0.05) !important;
-	border: 1px solid rgba(255, 255, 255, 0.08) !important;
+	background: var(--white-overlay-05) !important;
+	border: 1px solid var(--white-overlay-08) !important;
 }
 
 .filter-search-input:focus,
 .filter-dropdown:focus {
-	background: rgba(255, 255, 255, 0.08) !important;
+	background: var(--white-overlay-08) !important;
 	border-color: var(--border-gold) !important;
 	box-shadow: 0 0 0 2px var(--vault-gold-faint);
 	color: var(--vault-gold) !important;
@@ -117,7 +220,7 @@ body {
 	position: absolute;
 	width: 100%;
 	height: 3px;
-	background: rgba(255, 255, 255, 0.08);
+	background: var(--white-overlay-08);
 	border-radius: 2px;
 	top: 50%;
 	transform: translateY(-50%);
@@ -127,14 +230,14 @@ body {
 .price-slider-active-range {
 	position: absolute;
 	height: 3px;
-	background: rgba(199, 179, 119, 0.5);
+	background: var(--slider-active-opacity);
 	border-radius: 2px;
 	top: 50%;
 	transform: translateY(-50%);
 	pointer-events: none;
 	transition: left 0.1s ease, width 0.1s ease;
 	filter: saturate(0.7);
-	box-shadow: 0 0 8px rgba(199, 179, 119, 0.35);
+	box-shadow: 0 0 8px var(--vault-gold-soft);
 }
 
 .price-slider-thumb {
@@ -198,10 +301,10 @@ body {
 
 .card {
 	position: relative;
-	background: linear-gradient(180deg, #1a1a1e, #141418);
+	background: var(--card-bg-gradient);
 	border-radius: 0.6rem;
 	border: 1px solid var(--border-default);
-	box-shadow: var(--shadow-md), inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+	box-shadow: var(--shadow-md), inset 0 0 0 1px var(--white-overlay-02);
 	overflow: hidden;
 	transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
@@ -240,7 +343,7 @@ body {
 	background: linear-gradient(
 		120deg,
 		transparent 40%,
-		rgba(199, 179, 119, 0.35),
+		var(--vault-gold-soft),
 		transparent 60%
 	);
 	transform: translateX(-60%) rotate(6deg);
@@ -287,7 +390,7 @@ body {
 
 /* Default fallback if no data-rarity is set */
 .rarity-label-bar:not([data-rarity]) {
-	background: rgba(255, 255, 255, 0.03);
+	background: var(--white-overlay-03);
 	color: var(--text-muted);
 }
 
@@ -299,17 +402,17 @@ body {
 	padding: 0.25rem 0.6rem;
 	font-size: 0.65rem;
 	border-radius: 999px;
-	border: 1px solid rgba(255, 255, 255, 0.15);
+	border: 1px solid var(--white-overlay-15);
 	backdrop-filter: blur(8px);
-	color: white;
+	color: var(--text-primary);
 	opacity: 0.75;
 }
 
 .rarity-common {
-	background: rgba(142, 142, 147, 0.7);
+	background: var(--rarity-common-badge);
 }
 .rarity-uncommon {
-	background: rgba(106, 163, 139, 0.7);
+	background: var(--rarity-uncommon-badge);
 }
 .rarity-rare {
 	background: linear-gradient(
@@ -320,10 +423,10 @@ body {
 	color: var(--text-inverse);
 }
 .rarity-holo {
-	background: rgba(199, 179, 119, 0.75);
+	background: var(--rarity-holo-badge);
 }
 .rarity-ultra {
-	background: rgba(224, 210, 154, 0.85);
+	background: var(--rarity-ultra-badge);
 }
 
 /* ---------- Text ---------- */
@@ -344,12 +447,12 @@ body {
 	font-size: 1.25rem;
 	font-weight: 700;
 	color: var(--vault-gold);
-	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+	text-shadow: 0 1px 2px var(--black-overlay-50);
 }
 
 /* ---------- Buttons ---------- */
 .btn-primary {
-	background: rgba(199, 179, 119, 0.1);
+	background: var(--vault-gold-faint);
 	color: var(--text-secondary);
 	border: 1px solid var(--border-default);
 	border-radius: 0.75rem;
@@ -379,12 +482,12 @@ body {
 /* ---------- Card Rarity Backgrounds ---------- */
 .card-image-wrapper[data-rarity='COMMON'],
 .card-detail-image-bg[data-rarity='COMMON'] {
-	background: rgba(148, 163, 184, 0.18);
+	background: var(--rarity-common-bg);
 }
 
 .card-image-wrapper[data-rarity='UNCOMMON'],
 .card-detail-image-bg[data-rarity='UNCOMMON'] {
-	background: rgba(34, 197, 94, 0.18);
+	background: var(--rarity-uncommon-bg);
 }
 
 .card-image-wrapper[data-rarity='RARE'],
@@ -398,13 +501,13 @@ body {
 
 /* ---------- Rarity Label Bar Backgrounds ---------- */
 .rarity-label-bar[data-rarity='COMMON'] {
-	background: rgba(148, 163, 184, 0.18) !important;
-	color: #cbd5e1 !important;
+	background: var(--rarity-common-bg) !important;
+	color: var(--rarity-common-text) !important;
 }
 
 .rarity-label-bar[data-rarity='UNCOMMON'] {
-	background: rgba(34, 197, 94, 0.18) !important;
-	color: #86efac !important;
+	background: var(--rarity-uncommon-bg) !important;
+	color: var(--rarity-uncommon-text) !important;
 }
 
 .rarity-label-bar[data-rarity='RARE'] {
@@ -414,6 +517,6 @@ body {
 		var(--vault-gold-dark)
 	) !important;
 	color: var(--text-inverse) !important;
-	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35),
-		inset 0 -1px 0 rgba(0, 0, 0, 0.35) !important;
+	box-shadow: inset 0 1px 0 var(--white-overlay-35),
+		inset 0 -1px 0 var(--black-overlay-35) !important;
 }

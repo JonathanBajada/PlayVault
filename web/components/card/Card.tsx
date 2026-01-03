@@ -60,15 +60,8 @@ export default function Card({ card, onClick, isInBinder = false }: CardProps) {
 		>
 			{/* ================= FULL WIDTH IMAGE ================= */}
 			<div
-				className='card-image-wrapper'
-				style={{
-					background:
-						rarityColorCategory === 'COMMON'
-							? 'rgba(148, 163, 184, 0.18)'
-							: rarityColorCategory === 'UNCOMMON'
-							? 'rgba(34, 197, 94, 0.18)'
-							: 'rgba(245, 158, 11, 0.22)',
-				}}
+				className="card-image-wrapper"
+				data-rarity={rarityColorCategory}
 			>
 				{card.image_small_url ? (
 					<img src={card.image_small_url} alt={card.name} loading='lazy' />
@@ -97,21 +90,8 @@ export default function Card({ card, onClick, isInBinder = false }: CardProps) {
 
 			{/* ================= RARITY LABEL BAR ================= */}
 			<div
-				className='rarity-label-bar'
-				style={{
-					background:
-						rarityColorCategory === 'COMMON'
-							? 'rgba(148, 163, 184, 0.18)'
-							: rarityColorCategory === 'UNCOMMON'
-							? 'rgba(34, 197, 94, 0.18)'
-							: 'rgba(245, 158, 11, 0.22)',
-					color:
-						rarityColorCategory === 'COMMON'
-							? '#cbd5e1'
-							: rarityColorCategory === 'UNCOMMON'
-							? '#86efac'
-							: '#fde68a',
-				}}
+				className="rarity-label-bar"
+				data-rarity={rarityColorCategory}
 			>
 				{rarityLabel}
 			</div>

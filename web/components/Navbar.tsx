@@ -22,12 +22,7 @@ export default function Navbar() {
 					<div className='flex items-center'>
 						<Link
 							href='/'
-							className='flex items-center gap-2 text-xl md:text-2xl font-brand hover:opacity-80 transition-opacity'
-							style={{
-								color: '#E6EAF2',
-								fontWeight: 600,
-								letterSpacing: '0.5px',
-							}}
+							className='navbar-logo flex items-center gap-2 text-xl md:text-2xl font-brand hover:opacity-80 transition-opacity'
 						>
 							<svg
 								width='24'
@@ -45,9 +40,9 @@ export default function Navbar() {
 										x2='24'
 										y2='24'
 									>
-										<stop offset='0%' stopColor='#e0d29a' />
-										<stop offset='50%' stopColor='#c7b377' />
-										<stop offset='100%' stopColor='#b5a467' />
+										<stop offset='0%' />
+										<stop offset='50%' />
+										<stop offset='100%' />
 									</linearGradient>
 								</defs>
 								<rect
@@ -76,7 +71,7 @@ export default function Navbar() {
 						<div className='relative group'>
 							<button
 								disabled
-								className='flex items-center gap-2 px-4 py-2 rounded-xl text-sm md:text-base font-medium transition-all duration-300 text-white/90 opacity-75 cursor-not-allowed'
+								className='navbar-link flex items-center gap-2 px-4 py-2 rounded-xl text-sm md:text-base font-medium opacity-75 cursor-not-allowed'
 							>
 								<svg
 									width='20'
@@ -120,10 +115,8 @@ export default function Navbar() {
 						</div>
 						<Link
 							href='/'
-							className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm lg:text-base font-medium transition-all duration-300 ${
-								isActive('/')
-									? 'text-white bg-white/20 hover:bg-white/30 backdrop-blur-sm shadow-lg'
-									: 'text-white/90 hover:text-white hover:bg-white/10'
+							className={`navbar-link flex items-center gap-2 px-4 py-2 rounded-xl text-sm lg:text-base font-medium ${
+								isActive('/') ? 'navbar-link-active' : ''
 							}`}
 						>
 							<svg
@@ -166,10 +159,8 @@ export default function Navbar() {
 						</Link>
 						<Link
 							href='/binder'
-							className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm md:text-base font-medium transition-all duration-300 ${
-								isActive('/binder')
-									? 'text-white bg-white/20 hover:bg-white/30 backdrop-blur-sm shadow-lg'
-									: 'text-white/90 hover:text-white hover:bg-white/10'
+							className={`navbar-link flex items-center gap-2 px-4 py-2 rounded-xl text-sm md:text-base font-medium ${
+								isActive('/binder') ? 'navbar-link-active' : ''
 							}`}
 						>
 							<svg
@@ -239,21 +230,7 @@ export default function Navbar() {
 						<Link
 							href='/login'
 							className='nav-login-premium flex items-center gap-1.5'
-							style={{
-								background: 'rgba(255, 255, 255, 0.06)',
-								border: '1px solid rgba(255, 255, 255, 0.12)',
-								borderRadius: '999px',
-								padding: '8px 14px',
-								color: '#f8fafc',
-								fontWeight: 500,
-								fontSize: '0.875rem',
-								transition: 'all 150ms ease',
-							}}
 							onMouseEnter={(e) => {
-								e.currentTarget.style.background =
-									'rgba(255, 255, 255, 0.12)';
-								e.currentTarget.style.borderColor =
-									'rgba(255, 255, 255, 0.2)';
 								const arrow =
 									e.currentTarget.querySelector('.login-arrow');
 								if (arrow) {
@@ -262,10 +239,6 @@ export default function Navbar() {
 								}
 							}}
 							onMouseLeave={(e) => {
-								e.currentTarget.style.background =
-									'rgba(255, 255, 255, 0.06)';
-								e.currentTarget.style.borderColor =
-									'rgba(255, 255, 255, 0.12)';
 								const arrow =
 									e.currentTarget.querySelector('.login-arrow');
 								if (arrow) {
@@ -275,15 +248,7 @@ export default function Navbar() {
 							}}
 						>
 							<span>Login</span>
-							<span
-								className='login-arrow'
-								style={{
-									transition: 'transform 150ms ease',
-									display: 'inline-block',
-								}}
-							>
-								→
-							</span>
+							<span className='login-arrow'>→</span>
 						</Link>
 					</div>
 
@@ -291,22 +256,8 @@ export default function Navbar() {
 					<div className='md:hidden flex items-center gap-3'>
 						<Link
 							href='/login'
-							className='nav-login-premium flex items-center gap-1.5'
-							style={{
-								background: 'rgba(255, 255, 255, 0.06)',
-								border: '1px solid rgba(255, 255, 255, 0.12)',
-								borderRadius: '999px',
-								padding: '8px 14px',
-								color: '#f8fafc',
-								fontWeight: 500,
-								fontSize: '0.75rem',
-								transition: 'all 150ms ease',
-							}}
+							className='nav-login-premium nav-login-premium-mobile flex items-center gap-1.5'
 							onMouseEnter={(e) => {
-								e.currentTarget.style.background =
-									'rgba(255, 255, 255, 0.12)';
-								e.currentTarget.style.borderColor =
-									'rgba(255, 255, 255, 0.2)';
 								const arrow =
 									e.currentTarget.querySelector('.login-arrow');
 								if (arrow) {
@@ -315,10 +266,6 @@ export default function Navbar() {
 								}
 							}}
 							onMouseLeave={(e) => {
-								e.currentTarget.style.background =
-									'rgba(255, 255, 255, 0.06)';
-								e.currentTarget.style.borderColor =
-									'rgba(255, 255, 255, 0.12)';
 								const arrow =
 									e.currentTarget.querySelector('.login-arrow');
 								if (arrow) {
@@ -328,19 +275,11 @@ export default function Navbar() {
 							}}
 						>
 							<span>Login</span>
-							<span
-								className='login-arrow'
-								style={{
-									transition: 'transform 150ms ease',
-									display: 'inline-block',
-								}}
-							>
-								→
-							</span>
+							<span className='login-arrow'>→</span>
 						</Link>
 						<button
 							onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-							className='p-2 text-white hover:bg-white/10 rounded-lg transition-colors'
+							className='navbar-link p-2 rounded-lg'
 							aria-label='Toggle menu'
 						>
 							{!mobileMenuOpen ? (
@@ -378,11 +317,11 @@ export default function Navbar() {
 
 				{/* Mobile Menu */}
 				{mobileMenuOpen && (
-					<div className='md:hidden border-t border-white/10'>
+					<div className='md:hidden navbar-mobile-menu'>
 						<div className='px-4 py-4 space-y-2'>
 							<button
 								disabled
-								className='w-full flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 text-white/75 opacity-75 cursor-not-allowed'
+								className='navbar-link w-full flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium opacity-75 cursor-not-allowed'
 							>
 								<svg
 									width='20'
@@ -420,10 +359,8 @@ export default function Navbar() {
 							<Link
 								href='/'
 								onClick={() => setMobileMenuOpen(false)}
-								className={`flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 ${
-									isActive('/')
-										? 'text-white bg-white/20 backdrop-blur-sm shadow-lg'
-										: 'text-white/90 hover:bg-white/10'
+								className={`navbar-link flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium ${
+									isActive('/') ? 'navbar-link-active' : ''
 								}`}
 							>
 								<svg
@@ -463,10 +400,8 @@ export default function Navbar() {
 							<Link
 								href='/binder'
 								onClick={() => setMobileMenuOpen(false)}
-								className={`flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 ${
-									isActive('/binder')
-										? 'text-white bg-white/20 backdrop-blur-sm shadow-lg'
-										: 'text-white/90 hover:bg-white/10'
+								className={`navbar-link flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium ${
+									isActive('/binder') ? 'navbar-link-active' : ''
 								}`}
 							>
 								<svg
