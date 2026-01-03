@@ -79,6 +79,8 @@
 
 /* ---------- Base ---------- */
 body {
+	position: relative;
+	/* Background will be layered: image (::before) -> gradients (::after) -> body gradient -> content */
 	background: radial-gradient(
 			700px 420px at 80% 25%,
 			var(--vault-gold-faint),
@@ -88,6 +90,70 @@ body {
 	color: var(--text-primary);
 	font-family: 'Inter', system-ui, -apple-system, sans-serif;
 	min-height: 100vh;
+	overflow-x: hidden;
+}
+
+/* Pixel Art Tokyo Skyline Background */
+body::before {
+	content: '';
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 0;
+	/* Base image */
+	background-image: url('/bg/pixel-tokyo.png');
+	background-size: cover;
+	background-position: center bottom;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	opacity: 0.25;
+	filter: blur(3px) saturate(0.7);
+	pointer-events: none;
+}
+
+/* Darkening overlay layers */
+body::after {
+	content: '';
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	pointer-events: none;
+	/* Radial gradient overlay (center darkening) */
+	background: radial-gradient(
+			ellipse 120% 80% at 50% 50%,
+			rgba(5, 4, 10, 0.85) 0%,
+			rgba(5, 4, 10, 0.6) 40%,
+			rgba(5, 4, 10, 0.3) 70%,
+			transparent 100%
+		),
+		/* Linear gradient overlay (top to bottom darkening) */
+			linear-gradient(
+				to bottom,
+				rgba(5, 4, 10, 0.7) 0%,
+				rgba(5, 4, 10, 0.4) 30%,
+				rgba(5, 4, 10, 0.5) 70%,
+				rgba(5, 4, 10, 0.8) 100%
+			),
+		/* Neon Ash color tinting */
+			linear-gradient(
+				135deg,
+				rgba(255, 95, 210, 0.08) 0%,
+				transparent 30%,
+				transparent 70%,
+				rgba(34, 211, 238, 0.08) 100%
+			);
+	background-blend-mode: multiply, overlay, normal;
+}
+
+/* Background stays fixed - no parallax movement */
+body::before {
+	transform: none !important;
+	will-change: auto;
 }
 
 /* ---------- Typography ---------- */
