@@ -1,88 +1,645 @@
-#neon-theme {:root {
-	--bg-page: #08090b;
-	--bg-surface: #0e1014;
-	--bg-surface-soft: rgba(14, 16, 20, 0.88);
-	--bg-elevated: #141720;
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import 'tailwindcss';
 
-	--vault-gold: #ff4d6d;
-	--vault-gold-dark: #c93450;
-	--vault-gold-soft: rgba(255, 77, 109, 0.35);
-	--vault-gold-faint: rgba(255, 77, 109, 0.18);
+/* =========================================================
+   🔒 PokeVault – Neon Ash Theme
+   ========================================================= */
 
-	--text-primary: #f5f7fa;
-	--text-secondary: #cbd0dc;
-	--text-muted: #8a8f9e;
-	--text-inverse: #08090b;
+/* ---------- Design Tokens ---------- */
+:root {
+	/* =============================
+	   BACKGROUNDS
+	============================= */
+	--bg-page: #07060d;
+	--bg-surface: #0c0b16;
+	--bg-surface-soft: rgba(12, 11, 22, 0.92);
+	--bg-elevated: #15132a;
 
-	--border-default: rgba(255, 255, 255, 0.06);
-	--border-gold: rgba(255, 77, 109, 0.35);
+	/* =============================
+	   PRIMARY ACCENT (NEON CYAN)
+	============================= */
+	--vault-gold: #22d3ee;
+	--vault-gold-dark: #0891b2;
+	--vault-gold-soft: rgba(34, 211, 238, 0.35);
+	--vault-gold-faint: rgba(34, 211, 238, 0.18);
 
-	--shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.55);
-	--shadow-md: 0 16px 32px rgba(0, 0, 0, 0.7);
-	--shadow-lg: 0 32px 72px rgba(0, 0, 0, 0.85);
+	/* =============================
+	   TEXT
+	============================= */
+	--text-primary: #ecfeff;
+	--text-secondary: #bae6fd;
+	--text-muted: #67e8f9;
+	--text-inverse: #07060d;
 
-	--rarity-common: #8a8f9e;
-	--rarity-uncommon: #44ffd2;
-	--rarity-rare: #ff4d6d;
-	--rarity-rare-dark: #c93450;
-	--rarity-rare-soft: rgba(255, 77, 109, 0.45);
-	--rarity-holo: #ff8fab;
-	--rarity-ultra: #ffd1dc;
+	/* =============================
+	   BORDERS & SHADOWS
+	============================= */
+	--border-default: rgba(255, 255, 255, 0.08);
+	--border-gold: rgba(34, 211, 238, 0.35);
 
+	--shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.6);
+	--shadow-md: 0 26px 60px rgba(0, 0, 0, 0.8);
+	--shadow-lg: 0 48px 110px rgba(0, 0, 0, 0.9);
+
+	/* =============================
+	   RARITY COLORS
+	============================= */
+	--rarity-common: #94a3b8;
+	--rarity-uncommon: #22d3ee;
+	--rarity-rare: #e879f9; /* Neon Magenta */
+	--rarity-rare-dark: #a855f7;
+	--rarity-rare-soft: rgba(232, 121, 249, 0.45);
+	--rarity-holo: #67e8f9;
+	--rarity-ultra: #f0abfc;
+
+	/* =============================
+	   RARITY BACKGROUNDS
+	============================= */
 	--rarity-common-bg: rgba(148, 163, 184, 0.14);
-	--rarity-uncommon-bg: rgba(68, 255, 210, 0.18);
+	--rarity-uncommon-bg: rgba(34, 211, 238, 0.18);
+	--rarity-rare-bg: rgba(232, 121, 249, 0.18);
+
+	--rarity-common-badge: rgba(148, 163, 184, 0.7);
+	--rarity-uncommon-badge: rgba(34, 211, 238, 0.8);
+	--rarity-holo-badge: rgba(103, 232, 249, 0.85);
+	--rarity-ultra-badge: rgba(240, 171, 252, 0.9);
+
+	/* =============================
+	   RARITY TEXT
+	============================= */
+	--rarity-common-text: #e5e7eb;
+	--rarity-uncommon-text: #cffafe;
+
+	/* =============================
+	   CARD BACKGROUNDS
+	============================= */
+	--card-bg-start: #15132a;
+	--card-bg-end: #0c0b16;
+
+	/* =============================
+	   NAVBAR
+	============================= */
+	--navbar-bg-start: rgba(10, 10, 26, 0.95);
+	--navbar-bg-end: rgba(14, 14, 32, 0.97);
+
+	--navbar-logo-text: var(--text-primary);
+	--navbar-logo-gradient-start: #f0abfc;
+	--navbar-logo-gradient-mid: #22d3ee;
+	--navbar-logo-gradient-end: #0891b2;
+
+	--navbar-link-text: var(--text-primary);
+	--navbar-link-text-muted: rgba(236, 254, 255, 0.85);
+	--navbar-link-bg-active: rgba(34, 211, 238, 0.25);
+	--navbar-link-bg-hover: rgba(34, 211, 238, 0.15);
+
+	--navbar-login-bg: rgba(255, 255, 255, 0.06);
+	--navbar-login-bg-hover: rgba(34, 211, 238, 0.18);
+	--navbar-login-border: rgba(255, 255, 255, 0.12);
+	--navbar-login-border-hover: rgba(34, 211, 238, 0.35);
+	--navbar-login-text: var(--text-primary);
+
+	--navbar-mobile-border: rgba(255, 255, 255, 0.1);
+
+	/* =============================
+	   FILTERS & SLIDERS
+	============================= */
+	--filter-container-bg: rgba(20, 18, 40, 0.75);
+	--slider-active-opacity: rgba(34, 211, 238, 0.6);
 }
 
-#neon-tokyo-night-theme {:root {
-    :root {
-        --bg-page: #0b0e14;
-        --bg-surface: #11161f;
-        --bg-surface-soft: rgba(17, 22, 31, 0.92);
-        --bg-elevated: #1a2233;
-    
-        --vault-gold: #ef4444;
-        --vault-gold-dark: #991b1b;
-        --vault-gold-soft: rgba(239, 68, 68, 0.35);
-        --vault-gold-faint: rgba(239, 68, 68, 0.18);
-    
-        --text-primary: #f8fafc;
-        --text-secondary: #cbd5e1;
-        --text-muted: #94a3b8;
-        --text-inverse: #0b0e14;
-    
-        --border-default: rgba(255, 255, 255, 0.08);
-        --border-gold: rgba(239, 68, 68, 0.35);
-    
-        --shadow-sm: 0 8px 18px rgba(0, 0, 0, 0.6);
-        --shadow-md: 0 24px 55px rgba(0, 0, 0, 0.75);
-        --shadow-lg: 0 44px 100px rgba(0, 0, 0, 0.85);
-    
-        --rarity-common: #9ca3af;
-        --rarity-uncommon: #22c55e;
-        --rarity-rare: #ef4444;
-        --rarity-rare-dark: #7f1d1d;
-        --rarity-rare-soft: rgba(239, 68, 68, 0.45);
-        --rarity-holo: #f87171;
-        --rarity-ultra: #fecaca;
-    
-        --rarity-common-bg: rgba(148, 163, 184, 0.14);
-        --rarity-uncommon-bg: rgba(34, 197, 94, 0.18);
-        --rarity-common-badge: rgba(148, 163, 184, 0.7);
-        --rarity-uncommon-badge: rgba(34, 197, 94, 0.75);
-        --rarity-holo-badge: rgba(248, 113, 113, 0.8);
-        --rarity-ultra-badge: rgba(254, 202, 202, 0.9);
-    
-        --rarity-common-text: #e5e7eb;
-        --rarity-uncommon-text: #bbf7d0;
-    
-        --card-bg-start: #1a2233;
-        --card-bg-end: #11161f;
-    
-        --navbar-bg-start: rgba(17, 22, 31, 0.95);
-        --navbar-bg-end: rgba(22, 28, 40, 0.97);
-    
-        --filter-container-bg: rgba(26, 34, 52, 0.75);
-        --slider-active-opacity: rgba(239, 68, 68, 0.55);
-    }
-    
+/* ---------- Base ---------- */
+body {
+	background: radial-gradient(
+			700px 420px at 80% 25%,
+			var(--vault-gold-faint),
+			transparent 70%
+		),
+		var(--bg-page);
+	color: var(--text-primary);
+	font-family: 'Inter', system-ui, -apple-system, sans-serif;
+	min-height: 100vh;
+}
+
+/* ---------- Typography ---------- */
+.font-brand {
+	font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+}
+
+.font-body {
+	font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+	background: var(--navbar-bg-gradient);
+	backdrop-filter: blur(10px);
+	border-bottom: 1px solid var(--border-default);
+	box-shadow: 0 1px 0 var(--white-overlay-04);
+}
+
+.nav-login {
+	color: var(--text-primary);
+	opacity: 0.9;
+}
+
+.nav-login:hover {
+	color: var(--vault-gold);
+	opacity: 1;
+}
+
+/* ---------- Navbar Logo ---------- */
+.navbar-logo {
+	color: var(--navbar-logo-text);
+	font-weight: 600;
+	letter-spacing: 0.5px;
+}
+
+.navbar-logo-icon defs stop[offset='0%'] {
+	stop-color: var(--navbar-logo-gradient-start);
+}
+
+.navbar-logo-icon defs stop[offset='50%'] {
+	stop-color: var(--navbar-logo-gradient-mid);
+}
+
+.navbar-logo-icon defs stop[offset='100%'] {
+	stop-color: var(--navbar-logo-gradient-end);
+}
+
+/* ---------- Navbar Login Button ---------- */
+.nav-login-premium {
+	background: var(--navbar-login-bg);
+	border: 1px solid var(--navbar-login-border);
+	border-radius: 999px;
+	padding: 8px 14px;
+	color: var(--navbar-login-text);
+	font-weight: 500;
+	font-size: 0.875rem;
+	transition: all 150ms ease;
+}
+
+.nav-login-premium:hover {
+	background: var(--navbar-login-bg-hover);
+	border-color: var(--navbar-login-border-hover);
+}
+
+.nav-login-premium-mobile {
+	font-size: 0.75rem;
+}
+
+/* ---------- Navbar Links ---------- */
+.navbar-link {
+	color: var(--navbar-link-text-muted);
+	transition: all 300ms ease;
+}
+
+.navbar-link:hover {
+	color: var(--navbar-link-text);
+	background: var(--navbar-link-bg-hover);
+}
+
+.navbar-link-active {
+	color: var(--navbar-link-text);
+	background: var(--navbar-link-bg-active);
+	backdrop-filter: blur(4px);
+	box-shadow: var(--shadow-md);
+}
+
+.navbar-link-active:hover {
+	background: rgba(255, 255, 255, 0.3);
+}
+
+/* Navbar Mobile Menu */
+.navbar-mobile-menu {
+	border-top: 1px solid var(--navbar-mobile-border);
+}
+
+/* Navbar Login Arrow */
+.login-arrow {
+	transition: transform 150ms ease;
+	display: inline-block;
+}
+
+/* =========================================================
+   🎬 CYBERPUNK MICRO-ANIMATIONS
+   ========================================================= */
+
+/* ---------- Logo Idle Pulse Animation ---------- */
+@keyframes logoNeonPulse {
+	0%,
+	100% {
+		filter: drop-shadow(0 0 1px var(--vault-gold-faint))
+			drop-shadow(0 0 2px var(--vault-gold-faint));
+		opacity: 1;
+	}
+	50% {
+		filter: drop-shadow(0 0 2px var(--vault-gold-soft))
+			drop-shadow(0 0 4px var(--vault-gold-soft));
+		opacity: 0.98;
+	}
+}
+
+/* ---------- Logo Hover Surge Animation ---------- */
+@keyframes logoSignalSurge {
+	0% {
+		filter: drop-shadow(0 0 4px var(--vault-gold-soft))
+			drop-shadow(0 0 8px var(--vault-gold-soft));
+		opacity: 0.95;
+	}
+	50% {
+		filter: drop-shadow(0 0 8px var(--vault-gold))
+			drop-shadow(0 0 16px var(--vault-gold))
+			drop-shadow(0 0 24px var(--rarity-ultra));
+		opacity: 1;
+	}
+	100% {
+		filter: drop-shadow(0 0 4px var(--vault-gold-soft))
+			drop-shadow(0 0 8px var(--vault-gold-soft));
+		opacity: 0.95;
+	}
+}
+
+/* ---------- Header Title Entry Animation ---------- */
+@keyframes titleFadeInRise {
+	0% {
+		opacity: 0;
+		transform: translateY(6px);
+		filter: drop-shadow(0 0 0px var(--vault-gold));
+	}
+	60% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+		filter: drop-shadow(0 0 8px var(--vault-gold-soft))
+			drop-shadow(0 0 16px var(--vault-gold-faint));
+	}
+}
+
+/* ---------- Apply Logo Animations ---------- */
+.navbar-logo {
+	position: relative;
+}
+
+.navbar-logo-icon {
+	position: relative;
+	z-index: 1;
+	animation: logoNeonPulse 8s ease-in-out infinite;
+}
+
+.navbar-logo:hover .navbar-logo-icon {
+	animation: logoSignalSurge 250ms ease-out;
+}
+
+/* ---------- Apply Header Title Animation ---------- */
+.page-header-title {
+	animation: titleFadeInRise 600ms ease-out;
+	animation-fill-mode: both;
+}
+
+/* ---------- Accessibility: Reduced Motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+	.navbar-logo,
+	.navbar-logo:hover,
+	.page-header-title,
+	.navbar-logo::before {
+		animation: none !important;
+		transition: none !important;
+	}
+}
+
+/* ---------- Filter Container ---------- */
+.filter-container {
+	background: var(--filter-container-bg);
+	border: 1px solid var(--border-default);
+	border-radius: 1rem;
+}
+
+/* ---------- Inputs ---------- */
+.filter-search-input,
+.filter-dropdown {
+	background: var(--white-overlay-05) !important;
+	border: 1px solid var(--white-overlay-08) !important;
+}
+
+.filter-search-input:focus,
+.filter-dropdown:focus {
+	background: var(--white-overlay-08) !important;
+	border-color: var(--border-gold) !important;
+	box-shadow: 0 0 0 2px var(--vault-gold-faint);
+	color: var(--vault-gold) !important;
+}
+
+.filter-search-input:focus ~ div svg,
+.filter-dropdown:focus ~ div svg {
+	color: var(--vault-gold) !important;
+}
+
+/* ---------- Price Slider ---------- */
+.price-slider-track {
+	position: absolute;
+	width: 100%;
+	height: 3px;
+	background: var(--white-overlay-08);
+	border-radius: 2px;
+	top: 50%;
+	transform: translateY(-50%);
+	pointer-events: none;
+}
+
+.price-slider-active-range {
+	position: absolute;
+	height: 3px;
+	background: var(--slider-active-opacity);
+	border-radius: 2px;
+	top: 50%;
+	transform: translateY(-50%);
+	pointer-events: none;
+	transition: left 0.1s ease, width 0.1s ease;
+	filter: saturate(0.7);
+	box-shadow: 0 0 8px var(--vault-gold-soft);
+}
+
+.price-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	height: 3px;
+	background: transparent;
+	outline: none;
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.price-slider-thumb::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 13px;
+	height: 13px;
+	background: var(--vault-gold);
+	border-radius: 50%;
+	box-shadow: 0 0 0 1px var(--vault-gold-soft), 0 0 12px var(--vault-gold-soft);
+	cursor: pointer;
+	margin-top: -5px;
+	position: relative;
+}
+
+.price-slider-thumb::-moz-range-thumb {
+	width: 13px;
+	height: 13px;
+	background: var(--vault-gold);
+	border-radius: 50%;
+	cursor: pointer;
+	border: none;
+	box-shadow: 0 0 0 1px var(--vault-gold-soft), 0 0 12px var(--vault-gold-soft);
+}
+
+.price-slider-thumb::-webkit-slider-runnable-track {
+	height: 3px;
+	background: transparent;
+}
+
+.price-slider-thumb::-moz-range-track {
+	height: 3px;
+	background: transparent;
+	border: none;
+}
+
+/* ---------- Grid ---------- */
+.card-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+	gap: 2.5rem;
+	row-gap: 4rem;
+}
+
+/* =========================================================
+   🔥 CARD + IMAGE SHIMMER (UNCHANGED STRUCTURE)
+   ========================================================= */
+
+.card {
+	position: relative;
+	background: var(--card-bg-gradient);
+	border-radius: 0.6rem;
+	border: 1px solid var(--border-default);
+	box-shadow: var(--shadow-md), inset 0 0 0 1px var(--white-overlay-02);
+	overflow: hidden;
+	transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.card:hover {
+	transform: translateY(-4px);
+	box-shadow: var(--shadow-lg);
+}
+
+/* ---------- Card Image ---------- */
+.card-image-wrapper {
+	position: relative;
+	aspect-ratio: 2.5 / 3.5;
+	padding: 0.5rem;
+	overflow: hidden;
+}
+
+.card-image-wrapper img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	border-radius: 0.375rem;
+	transition: transform 0.35s ease;
+}
+
+.card:hover .card-image-wrapper img {
+	transform: scale(1.015);
+}
+
+/* ---------- IMAGE-ONLY FOIL SHIMMER ---------- */
+.card.holo .card-image-wrapper::after,
+.holo .card-image-wrapper::after {
+	content: '';
+	position: absolute;
+	inset: -40%;
+	background: linear-gradient(
+		120deg,
+		transparent 40%,
+		var(--vault-gold-soft),
+		transparent 60%
+	);
+	transform: translateX(-60%) rotate(6deg);
+	opacity: 0;
+	pointer-events: none;
+	z-index: 5;
+}
+
+.card.holo:hover .card-image-wrapper::after,
+.holo:hover .card-image-wrapper::after {
+	animation: imageFoil 1.6s ease forwards;
+}
+
+@keyframes imageFoil {
+	0% {
+		transform: translateX(-60%) rotate(6deg);
+		opacity: 0;
+	}
+	20% {
+		opacity: 1;
+	}
+	80% {
+		opacity: 1;
+	}
+	100% {
+		transform: translateX(60%) rotate(6deg);
+		opacity: 0;
+	}
+}
+
+/* ---------- Rarity Label Bar ---------- */
+.rarity-label-bar {
+	width: 100%;
+	padding: 0.3rem 1.25rem;
+	font-size: 0.6rem;
+	font-weight: 600;
+	letter-spacing: 0.22em;
+	text-transform: uppercase;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-top: 1px solid var(--border-default);
+}
+
+/* Default fallback if no data-rarity is set */
+.rarity-label-bar:not([data-rarity]) {
+	background: var(--white-overlay-03);
+	color: var(--text-muted);
+}
+
+/* ---------- Rarity Badge ---------- */
+.rarity-badge {
+	position: absolute;
+	top: 0.75rem;
+	left: 0.75rem;
+	padding: 0.25rem 0.6rem;
+	font-size: 0.65rem;
+	border-radius: 999px;
+	border: 1px solid var(--white-overlay-15);
+	backdrop-filter: blur(8px);
+	color: var(--text-primary);
+	opacity: 0.75;
+}
+
+.rarity-common {
+	background: var(--rarity-common-badge);
+}
+.rarity-uncommon {
+	background: var(--rarity-uncommon-badge);
+}
+.rarity-rare {
+	background: linear-gradient(
+		135deg,
+		var(--rarity-ultra),
+		var(--vault-gold-dark)
+	);
+	color: var(--text-inverse);
+}
+.rarity-holo {
+	background: var(--rarity-holo-badge);
+}
+.rarity-ultra {
+	background: var(--rarity-ultra-badge);
+}
+
+/* ---------- Text ---------- */
+.card-title {
+	font-size: 0.95rem;
+	font-weight: 700;
+	color: var(--text-primary);
+}
+
+.card-set-name {
+	font-size: 0.7rem;
+	color: var(--text-muted);
+	text-transform: uppercase;
+	margin-bottom: 12px;
+}
+
+.card-price {
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: var(--vault-gold);
+	text-shadow: 0 1px 2px var(--black-overlay-50);
+}
+
+/* ---------- Buttons ---------- */
+.btn-primary {
+	background: var(--vault-gold-faint);
+	color: var(--text-secondary);
+	border: 1px solid var(--border-default);
+	border-radius: 0.75rem;
+	padding: 0.6rem 1rem;
+	font-weight: 600;
+	transition: all 0.25s ease;
+}
+
+.card:hover .btn-primary {
+	background: linear-gradient(
+		135deg,
+		var(--vault-gold),
+		var(--vault-gold-dark)
+	);
+	color: var(--text-inverse);
+	border-color: transparent;
+	box-shadow: 0 10px 22px var(--vault-gold-soft);
+}
+
+.btn-secondary {
+	border: 1px solid var(--border-default);
+	background: transparent;
+	color: var(--text-muted);
+	border-radius: 0.75rem;
+}
+
+/* ---------- Card Rarity Backgrounds ---------- */
+.card-image-wrapper[data-rarity='COMMON'],
+.card-detail-image-bg[data-rarity='COMMON'] {
+	background: var(--rarity-common-bg);
+}
+
+.card-image-wrapper[data-rarity='UNCOMMON'],
+.card-detail-image-bg[data-rarity='UNCOMMON'] {
+	background: var(--rarity-uncommon-bg);
+}
+
+.card-image-wrapper[data-rarity='RARE'],
+.card-detail-image-bg[data-rarity='RARE'] {
+	background: radial-gradient(
+		ellipse at center,
+		var(--rarity-rare-soft),
+		transparent 70%
+	);
+}
+
+/* ---------- Rarity Label Bar Backgrounds ---------- */
+.rarity-label-bar[data-rarity='COMMON'] {
+	background: var(--rarity-common-bg) !important;
+	color: var(--rarity-common-text) !important;
+}
+
+.rarity-label-bar[data-rarity='UNCOMMON'] {
+	background: var(--rarity-uncommon-bg) !important;
+	color: var(--rarity-uncommon-text) !important;
+}
+
+.rarity-label-bar[data-rarity='RARE'] {
+	background: linear-gradient(
+		180deg,
+		var(--rarity-ultra),
+		var(--vault-gold-dark)
+	) !important;
+	color: var(--text-inverse) !important;
+	box-shadow: inset 0 1px 0 var(--white-overlay-35),
+		inset 0 -1px 0 var(--black-overlay-35) !important;
 }

@@ -72,7 +72,15 @@ export default function Navbar() {
 									/>
 								</svg>
 							</div>
-							Poke Vault
+							<span className='flex items-center gap-2'>
+								Poke Vault
+								<span
+									className='font-japanese text-xs md:text-sm opacity-60'
+									style={{ color: 'var(--vault-gold)' }}
+								>
+									ポケボルト
+								</span>
+							</span>
 						</Link>
 					</div>
 					{/* Desktop Navigation */}
@@ -134,7 +142,15 @@ export default function Navbar() {
 								<circle cx='12' cy='17' r='1' fill='currentColor' />
 								<circle cx='15' cy='17' r='1' fill='currentColor' />
 							</svg>
-							Pokedex
+							<span className='flex items-center gap-1.5'>
+								Pokedex
+								<span
+									className='font-japanese text-[10px] opacity-50'
+									style={{ color: 'var(--text-muted)' }}
+								>
+									図鑑
+								</span>
+							</span>
 						</Link>
 						<Link
 							href='/binder'
@@ -143,7 +159,15 @@ export default function Navbar() {
 							}`}
 						>
 							<HiBookOpen className='w-4 h-4 md:w-5 md:h-5' />
-							My Binder
+							<span className='flex items-center gap-1.5'>
+								My Binder
+								<span
+									className='font-japanese text-[10px] opacity-50'
+									style={{ color: 'var(--text-muted)' }}
+								>
+									コレクション
+								</span>
+							</span>
 						</Link>
 						<Link
 							href='/login'
@@ -270,7 +294,15 @@ export default function Navbar() {
 								}`}
 							>
 								<HiBookOpen className='w-5 h-5' />
-								My Binder
+								<span className='flex items-center gap-1.5'>
+									My Binder
+									<span
+										className='font-japanese text-[10px] opacity-50'
+										style={{ color: 'var(--text-muted)' }}
+									>
+										コレクション
+									</span>
+								</span>
 							</Link>
 						</div>
 					</div>

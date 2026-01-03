@@ -184,17 +184,25 @@ export default function CardCollection({
 				{/* Header */}
 				{showHeader && (
 					<div className='mb-16'>
-						<h1
-							className='page-header-title font-brand text-4xl md:text-5xl mb-3 drop-shadow-sm'
-							style={{
-								color: 'var(--vault-gold)',
-								letterSpacing: '0.3px',
-								fontWeight: 600,
-								lineHeight: 1.2,
-							}}
-						>
-							{headerTitle}
-						</h1>
+						<div className='flex items-baseline gap-3 mb-3'>
+							<h1
+								className='page-header-title font-brand text-4xl md:text-5xl drop-shadow-sm'
+								style={{
+									color: 'var(--vault-gold)',
+									letterSpacing: '0.3px',
+									fontWeight: 600,
+									lineHeight: 1.2,
+								}}
+							>
+								{headerTitle}
+							</h1>
+							<span
+								className='font-japanese japanese-label japanese-neon text-lg md:text-xl'
+								style={{ color: 'var(--vault-gold)' }}
+							>
+								カードカタログ
+							</span>
+						</div>
 						<p
 							className='font-body text-sm md:text-base'
 							style={{

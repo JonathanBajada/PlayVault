@@ -1,0 +1,68 @@
+:root {
+	/* BACKGROUNDS */
+	--bg-page: #05040a;
+	--bg-surface: #0b0914;
+	--bg-surface-soft: rgba(11, 9, 20, 0.94);
+	--bg-elevated: #161229;
+
+	/* PRIMARY ACCENT (NEON PINK → CYAN) */
+	--vault-gold: #ff5fd2;
+	--vault-gold-dark: #22d3ee;
+	--vault-gold-soft: rgba(255, 95, 210, 0.35);
+	--vault-gold-faint: rgba(255, 95, 210, 0.18);
+
+	/* TEXT */
+	--text-primary: #fdf4ff;
+	--text-secondary: #f0abfc;
+	--text-muted: #67e8f9;
+	--text-inverse: #05040a;
+
+	/* BORDERS & SHADOWS */
+	--border-default: rgba(255, 255, 255, 0.07);
+	--border-gold: rgba(255, 95, 210, 0.4);
+
+	--shadow-sm: 0 8px 18px rgba(0, 0, 0, 0.6);
+	--shadow-md: 0 28px 70px rgba(0, 0, 0, 0.85);
+	--shadow-lg: 0 60px 140px rgba(0, 0, 0, 0.95);
+
+	/* RARITY COLORS */
+	--rarity-common: #94a3b8;
+	--rarity-uncommon: #22d3ee;
+	--rarity-rare: #ff5fd2;
+	--rarity-rare-dark: #c026d3;
+	--rarity-rare-soft: rgba(255, 95, 210, 0.45);
+	--rarity-holo: #67e8f9;
+	--rarity-ultra: #f0abfc;
+
+	/* RARITY BACKGROUNDS */
+	--rarity-common-bg: rgba(148, 163, 184, 0.12);
+	--rarity-uncommon-bg: rgba(34, 211, 238, 0.18);
+	--rarity-rare-bg: rgba(255, 95, 210, 0.22);
+
+	--rarity-common-badge: rgba(148, 163, 184, 0.7);
+	--rarity-uncommon-badge: rgba(34, 211, 238, 0.85);
+	--rarity-holo-badge: rgba(103, 232, 249, 0.9);
+	--rarity-ultra-badge: rgba(240, 171, 252, 0.95);
+
+	/* TEXT */
+	--rarity-common-text: #e5e7eb;
+	--rarity-uncommon-text: #cffafe;
+
+	/* CARD */
+	--card-bg-start: #18122f;
+	--card-bg-end: #0b0914;
+
+	/* NAVBAR */
+	--navbar-bg-start: rgba(9, 7, 18, 0.96);
+	--navbar-bg-end: rgba(14, 10, 28, 0.98);
+
+	--navbar-logo-gradient-start: #ff5fd2;
+	--navbar-logo-gradient-mid: #22d3ee;
+	--navbar-logo-gradient-end: #67e8f9;
+
+	--navbar-link-bg-active: rgba(255, 95, 210, 0.28);
+	--navbar-link-bg-hover: rgba(34, 211, 238, 0.18);
+
+	--filter-container-bg: rgba(20, 15, 38, 0.75);
+	--slider-active-opacity: rgba(255, 95, 210, 0.65);
+}
