@@ -107,13 +107,16 @@ body::before {
 	background-size: cover;
 	background-position: center bottom;
 	background-repeat: no-repeat;
-	background-attachment: fixed;
+	/* background-attachment: fixed removed for scroll performance */
 	opacity: 0.25;
 	filter: blur(2px) saturate(0.7);
 	pointer-events: none;
+	/* GPU acceleration for better performance */
+	will-change: auto;
+	transform: translateZ(0);
 }
 
-/* Darkening overlay layers */
+/* Darkening overlay layers - simplified for performance */
 body::after {
 	content: '';
 	position: fixed;
@@ -123,37 +126,14 @@ body::after {
 	height: 100%;
 	z-index: -1;
 	pointer-events: none;
-	/* Radial gradient overlay (center darkening) */
-	background: radial-gradient(
-			ellipse 120% 80% at 50% 50%,
-			rgba(5, 4, 10, 0.85) 0%,
-			rgba(5, 4, 10, 0.6) 40%,
-			rgba(5, 4, 10, 0.3) 70%,
-			transparent 100%
-		),
-		/* Linear gradient overlay (top to bottom darkening) */
-			linear-gradient(
-				to bottom,
-				rgba(5, 4, 10, 0.7) 0%,
-				rgba(5, 4, 10, 0.4) 30%,
-				rgba(5, 4, 10, 0.5) 70%,
-				rgba(5, 4, 10, 0.8) 100%
-			),
-		/* Neon Ash color tinting */
-			linear-gradient(
-				135deg,
-				rgba(255, 95, 210, 0.08) 0%,
-				transparent 30%,
-				transparent 70%,
-				rgba(34, 211, 238, 0.08) 100%
-			);
-	background-blend-mode: multiply, overlay, normal;
-}
-
-/* Background stays fixed - no parallax movement */
-body::before {
-	transform: none !important;
-	will-change: auto;
+	/* Simplified single gradient - removed blend modes for performance */
+	background: linear-gradient(
+		to bottom,
+		rgba(5, 4, 10, 0.7) 0%,
+		rgba(5, 4, 10, 0.4) 30%,
+		rgba(5, 4, 10, 0.5) 70%,
+		rgba(5, 4, 10, 0.8) 100%
+	);
 }
 
 /* ---------- Card Grid Background ---------- */
@@ -163,7 +143,7 @@ body::before {
 	border-radius: 1rem;
 	/* Semi-opaque black background - allows pixel image to show through slightly */
 	background: rgba(0, 0, 0, 0.95);
-	backdrop-filter: blur(1px);
+	/* backdrop-filter removed for performance */
 }
 
 /* ---------- Typography ---------- */
